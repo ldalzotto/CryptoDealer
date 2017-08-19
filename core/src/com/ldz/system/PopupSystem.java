@@ -5,9 +5,11 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector3;
-import com.ldz.component.BoudingRectangleComponent;
+import com.ldz.component.ParentAndChildComponent;
 import com.ldz.component.PopUpComponent;
+import com.ldz.component.TimeAccumlatorComponent;
+import com.ldz.util.CollisionChecker;
+import com.ldz.util.ParentAndChildUtil;
 
 /**
  * Created by Loic on 19/08/2017.
@@ -15,7 +17,7 @@ import com.ldz.component.PopUpComponent;
 public class PopupSystem extends IteratingSystem {
 
     public PopupSystem(OrthographicCamera orthographicCamera) {
-        super(Family.all(PopUpComponent.class).get());
+        super(Family.all(PopUpComponent.class, ParentAndChildComponent.class).get());
         this.orthographicCamera = orthographicCamera;
     }
 
@@ -34,28 +36,23 @@ public class PopupSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         if(Gdx.input.isTouched()){
-            if(!tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity)){
-                this.getEngine().removeEntity(entity);
+            if(!CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
+                ParentAndChildUtil.removeChildsRecurcsively(entity, null, this.getEngine());
 
                 PopUpComponent popUpComponent = entity.getComponent(PopUpComponent.class);
-                if(popUpComponent != null){
-                    popUpComponent.sourceEntity.add(popUpComponent.sourceOfPopupTimeAccumulatorComponent);
-                }
-            }
-        }
-    }
+                ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
 
-    public boolean tapPressedInside(int mx, int my, Entity entity){
-        boolean isPressedInside = false;
-        if(entity != null){
-            BoudingRectangleComponent boudingRectangleComponent = entity.getComponent(BoudingRectangleComponent.class);
-            if(boudingRectangleComponent != null){
-                Vector3 unprojected = orthographicCamera.unproject(new Vector3(mx, my, 0));
-                if(boudingRectangleComponent.rectangle.contains(unprojected.x, unprojected.y)){
-                    isPressedInside = true;
+                if(popUpComponent != null && parentAndChildComponent != null){
+                    //adding popupaccumulator
+                    Entity sourceEntity = parentAndChildComponent.parent;
+                    if(sourceEntity != null){
+                        TimeAccumlatorComponent timeAccumlatorComponent = sourceEntity.getComponent(TimeAccumlatorComponent.class);
+                        if(timeAccumlatorComponent != null){
+                            timeAccumlatorComponent.isProcessing = true;
+                        }
+                    }
                 }
             }
         }
-        return isPressedInside;
     }
 }

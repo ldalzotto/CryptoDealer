@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 public class EntityFactory {
 
                 public enum ENTITY_TYPE{
-                    ZIT_COIN_CURRENCY, ITHEREUM_CURRENCY, LOUD_COIN_CURRENCY, COMPUTER, UPGRADE_MENU_BACKGROUND;
+                    ZIT_COIN_CURRENCY, ITHEREUM_CURRENCY, LOUD_COIN_CURRENCY, COMPUTER, UPGRADE_MENU_BACKGROUND, EXIT_BOX_MENU;
                 }
 
             public static Entity getEntity(ENTITY_TYPE entity_type){
@@ -32,6 +32,9 @@ public class EntityFactory {
                         break;
                     case UPGRADE_MENU_BACKGROUND:
                         entity = new ComputerMenuBackgroundEntity(new Vector2(150,150), new Texture("assets/compuer_upgrade_menu.jpg"));
+                        break;
+                    case EXIT_BOX_MENU:
+                        entity = new ExitBoxMenuEntity(new Vector2(10, 10), new Texture("assets/exit_cross.jpg"));
                         break;
         }
 

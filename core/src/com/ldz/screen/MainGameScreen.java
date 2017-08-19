@@ -68,6 +68,7 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine.addSystem(CurrencySystem.getInstance());
         engine.addSystem(DelayedDisplayerSystem.getInstance(camera));
         engine.addSystem(PopupSystem.getInstance(camera));
+        engine.addSystem(ExitBoxSystem.getInstance(camera));
     }
 
     @Override
