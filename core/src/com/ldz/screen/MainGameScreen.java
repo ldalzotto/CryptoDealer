@@ -10,8 +10,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ldz.entity.EntityFactory;
 import com.ldz.screen.viewport.GlobalViewport;
-import com.ldz.system.CurrencySystem;
-import com.ldz.system.RenderingBitmapSystem;
+import com.ldz.system.*;
 
 /**
  * Created by Loic on 19/08/2017.
@@ -61,11 +60,14 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine.addEntity(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.ZIT_COIN_CURRENCY));
         engine.addEntity(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.ITHEREUM_CURRENCY));
         engine.addEntity(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.LOUD_COIN_CURRENCY));
+        engine.addEntity(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.COMPUTER));
 
         //set all systems
-        //engine.addSystem(new RenderingSystem(camera, batch));
+        engine.addSystem(new RenderingSystem(camera, batch));
         engine.addSystem(new RenderingBitmapSystem(camera, batch));
         engine.addSystem(CurrencySystem.getInstance());
+        engine.addSystem(DelayedDisplayerSystem.getInstance(camera));
+        engine.addSystem(PopupSystem.getInstance(camera));
     }
 
     @Override

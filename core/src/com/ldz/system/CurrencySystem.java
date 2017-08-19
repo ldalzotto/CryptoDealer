@@ -5,9 +5,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
 import com.ldz.component.CurrencyComponent;
 import com.ldz.input.CurrencyInputProcessor;
+import com.ldz.input.MyInputMultiplexer;
 import com.ldz.system.inter.IAddScore;
 
 /**
@@ -25,7 +25,7 @@ public class CurrencySystem extends EntitySystem implements IAddScore {
     }
 
     public CurrencySystem() {
-        Gdx.input.setInputProcessor(new CurrencyInputProcessor());
+        MyInputMultiplexer.getInstance().addProcessor(new CurrencyInputProcessor());
     }
 
     private ImmutableArray<Entity> currencyEntities;

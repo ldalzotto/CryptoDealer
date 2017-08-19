@@ -32,10 +32,10 @@ public class RenderingBitmapSystem extends IteratingSystem {
         BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
         TranformComponent tranformComponent = entity.getComponent(TranformComponent.class);
 
-        if(bitmapFontComponent != null && tranformComponent != null){
+            if(bitmapFontComponent != null && tranformComponent != null){
 
-            //position
-            Vector2 position = tranformComponent.position;
+                //position
+                Vector2 position = tranformComponent.position;
 
             //get score component if available
             CurrencyComponent currencyComponent = entity.getComponent(CurrencyComponent.class);
