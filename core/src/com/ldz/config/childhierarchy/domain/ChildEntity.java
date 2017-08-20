@@ -7,15 +7,15 @@ import java.util.List;
  */
 public class ChildEntity {
 
-    private String classname;
+    private String id;
     private List<ChildEntity> childs;
 
-    public String getClassname() {
-        return classname;
+    public String getId() {
+        return id;
     }
 
-    public void setClassname(String classname) {
-        this.classname = classname;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<ChildEntity> getChilds() {

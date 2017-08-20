@@ -9,6 +9,7 @@ import com.ldz.component.ParentAndChildComponent;
 import com.ldz.config.childhierarchy.ChildEntitiesConfig;
 import com.ldz.config.childhierarchy.domain.ChildEntities;
 import com.ldz.config.childhierarchy.domain.ChildEntity;
+import com.ldz.entity.EntityWithId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,14 +107,18 @@ public class ParentAndChildSystem extends EntitySystem {
     private Map<String, List<Entity>> initializeEntityById(Map<String, List<Entity>> entitysById) {
         for (Entity entity :
                 entityList) {
-            String className = entity.getClass().getName();
-            if(entitysById.containsKey(className)){
-                entitysById.get(className).add(entity);
-            } else {
-                List<Entity> entities = new ArrayList<>();
-                entities.add(entity);
-                entitysById.put(className, entities);
+            if(entity instanceof EntityWithId){
+                EntityWithId entityWithId = (EntityWithId) entity;
+                String id = entityWithId.getId();
+                if(entitysById.containsKey(id)){
+                    entitysById.get(id).add(entity);
+                } else {
+                    List<Entity> entities = new ArrayList<>();
+                    entities.add(entity);
+                    entitysById.put(id, entities);
+                }
             }
+
         }
         return entitysById;
     }

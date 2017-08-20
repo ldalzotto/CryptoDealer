@@ -1,6 +1,5 @@
 package com.ldz.entity;
 
-import com.badlogic.ashley.core.Entity;
 import com.ldz.config.game.entities.GameEntitiesConfig;
 
 /**
@@ -8,7 +7,7 @@ import com.ldz.config.game.entities.GameEntitiesConfig;
  */
 public class EntityFactory {
 
-    public static Entity getEntityFromId(String entityId){
+    public static EntityWithId getEntityFromId(String entityId){
         return GameEntitiesConfig.getInstance().buildEntityById(entityId);
     }
 

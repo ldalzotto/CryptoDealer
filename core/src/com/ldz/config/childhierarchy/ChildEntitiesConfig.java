@@ -44,11 +44,11 @@ public class ChildEntitiesConfig {
                 if(childEntity.getChilds() != null){
                     for (ChildEntity childEntity1:
                          childEntity.getChilds()) {
-                        classNames.add(childEntity1.getClassname());
+                        classNames.add(childEntity1.getId());
                     }
                 }
 
-                stringListVoidBiFunction.apply(childEntity.getClassname(), classNames);
+                stringListVoidBiFunction.apply(childEntity.getId(), classNames);
 
             if(childEntity.getChilds() != null){
                 this.iterateThroughChildRecursively(stringListVoidBiFunction, childEntity.getChilds());

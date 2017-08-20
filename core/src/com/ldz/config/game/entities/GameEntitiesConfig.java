@@ -1,12 +1,12 @@
 package com.ldz.config.game.entities;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.ldz.config.game.entities.domain.Constructor;
 import com.ldz.config.game.entities.domain.GameEntities;
 import com.ldz.config.game.entities.domain.GameEntity;
 import com.ldz.config.game.entities.domain.Parameter;
+import com.ldz.entity.EntityWithId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class GameEntitiesConfig {
         return gameEntities;
     }
 
-    public Entity buildEntityById(String id) {
+    public EntityWithId buildEntityById(String id) {
 
         //get entity
         try {
@@ -57,7 +57,9 @@ public class GameEntitiesConfig {
                     //get constructor
                     Constructor jsonConstructor = gameEntity.getInstance().getConstructor();
 
-                    return (Entity)buildInstance(jsonConstructor);
+                    EntityWithId entityWithId = (EntityWithId) buildInstance(jsonConstructor);
+                    entityWithId.setId(id);
+                    return entityWithId;
 
                 }
             }

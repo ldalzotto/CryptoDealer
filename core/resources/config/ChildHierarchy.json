@@ -1,11 +1,11 @@
 {
   "entities": [
     {
-      "classname" : "com.ldz.entity.DelayedDisplayerEntity",
+      "id" : "computer-entity",
       "childs": [{
-        "classname" : "com.ldz.entity.PopUpEntity",
+        "id" : "upgrade-menu-popup",
         "childs": [{
-          "classname" : "com.ldz.entity.ExitBoxMenuEntity"
+          "id" : "exit-upgrade-menu-popup"
         }]
       }]
     }
