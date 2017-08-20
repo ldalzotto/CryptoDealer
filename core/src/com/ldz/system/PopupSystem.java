@@ -34,12 +34,20 @@ public class PopupSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+
+        //only compute when parent is not computing
+        ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
+        if(parentAndChildComponent != null){
+            if(ParentAndChildSystem.getInstance().checkProcessing()){
+                return;
+            }
+        }
+
         if(Gdx.input.isTouched()){
             if(!CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
                 this.getEngine().removeEntity(entity);
 
                 PopUpComponent popUpComponent = entity.getComponent(PopUpComponent.class);
-                ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
 
                 if(popUpComponent != null && parentAndChildComponent != null){
                     //adding popupaccumulator
