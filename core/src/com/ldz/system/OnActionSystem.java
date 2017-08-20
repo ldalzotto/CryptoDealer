@@ -6,7 +6,6 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ldz.component.OnActionComponent;
-import com.ldz.util.CollisionChecker;
 
 /**
  * Created by Loic on 20/08/2017.

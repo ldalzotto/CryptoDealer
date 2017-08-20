@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.ldz.component.DisplayStateComponent;
 import com.ldz.component.ExitBoxComponent;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.util.CollisionChecker;
@@ -35,7 +36,6 @@ public class ExitBoxSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         if(Gdx.input.isTouched()){
             if(CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
-                this.getEngine().removeEntity(entity);
 
                 ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
 
@@ -45,6 +45,25 @@ public class ExitBoxSystem extends IteratingSystem {
                     if(sourceEntity != null){
                         this.getEngine().removeEntity(sourceEntity);
                     }
+
+                    //get popup
+                    Entity popupEntity = parentAndChildComponent.parent;
+
+                    if(popupEntity != null){
+                        //popup source
+                        ParentAndChildComponent parentAndChildComponent1 = popupEntity.getComponent(ParentAndChildComponent.class);
+                        if(parentAndChildComponent1 != null){
+                            Entity popupSourceEntity = parentAndChildComponent1.parent;
+                            if(popupSourceEntity != null){
+                                DisplayStateComponent displayStateComponent = popupSourceEntity.getComponent(DisplayStateComponent.class);
+                                if(displayStateComponent != null){
+                                    displayStateComponent.isDisplayed = false;
+                                }
+                            }
+                        }
+
+                    }
+
                 }
             }
         }

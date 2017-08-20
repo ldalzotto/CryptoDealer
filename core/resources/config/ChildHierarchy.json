@@ -14,6 +14,8 @@
               "id": "upgrade-1-cost-display"
             },{
               "id": "upgrade-1-buy-button"
+            },{
+              "id": "upgrade-1-exit-button"
             }]
           }]
         }]

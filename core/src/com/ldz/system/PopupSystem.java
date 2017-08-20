@@ -30,7 +30,7 @@ public class PopupSystem extends IteratingSystem {
     }
 
     private OrthographicCamera orthographicCamera;
-
+    private boolean screenTouching = false;
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
@@ -44,24 +44,29 @@ public class PopupSystem extends IteratingSystem {
         }
 
         if(Gdx.input.isTouched()){
-            if(!CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
-                this.getEngine().removeEntity(entity);
+            if(!this.screenTouching){
+                this.screenTouching = true;
+                if(!CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
+                    this.getEngine().removeEntity(entity);
 
-                PopUpComponent popUpComponent = entity.getComponent(PopUpComponent.class);
+                    PopUpComponent popUpComponent = entity.getComponent(PopUpComponent.class);
 
-                if(popUpComponent != null && parentAndChildComponent != null){
-                    //adding popupaccumulator
-                    Entity sourceEntity = parentAndChildComponent.parent;
-                    if(sourceEntity != null){
-                        //if displaystate component
-                        DisplayStateComponent displayStateComponent = sourceEntity.getComponent(DisplayStateComponent.class);
-                        if(displayStateComponent != null){
-                            displayStateComponent.isDisplayed = false;
+                    if(popUpComponent != null && parentAndChildComponent != null){
+                        //adding popupaccumulator
+                        Entity sourceEntity = parentAndChildComponent.parent;
+                        if(sourceEntity != null){
+                            //if displaystate component
+                            DisplayStateComponent displayStateComponent = sourceEntity.getComponent(DisplayStateComponent.class);
+                            if(displayStateComponent != null){
+                                displayStateComponent.isDisplayed = false;
+                            }
+
                         }
-
                     }
                 }
             }
+        } else {
+            this.screenTouching = false;
         }
     }
 }

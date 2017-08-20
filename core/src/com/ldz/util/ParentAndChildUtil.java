@@ -2,6 +2,7 @@ package com.ldz.util;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.ldz.component.DisplayStateComponent;
 import com.ldz.component.ParentAndChildComponent;
 
 /**
@@ -19,6 +20,9 @@ public class ParentAndChildUtil {
         for (Entity entity :
                 parentAndChildComponent.childs) {
             engine.removeEntity(entity);
+            if(entity.getComponent(DisplayStateComponent.class) != null){
+                entity.getComponent(DisplayStateComponent.class).isDisplayed = false;
+            }
             if(entity.getComponent(ParentAndChildComponent.class) != null){
                 removeChildsRecurcsively(entity, entity.getComponent(ParentAndChildComponent.class), engine);
             }
