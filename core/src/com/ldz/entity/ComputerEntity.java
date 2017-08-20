@@ -1,8 +1,8 @@
 package com.ldz.entity;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.component.TimeAccumlatorComponent;
 import com.ldz.entity.abstr.TextureDisplayEntity;
@@ -20,15 +20,12 @@ public class ComputerEntity extends TextureDisplayEntity {
 
         ParentAndChildComponent parentAndChildComponent = new ParentAndChildComponent();
 
-        Entity backgroundEntity = EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.UPGRADE_MENU_BACKGROUND);
-        ParentAndChildComponent parentAndChildComponent1 = backgroundEntity.getComponent(ParentAndChildComponent.class);
-        if(parentAndChildComponent1 != null){
-            parentAndChildComponent1.parent = this;
-        }
-        parentAndChildComponent.childs.add(backgroundEntity);
-
         this.add(parentAndChildComponent);
 
+        BagOfEntitiesComponent bagOfEntitiesComponent = new BagOfEntitiesComponent();
+        bagOfEntitiesComponent.entities.add(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.UPGRADE_MENU_BACKGROUND));
+        bagOfEntitiesComponent.entities.add(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.EXIT_BOX_MENU));
 
+        this.add(bagOfEntitiesComponent);
     }
 }

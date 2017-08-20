@@ -7,11 +7,11 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.component.BoudingRectangleComponent;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.component.TimeAccumlatorComponent;
 import com.ldz.util.CollisionChecker;
-import com.ldz.util.ParentAndChildUtil;
 
 /**
  * Created by Loic on 19/08/2017.
@@ -40,7 +40,8 @@ public class DelayedDisplayerSystem extends EntitySystem {
     @Override
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
-        computerMenuEntities = engine.getEntitiesFor(Family.all(TimeAccumlatorComponent.class, BoudingRectangleComponent.class, ParentAndChildComponent.class).get());
+        computerMenuEntities = engine.getEntitiesFor(Family.all(TimeAccumlatorComponent.class, BoudingRectangleComponent.class, ParentAndChildComponent.class,
+                BagOfEntitiesComponent.class).get());
     }
 
     @Override
@@ -57,9 +58,10 @@ public class DelayedDisplayerSystem extends EntitySystem {
 
             TimeAccumlatorComponent timeAccumlatorComponent = entity.getComponent(TimeAccumlatorComponent.class);
             ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
+            BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
 
-
-            if(timeAccumlatorComponent != null && parentAndChildComponent != null && timeAccumlatorComponent.isProcessing){
+            if(timeAccumlatorComponent != null && parentAndChildComponent != null
+                    && bagOfEntitiesComponent!=null && timeAccumlatorComponent.isProcessing){
                 if(Gdx.input.isTouched()){
                     if(CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
                         timeAccumlatorComponent.accumulatedTime += deltaTime;
@@ -67,7 +69,9 @@ public class DelayedDisplayerSystem extends EntitySystem {
                         if(timeAccumlatorComponent.accumulatedTime >= timeAccumlatorComponent.timeLimit){
                             timeAccumlatorComponent.accumulatedTime = 0;
                             timeAccumlatorComponent.isProcessing = false;
-                            ParentAndChildUtil.displayChildsRecurcsively(parentAndChildComponent, this.getEngine());
+
+                            bagOfEntitiesComponent.addEntityToEngine = true;
+                            ParentAndChildSystem.getInstance().setProcessing(true);
                         }
                     }
 

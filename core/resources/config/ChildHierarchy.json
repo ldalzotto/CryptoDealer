@@ -1,0 +1,13 @@
+{
+  "entities": [
+    {
+      "classname" : "com.ldz.entity.ComputerEntity",
+      "childs": [{
+        "classname" : "com.ldz.entity.ComputerMenuBackgroundEntity",
+        "childs": [{
+          "classname" : "com.ldz.entity.ExitBoxMenuEntity"
+        }]
+      }]
+    }
+  ]
+}
