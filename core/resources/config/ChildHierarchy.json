@@ -9,7 +9,10 @@
         },{
           "id" : "upgrade-1",
           "childs": [{
-            "id": "upgrade-1-buy-popup"
+            "id": "upgrade-1-buy-popup",
+            "childs": [{
+              "id": "upgrade-1-cost-display"
+            }]
           }]
         }]
       }]

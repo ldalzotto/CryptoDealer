@@ -42,6 +42,8 @@ public class RenderingBitmapSystem extends IteratingSystem {
 
             if(currencyComponent != null){
                 bitmapFontComponent.bitmapFont.draw(batch, String.valueOf(MathUtils.round(currencyComponent.currentValue)) + " (x "+ currencyComponent.currentTradeRate +")", position.x, position.y);
+            } else {
+                bitmapFontComponent.bitmapFont.draw(batch, bitmapFontComponent.stringToDisplay, position.x, position.y);
             }
 
         }

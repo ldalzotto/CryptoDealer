@@ -23,7 +23,9 @@ public class DisplayerEntity extends TextureDisplayEntity {
         this.add(parentAndChildComponent);
 
         BagOfEntitiesComponent bagOfEntitiesComponent = new BagOfEntitiesComponent();
+
         bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId("upgrade-1-buy-popup"));
+        bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId("upgrade-1-cost-display"));
 
         this.add(bagOfEntitiesComponent);
 

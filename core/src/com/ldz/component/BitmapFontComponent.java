@@ -9,5 +9,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 public class BitmapFontComponent implements Component {
 
     public BitmapFont bitmapFont = new BitmapFont();
+    public String stringToDisplay;
 
 }

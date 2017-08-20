@@ -32,7 +32,7 @@
     "id": "upgrade-1-buy-popup",
     "instance": {
       "constructor":{
-        "classname": "com.ldz.entity.PopUpEntity",
+        "classname": "com.ldz.entity.UpgradePopupEntity",
         "parameters": [{
           "classname": "com.badlogic.gdx.math.Vector2",
           "constructor":{
@@ -54,6 +54,32 @@
               "value": "assets/buy_upgrade.bmp"
             }]
           }
+        },{
+          "classname": "java.lang.float",
+          "value": 10
+        }]
+      }
+    }
+  },{
+    "id": "upgrade-1-cost-display",
+    "instance": {
+      "constructor":{
+        "classname": "com.ldz.entity.abstr.FontDisplayEntity",
+        "parameters": [{
+          "classname": "com.badlogic.gdx.math.Vector2",
+          "constructor":{
+            "classname": "com.badlogic.gdx.math.Vector2",
+            "parameters": [{
+              "classname": "java.lang.float",
+              "value": "300"
+            },{
+              "classname": "java.lang.float",
+              "value": "30"
+            }]
+          }
+        },{
+          "classname": "java.lang.String",
+          "value": "TEMEMEME"
         }]
       }
     }
