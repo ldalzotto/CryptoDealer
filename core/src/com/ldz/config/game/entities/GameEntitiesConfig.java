@@ -36,6 +36,7 @@ public class GameEntitiesConfig {
         gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/DelayedDisplayerEntity.json")));
         gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/ExitBoxEntity.json")));
         gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/PopUpEntity.json")));
+        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/UpgradeObjectsEntity.json")));
 
         for (GameEntities gameEntities1 :
                 gameEntities) {

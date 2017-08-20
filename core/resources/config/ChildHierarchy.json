@@ -6,6 +6,11 @@
         "id" : "upgrade-menu-popup",
         "childs": [{
           "id" : "exit-upgrade-menu-popup"
+        },{
+          "id" : "upgrade-1",
+          "childs": [{
+            "id": "upgrade-1-buy-popup"
+          }]
         }]
       }]
     }

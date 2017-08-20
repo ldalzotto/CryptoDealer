@@ -10,6 +10,4 @@ public class TimeAccumlatorComponent implements Component {
     public float accumulatedTime = 0f;
     public float timeLimit = 0.35f;
 
-    public boolean isProcessing = true;
-
 }

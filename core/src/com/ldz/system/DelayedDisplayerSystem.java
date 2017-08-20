@@ -7,10 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.ldz.component.BagOfEntitiesComponent;
-import com.ldz.component.BoudingRectangleComponent;
-import com.ldz.component.ParentAndChildComponent;
-import com.ldz.component.TimeAccumlatorComponent;
+import com.ldz.component.*;
 import com.ldz.util.CollisionChecker;
 
 /**
@@ -41,7 +38,7 @@ public class DelayedDisplayerSystem extends EntitySystem {
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
         computerMenuEntities = engine.getEntitiesFor(Family.all(TimeAccumlatorComponent.class, BoudingRectangleComponent.class, ParentAndChildComponent.class,
-                BagOfEntitiesComponent.class).get());
+                BagOfEntitiesComponent.class, DisplayStateComponent.class).get());
     }
 
     @Override
@@ -59,17 +56,19 @@ public class DelayedDisplayerSystem extends EntitySystem {
             TimeAccumlatorComponent timeAccumlatorComponent = entity.getComponent(TimeAccumlatorComponent.class);
             ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
             BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
+            DisplayStateComponent displayStateComponent = entity.getComponent(DisplayStateComponent.class);
 
             if(timeAccumlatorComponent != null && parentAndChildComponent != null
-                    && bagOfEntitiesComponent!=null && timeAccumlatorComponent.isProcessing){
+                    && bagOfEntitiesComponent!=null
+                    && displayStateComponent.state.equals(DisplayStateComponent.STATE.DELAYED)
+                    && displayStateComponent.isDisplayed == false){
                 if(Gdx.input.isTouched()){
                     if(CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
                         timeAccumlatorComponent.accumulatedTime += deltaTime;
 
                         if(timeAccumlatorComponent.accumulatedTime >= timeAccumlatorComponent.timeLimit){
                             timeAccumlatorComponent.accumulatedTime = 0;
-                            timeAccumlatorComponent.isProcessing = false;
-
+                            displayStateComponent.isDisplayed = true;
                             bagOfEntitiesComponent.addEntityToEngine = true;
                             ParentAndChildSystem.getInstance().setProcessing(true);
                         }

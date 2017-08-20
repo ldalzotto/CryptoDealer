@@ -5,9 +5,9 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.ldz.component.DisplayStateComponent;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.component.PopUpComponent;
-import com.ldz.component.TimeAccumlatorComponent;
 import com.ldz.util.CollisionChecker;
 
 /**
@@ -53,10 +53,12 @@ public class PopupSystem extends IteratingSystem {
                     //adding popupaccumulator
                     Entity sourceEntity = parentAndChildComponent.parent;
                     if(sourceEntity != null){
-                        TimeAccumlatorComponent timeAccumlatorComponent = sourceEntity.getComponent(TimeAccumlatorComponent.class);
-                        if(timeAccumlatorComponent != null){
-                            timeAccumlatorComponent.isProcessing = true;
+                        //if displaystate component
+                        DisplayStateComponent displayStateComponent = sourceEntity.getComponent(DisplayStateComponent.class);
+                        if(displayStateComponent != null){
+                            displayStateComponent.isDisplayed = false;
                         }
+
                     }
                 }
             }
