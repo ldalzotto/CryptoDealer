@@ -10,9 +10,9 @@ import com.ldz.entity.abstr.TextureDisplayEntity;
 /**
  * Created by Loic on 19/08/2017.
  */
-public class ComputerEntity extends TextureDisplayEntity {
+public class DelayedDisplayerEntity extends TextureDisplayEntity {
 
-    public ComputerEntity(Vector2 position, Texture texture) {
+    public DelayedDisplayerEntity(Vector2 position, Texture texture) {
         super(position, texture);
 
         TimeAccumlatorComponent timeAccumlatorComponent = new TimeAccumlatorComponent();
@@ -23,8 +23,8 @@ public class ComputerEntity extends TextureDisplayEntity {
         this.add(parentAndChildComponent);
 
         BagOfEntitiesComponent bagOfEntitiesComponent = new BagOfEntitiesComponent();
-        bagOfEntitiesComponent.entities.add(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.UPGRADE_MENU_BACKGROUND));
-        bagOfEntitiesComponent.entities.add(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.EXIT_BOX_MENU));
+        bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId("upgrade-menu-popup"));
+        bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId("exit-upgrade-menu-popup"));
 
         this.add(bagOfEntitiesComponent);
     }

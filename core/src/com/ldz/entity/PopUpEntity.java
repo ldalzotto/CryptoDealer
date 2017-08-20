@@ -10,9 +10,9 @@ import com.ldz.entity.abstr.TextureDisplayEntity;
 /**
  * Created by Loic on 19/08/2017.
  */
-public class ComputerMenuBackgroundEntity extends TextureDisplayEntity {
+public class PopUpEntity extends TextureDisplayEntity {
 
-    public ComputerMenuBackgroundEntity(Vector2 position, Texture texture) {
+    public PopUpEntity(Vector2 position, Texture texture) {
 
         super(position, texture);
 

@@ -1,0 +1,32 @@
+{
+  "entities": [{
+    "id": "upgrade-menu-popup",
+    "instance": {
+      "constructor":{
+        "classname": "com.ldz.entity.PopUpEntity",
+        "parameters": [{
+          "classname": "com.badlogic.gdx.math.Vector2",
+          "constructor":{
+            "classname": "com.badlogic.gdx.math.Vector2",
+            "parameters": [{
+              "classname": "java.lang.float",
+              "value": "150"
+            },{
+              "classname": "java.lang.float",
+              "value": "150"
+            }]
+          }
+        },{
+          "classname": "com.badlogic.gdx.graphics.Texture",
+          "constructor":{
+            "classname": "com.badlogic.gdx.graphics.Texture",
+            "parameters": [{
+              "classname": "java.lang.String",
+              "value": "assets/compuer_upgrade_menu.jpg"
+            }]
+          }
+        }]
+      }
+    }
+  }]
+}

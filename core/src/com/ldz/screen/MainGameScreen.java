@@ -61,10 +61,10 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine = MyEngine.getInstance();
 
         //set all entity
-        engine.addEntity(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.ZIT_COIN_CURRENCY));
-        engine.addEntity(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.ITHEREUM_CURRENCY));
-        engine.addEntity(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.LOUD_COIN_CURRENCY));
-        engine.addEntity(EntityFactory.getEntity(EntityFactory.ENTITY_TYPE.COMPUTER));
+        engine.addEntity(EntityFactory.getEntityFromId("zit-coin-entity"));
+        engine.addEntity(EntityFactory.getEntityFromId("ithereum-coin-entity"));
+        engine.addEntity(EntityFactory.getEntityFromId("loud-coin-entity"));
+        engine.addEntity(EntityFactory.getEntityFromId("computer-entity"));
 
         //set all systems
         engine.addSystem(new RenderingSystem(camera, batch));
@@ -77,6 +77,7 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine.addSystem(BagOfEntitiesToEngineSystem.getInstance());
 
         engine.addEntityListener(Family.all(ParentAndChildComponent.class).get(), new EntityRemoveListener());
+
     }
 
     @Override

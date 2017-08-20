@@ -1,9 +1,9 @@
 {
   "entities": [
     {
-      "classname" : "com.ldz.entity.ComputerEntity",
+      "classname" : "com.ldz.entity.DelayedDisplayerEntity",
       "childs": [{
-        "classname" : "com.ldz.entity.ComputerMenuBackgroundEntity",
+        "classname" : "com.ldz.entity.PopUpEntity",
         "childs": [{
           "classname" : "com.ldz.entity.ExitBoxMenuEntity"
         }]
