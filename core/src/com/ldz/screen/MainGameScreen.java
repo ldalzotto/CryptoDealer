@@ -77,6 +77,7 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine.addSystem(BagOfEntitiesToEngineSystem.getInstance());
         engine.addSystem(InstantDisplayerSystem.getInstance(camera));
         engine.addSystem(BuyableUpgradePopupSystem.getInstance());
+        engine.addSystem(OnActionSystem.getInstance(camera));
 
 
         engine.addEntityListener(Family.all(ParentAndChildComponent.class).get(), new EntityRemoveListener());

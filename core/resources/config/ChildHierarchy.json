@@ -12,6 +12,8 @@
             "id": "upgrade-1-buy-popup",
             "childs": [{
               "id": "upgrade-1-cost-display"
+            },{
+              "id": "upgrade-1-buy-button"
             }]
           }]
         }]
