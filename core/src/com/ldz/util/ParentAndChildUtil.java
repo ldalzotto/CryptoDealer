@@ -9,16 +9,6 @@ import com.ldz.component.ParentAndChildComponent;
  */
 public class ParentAndChildUtil {
 
-    public static void displayChildsRecurcsively(ParentAndChildComponent parentAndChildComponent, Engine engine){
-        for (Entity entity :
-                parentAndChildComponent.childs) {
-            engine.addEntity(entity);
-            if(entity.getComponent(ParentAndChildComponent.class) != null){
-                displayChildsRecurcsively(entity.getComponent(ParentAndChildComponent.class), engine);
-            }
-        }
-    }
-
     public static void removeChildsRecurcsively(Entity entity1, ParentAndChildComponent parentAndChildComponent, Engine engine){
 
         if(parentAndChildComponent == null){

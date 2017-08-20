@@ -9,7 +9,6 @@ import com.ldz.component.ParentAndChildComponent;
 import com.ldz.component.PopUpComponent;
 import com.ldz.component.TimeAccumlatorComponent;
 import com.ldz.util.CollisionChecker;
-import com.ldz.util.ParentAndChildUtil;
 
 /**
  * Created by Loic on 19/08/2017.
@@ -37,7 +36,7 @@ public class PopupSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         if(Gdx.input.isTouched()){
             if(!CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
-                ParentAndChildUtil.removeChildsRecurcsively(entity, null, this.getEngine());
+                this.getEngine().removeEntity(entity);
 
                 PopUpComponent popUpComponent = entity.getComponent(PopUpComponent.class);
                 ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
