@@ -123,10 +123,10 @@
             "classname": "com.badlogic.gdx.math.Vector2",
             "parameters": [{
               "classname": "java.lang.float",
-              "value": "150"
+              "value": "300"
             },{
               "classname": "java.lang.float",
-              "value": "150"
+              "value": "300"
             }]
           }
         },{

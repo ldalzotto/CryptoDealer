@@ -2,6 +2,7 @@ package com.ldz.input;
 
 import com.badlogic.gdx.InputProcessor;
 import com.ldz.system.CurrencySystem;
+import com.ldz.system.PopupSystem;
 import com.ldz.system.inter.IAddScore;
 
 /**
@@ -26,7 +27,9 @@ public class CurrencyInputProcessor implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        ((IAddScore)CurrencySystem.getInstance()).addScore(1.0f);
+        if(!PopupSystem.getInstance(null).popupActives()){
+            ((IAddScore) CurrencySystem.getInstance()).addScore(1.0f);
+        }
         return false;
     }
 

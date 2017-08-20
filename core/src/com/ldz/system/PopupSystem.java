@@ -69,4 +69,12 @@ public class PopupSystem extends IteratingSystem {
             this.screenTouching = false;
         }
     }
+
+    public boolean popupActives(){
+        if(this.getEntities().size() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
