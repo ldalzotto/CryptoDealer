@@ -6,6 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ldz.component.OnActionComponent;
+import com.ldz.util.CollisionChecker;
 
 /**
  * Created by Loic on 20/08/2017.
@@ -42,7 +43,7 @@ public class OnActionSystem extends IteratingSystem {
             switch (onActionComponent.action_type) {
                 case ON_CLICK_INSIDE:
                     if (Gdx.input.isTouched()) {
-                        //if(CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
+                        //if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
                         onActionComponent.function.apply(entity);
                         //}
                     }

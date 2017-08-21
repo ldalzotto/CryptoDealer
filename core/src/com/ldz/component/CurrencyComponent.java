@@ -10,4 +10,6 @@ public class CurrencyComponent implements Component {
     public float currentValue = 0f;
     public float currentTradeRate = 1f;
 
+    public float scoreToAdd = 0f;
+
 }

@@ -1,9 +1,10 @@
 package com.ldz.input;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.InputProcessor;
+import com.ldz.component.CurrencyComponent;
 import com.ldz.system.CurrencySystem;
 import com.ldz.system.PopupSystem;
-import com.ldz.system.inter.IAddScore;
 
 /**
  * Created by Loic on 19/08/2017.
@@ -27,8 +28,14 @@ public class CurrencyInputProcessor implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(!PopupSystem.getInstance(null).popupActives()){
-            ((IAddScore) CurrencySystem.getInstance()).addScore(1.0f);
+        if (!PopupSystem.getInstance(null).popupActives()) {
+            for (Entity entity :
+                    CurrencySystem.getInstance().getCurrencyEntities()) {
+                CurrencyComponent currencyComponent = entity.getComponent(CurrencyComponent.class);
+                if (currencyComponent != null) {
+                    currencyComponent.scoreToAdd = 1.0f;
+                }
+            }
         }
         return false;
     }

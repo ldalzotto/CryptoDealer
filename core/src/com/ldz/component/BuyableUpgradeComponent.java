@@ -8,5 +8,11 @@ import com.badlogic.ashley.core.Component;
 public class BuyableUpgradeComponent implements Component {
 
     public float objectCost;
+    public STATE state = STATE.PENDING;
+
+    public enum STATE {
+        PENDING,
+        ASKING_FOR_UPGRADE;
+    }
 
 }

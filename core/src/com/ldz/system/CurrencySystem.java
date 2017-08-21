@@ -8,14 +8,18 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.ldz.component.CurrencyComponent;
 import com.ldz.input.CurrencyInputProcessor;
 import com.ldz.input.MyInputMultiplexer;
-import com.ldz.system.inter.IAddScore;
 
 /**
  * Created by Loic on 19/08/2017.
  */
-public class CurrencySystem extends EntitySystem implements IAddScore {
+public class CurrencySystem extends EntitySystem {
 
     private static CurrencySystem instance = null;
+    private ImmutableArray<Entity> currencyEntities;
+
+    public CurrencySystem() {
+        MyInputMultiplexer.getInstance().addProcessor(new CurrencyInputProcessor());
+    }
 
     public static CurrencySystem getInstance() {
         if (instance == null) {
@@ -23,12 +27,6 @@ public class CurrencySystem extends EntitySystem implements IAddScore {
         }
         return instance;
     }
-
-    public CurrencySystem() {
-        MyInputMultiplexer.getInstance().addProcessor(new CurrencyInputProcessor());
-    }
-
-    private ImmutableArray<Entity> currencyEntities;
 
     @Override
     public void addedToEngine(Engine engine) {
@@ -44,17 +42,21 @@ public class CurrencySystem extends EntitySystem implements IAddScore {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-    }
-
-    @Override
-    public void addScore(float score) {
-        for (Entity entity:
+        for (Entity entity :
                 currencyEntities) {
             CurrencyComponent currencyComponent = entity.getComponent(CurrencyComponent.class);
 
-            if(currencyComponent != null){
-                currencyComponent.currentValue += (score*currencyComponent.currentTradeRate);
+            if (currencyComponent != null) {
+                if (currencyComponent.scoreToAdd != 0.0f) {
+                    currencyComponent.currentValue += (currencyComponent.scoreToAdd * currencyComponent.currentTradeRate);
+                    currencyComponent.scoreToAdd = 0.0f;
+                }
             }
         }
     }
+
+    public ImmutableArray<Entity> getCurrencyEntities() {
+        return currencyEntities;
+    }
+
 }
