@@ -18,20 +18,18 @@ public class DelayedDisplayerSystem extends EntitySystem {
     private static final String TAG = DelayedDisplayerSystem.class.getSimpleName();
 
     private static DelayedDisplayerSystem instance = null;
+    private OrthographicCamera orthographicCamera;
+    private ImmutableArray<Entity> computerMenuEntities;
+
+    public DelayedDisplayerSystem(OrthographicCamera orthographicCamera) {
+        this.orthographicCamera = orthographicCamera;
+    }
 
     public static DelayedDisplayerSystem getInstance(OrthographicCamera orthographicCamera) {
         if (instance == null) {
             instance = new DelayedDisplayerSystem(orthographicCamera);
         }
         return instance;
-    }
-
-    private OrthographicCamera orthographicCamera;
-
-    private ImmutableArray<Entity> computerMenuEntities;
-
-    public DelayedDisplayerSystem(OrthographicCamera orthographicCamera) {
-        this.orthographicCamera = orthographicCamera;
     }
 
     @Override
@@ -58,15 +56,15 @@ public class DelayedDisplayerSystem extends EntitySystem {
             BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
             DisplayStateComponent displayStateComponent = entity.getComponent(DisplayStateComponent.class);
 
-            if(timeAccumlatorComponent != null && parentAndChildComponent != null
-                    && bagOfEntitiesComponent!=null
+            if (timeAccumlatorComponent != null && parentAndChildComponent != null
+                    && bagOfEntitiesComponent != null
                     && displayStateComponent.state.equals(DisplayStateComponent.STATE.DELAYED)
-                    && displayStateComponent.isDisplayed == false){
-                if(Gdx.input.isTouched()){
-                    if(CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
+                    && displayStateComponent.isDisplayed == false) {
+                if (Gdx.input.isTouched()) {
+                    if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
                         timeAccumlatorComponent.accumulatedTime += deltaTime;
 
-                        if(timeAccumlatorComponent.accumulatedTime >= timeAccumlatorComponent.timeLimit){
+                        if (timeAccumlatorComponent.accumulatedTime >= timeAccumlatorComponent.timeLimit) {
                             timeAccumlatorComponent.accumulatedTime = 0;
                             displayStateComponent.isDisplayed = true;
                             bagOfEntitiesComponent.addEntityToEngine = true;

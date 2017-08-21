@@ -7,12 +7,14 @@ import com.ldz.component.DisplayStateComponent;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.entity.abstr.TextureDisplayEntity;
 
+import java.util.ArrayList;
+
 /**
  * Created by Loic on 20/08/2017.
  */
 public class DisplayerEntity extends TextureDisplayEntity {
 
-    public DisplayerEntity(Vector2 position, Texture texture) {
+    public DisplayerEntity(Vector2 position, Texture texture, ArrayList<String> entityInBagIds) {
         super(position, texture);
 
         DisplayStateComponent displayStateComponent = new DisplayStateComponent();
@@ -24,11 +26,10 @@ public class DisplayerEntity extends TextureDisplayEntity {
 
         BagOfEntitiesComponent bagOfEntitiesComponent = new BagOfEntitiesComponent();
 
-        bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId("upgrade-1-buy-popup"));
-        bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId("upgrade-1-cost-display"));
-        bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId("upgrade-1-buy-button"));
-        bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId("upgrade-1-exit-button"));
-
+        for (String entityIdsInBag :
+                entityInBagIds) {
+            bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId(entityIdsInBag));
+        }
 
 
         this.add(bagOfEntitiesComponent);

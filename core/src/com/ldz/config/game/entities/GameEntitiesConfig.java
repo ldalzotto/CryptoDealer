@@ -17,14 +17,6 @@ import java.util.List;
 public class GameEntitiesConfig {
 
     private static GameEntitiesConfig instance = null;
-
-    public static GameEntitiesConfig getInstance(){
-        if(instance == null){
-            instance = new GameEntitiesConfig();
-        }
-        return instance;
-    }
-
     private Json json = new Json();
     private GameEntities gameEntities = new GameEntities();
 
@@ -44,6 +36,13 @@ public class GameEntitiesConfig {
         }
     }
 
+    public static GameEntitiesConfig getInstance() {
+        if (instance == null) {
+            instance = new GameEntitiesConfig();
+        }
+        return instance;
+    }
+
     public GameEntities getGameEntities() {
         return gameEntities;
     }
@@ -54,7 +53,7 @@ public class GameEntitiesConfig {
         try {
             for (GameEntity gameEntity :
                     this.gameEntities.getEntities()) {
-                if(gameEntity.getId().equals(id)){
+                if (gameEntity.getId().equals(id)) {
                     //get constructor
                     Constructor jsonConstructor = gameEntity.getInstance().getConstructor();
 
@@ -72,7 +71,7 @@ public class GameEntitiesConfig {
 
     }
 
-    private Object buildInstance(Constructor jsonConstructor) throws Exception{
+    private Object buildInstance(Constructor jsonConstructor) throws Exception {
         Class currentClass = Class.forName(jsonConstructor.getClassname());
 
         List<Class> types = new ArrayList<>();
@@ -88,29 +87,28 @@ public class GameEntitiesConfig {
     }
 
 
-    private Object buildParemeter(List<Class> types, List<Object> parametersValues, Parameter parameter) throws Exception{
+    private Object buildParemeter(List<Class> types, List<Object> parametersValues, Parameter parameter) throws Exception {
 
-        if(parameter.getConstructor() == null){
+        if (parameter.getConstructor() == null) {
             Object o;
-            if(parameter.getClassname().contains("Integer")){
+            if (parameter.getClassname().contains("Integer")) {
                 o = Integer.valueOf(parameter.getValue());
                 types.add(Integer.class);
-            } else if(parameter.getClassname().contains("int")){
-                if(parameter.getValue().contains("0x")){
+            } else if (parameter.getClassname().contains("int")) {
+                if (parameter.getValue().contains("0x")) {
                     o = (int) Long.parseLong(parameter.getValue().replace("0x", ""), 16);
                     types.add(int.class);
                 } else {
                     o = Integer.valueOf(parameter.getValue());
                     types.add(int.class);
                 }
-            } else if(parameter.getClassname().contains("Float")){
+            } else if (parameter.getClassname().contains("Float")) {
                 o = Float.valueOf(parameter.getValue());
                 types.add(Float.class);
-            } else if(parameter.getClassname().contains("float")){
+            } else if (parameter.getClassname().contains("float")) {
                 o = Float.valueOf(parameter.getValue());
                 types.add(float.class);
-            }
-            else {
+            } else {
                 Class currentClass = Class.forName(parameter.getClassname());
                 o = parameter.getValue();
                 types.add(currentClass);
@@ -118,10 +116,30 @@ public class GameEntitiesConfig {
             parametersValues.add(o);
             return o;
         } else {
-            Object o = buildInstance(parameter.getConstructor());
-            types.add(o.getClass());
-            parametersValues.add(o);
-            return o;
+            if (parameter.getClassname().contains("List|")) {
+
+                List arrayList = new ArrayList();
+
+                //get constructor
+                Constructor constructor = parameter.getConstructor();
+
+                for (Parameter arrayParameter :
+                        constructor.getParameters()) {
+                    arrayList.add(buildParemeter(new ArrayList<>(), new ArrayList<>(), arrayParameter));
+                }
+
+                types.add(ArrayList.class);
+                parametersValues.add(arrayList);
+                return arrayList;
+
+
+            } else {
+                Object o = buildInstance(parameter.getConstructor());
+                types.add(o.getClass());
+                parametersValues.add(o);
+                return o;
+            }
+
         }
 
     }

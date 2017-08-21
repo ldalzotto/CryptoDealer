@@ -1,32 +1,62 @@
 {
-  "entities": [{
-    "id": "computer-entity",
-    "instance": {
-      "constructor":{
-        "classname": "com.ldz.entity.DelayedDisplayerEntity",
-        "parameters": [{
-          "classname": "com.badlogic.gdx.math.Vector2",
-          "constructor":{
-            "classname": "com.badlogic.gdx.math.Vector2",
-            "parameters": [{
-              "classname": "java.lang.float",
-              "value": "10"
-            },{
-              "classname": "java.lang.float",
-              "value": "20"
-            }]
-          }
-        },{
-          "classname": "com.badlogic.gdx.graphics.Texture",
-          "constructor":{
-            "classname": "com.badlogic.gdx.graphics.Texture",
-            "parameters": [{
-              "classname": "java.lang.String",
-              "value": "assets/ordinateur.jpg"
-            }]
-          }
-        }]
+  "entities": [
+    {
+      "id": "computer-entity",
+      "instance": {
+        "constructor": {
+          "classname": "com.ldz.entity.DelayedDisplayerEntity",
+          "parameters": [
+            {
+              "classname": "com.badlogic.gdx.math.Vector2",
+              "constructor": {
+                "classname": "com.badlogic.gdx.math.Vector2",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float",
+                    "value": "10"
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": "20"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "com.badlogic.gdx.graphics.Texture",
+              "constructor": {
+                "classname": "com.badlogic.gdx.graphics.Texture",
+                "parameters": [
+                  {
+                    "classname": "java.lang.String",
+                    "value": "assets/ordinateur.jpg"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "List|java.lang.String|",
+              "constructor": {
+                "classname": "|List|java.lang.String|",
+                "parameters": [
+                  {
+                    "classname": "java.lang.String",
+                    "value": "upgrade-menu-popup"
+                  },
+                  {
+                    "classname": "java.lang.String",
+                    "value": "exit-upgrade-menu-popup"
+                  },
+                  {
+                    "classname": "java.lang.String",
+                    "value": "upgrade-1"
+                  }
+                ]
+              }
+            }
+          ]
+        }
       }
     }
-  }]
+  ]
 }

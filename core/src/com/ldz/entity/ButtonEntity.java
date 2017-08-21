@@ -15,6 +15,22 @@ import java.util.function.Function;
  */
 public class ButtonEntity extends TextureDisplayEntity {
 
+    private static Function<Entity, Void> entityVoidFunction = new Function<Entity, Void>() {
+        @Override
+        public Void apply(Entity entity) {
+            //get cost
+            ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
+            if (parentAndChildComponent != null) {
+                Entity parentEntity = parentAndChildComponent.parent;
+                BuyableUpgradeComponent buyableUpgradeComponent = parentEntity.getComponent(BuyableUpgradeComponent.class);
+                if (buyableUpgradeComponent != null) {
+                    buyableUpgradeComponent.objectCost += 1;
+                }
+            }
+            return null;
+        }
+    };
+
     public ButtonEntity(Vector2 position, Texture texture) {
         super(position, texture);
 
@@ -27,20 +43,4 @@ public class ButtonEntity extends TextureDisplayEntity {
         this.add(onActionComponent);
 
     }
-
-    private static Function<Entity, Void> entityVoidFunction = new Function<Entity, Void>() {
-        @Override
-        public Void apply(Entity entity) {
-            //get cost
-            ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
-            if(parentAndChildComponent != null){
-                Entity parentEntity = parentAndChildComponent.parent;
-                BuyableUpgradeComponent buyableUpgradeComponent = parentEntity.getComponent(BuyableUpgradeComponent.class);
-                if(buyableUpgradeComponent != null){
-                    buyableUpgradeComponent.objectCost += 1;
-                }
-            }
-            return null;
-        }
-    };
 }

@@ -16,6 +16,12 @@ public class InstantDisplayerSystem extends IteratingSystem {
 
 
     private static InstantDisplayerSystem instance = null;
+    private OrthographicCamera orthographicCamera;
+
+    public InstantDisplayerSystem(OrthographicCamera orthographicCamera) {
+        super(Family.all(DisplayStateComponent.class).get());
+        this.orthographicCamera = orthographicCamera;
+    }
 
     public static InstantDisplayerSystem getInstance(OrthographicCamera orthographicCamera) {
         if (instance == null) {
@@ -24,27 +30,20 @@ public class InstantDisplayerSystem extends IteratingSystem {
         return instance;
     }
 
-    public InstantDisplayerSystem(OrthographicCamera orthographicCamera) {
-        super(Family.all(DisplayStateComponent.class).get());
-        this.orthographicCamera = orthographicCamera;
-    }
-
-    private OrthographicCamera orthographicCamera;
-
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
 
         DisplayStateComponent displayStateComponent = entity.getComponent(DisplayStateComponent.class);
         BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
 
-        if(displayStateComponent != null && displayStateComponent.state.equals(DisplayStateComponent.STATE.INSTANT ) &&
-                bagOfEntitiesComponent != null && !displayStateComponent.isDisplayed){
+        if (displayStateComponent != null && displayStateComponent.state.equals(DisplayStateComponent.STATE.INSTANT) &&
+                bagOfEntitiesComponent != null && !displayStateComponent.isDisplayed) {
 
-            if(Gdx.input.isTouched()){
-                if(CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
-                        bagOfEntitiesComponent.addEntityToEngine = true;
-                        displayStateComponent.isDisplayed = true;
-                        ParentAndChildSystem.getInstance().setProcessing(true);
+            if (Gdx.input.isTouched()) {
+                if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
+                    bagOfEntitiesComponent.addEntityToEngine = true;
+                    displayStateComponent.isDisplayed = true;
+                    ParentAndChildSystem.getInstance().setProcessing(true);
                 }
             }
 

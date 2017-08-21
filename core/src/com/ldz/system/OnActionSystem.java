@@ -14,6 +14,12 @@ public class OnActionSystem extends IteratingSystem {
 
 
     private static OnActionSystem instance = null;
+    private OrthographicCamera orthographicCamera;
+
+    public OnActionSystem(OrthographicCamera orthographicCamera) {
+        super(Family.all(OnActionComponent.class).get());
+        this.orthographicCamera = orthographicCamera;
+    }
 
     public static OnActionSystem getInstance(OrthographicCamera orthographicCamera) {
         if (instance == null) {
@@ -22,29 +28,22 @@ public class OnActionSystem extends IteratingSystem {
         return instance;
     }
 
-    public OnActionSystem(OrthographicCamera orthographicCamera) {
-        super(Family.all(OnActionComponent.class).get());
-        this.orthographicCamera = orthographicCamera;
-    }
-
-    private OrthographicCamera orthographicCamera;
-
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
 
-        if(ParentAndChildSystem.getInstance().checkProcessing()){
+        if (ParentAndChildSystem.getInstance().checkProcessing()) {
             return;
         }
 
         OnActionComponent onActionComponent = entity.getComponent(OnActionComponent.class);
 
-        if(onActionComponent != null){
+        if (onActionComponent != null) {
 
-            switch (onActionComponent.action_type){
+            switch (onActionComponent.action_type) {
                 case ON_CLICK_INSIDE:
-                    if(Gdx.input.isTouched()){
+                    if (Gdx.input.isTouched()) {
                         //if(CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
-                            onActionComponent.function.apply(entity);
+                        onActionComponent.function.apply(entity);
                         //}
                     }
                     break;
