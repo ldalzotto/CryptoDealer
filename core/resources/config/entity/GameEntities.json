@@ -1,108 +1,154 @@
 {
-  "entities": [{
-    "id": "zit-coin-entity",
-    "instance": {
-      "constructor":{
-        "classname": "com.ldz.entity.CurrencyEntity",
-        "parameters": [{
-          "classname": "com.badlogic.gdx.math.Vector2",
-          "constructor":{
-            "classname": "com.badlogic.gdx.math.Vector2",
-            "parameters": [{
+  "entities": [
+    {
+      "id": "zit-coin-entity",
+      "instance": {
+        "constructor": {
+          "classname": "com.ldz.entity.CurrencyEntity",
+          "parameters": [
+            {
+              "classname": "com.badlogic.gdx.math.Vector2",
+              "constructor": {
+                "classname": "com.badlogic.gdx.math.Vector2",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float",
+                    "value": "10"
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": "20"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "com.badlogic.gdx.graphics.Color",
+              "constructor": {
+                "classname": "com.badlogic.gdx.graphics.Color",
+                "parameters": [
+                  {
+                    "classname": "java.lang.int",
+                    "value": "0xffa500ff"
+                  }
+                ]
+              }
+            },
+            {
               "classname": "java.lang.float",
-              "value": "10"
-            },{
+              "value": "1.0"
+            },
+            {
+              "classname": "java.lang.String",
+              "value": "ZIT_COIN"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ithereum-coin-entity",
+      "instance": {
+        "constructor": {
+          "classname": "com.ldz.entity.CurrencyEntity",
+          "parameters": [
+            {
+              "classname": "com.badlogic.gdx.math.Vector2",
+              "constructor": {
+                "classname": "com.badlogic.gdx.math.Vector2",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float",
+                    "value": "10"
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": "40"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "com.badlogic.gdx.graphics.Color",
+              "constructor": {
+                "classname": "com.badlogic.gdx.graphics.Color",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float",
+                    "value": "0"
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": "0"
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": "1"
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": "1"
+                  }
+                ]
+              }
+            },
+            {
               "classname": "java.lang.float",
-              "value": "20"
-            }]
-          }
-        },{
-          "classname": "com.badlogic.gdx.graphics.Color",
-          "constructor":{
-            "classname": "com.badlogic.gdx.graphics.Color",
-            "parameters": [{
-              "classname": "java.lang.int",
-              "value": "0xffa500ff"
-            }]
-          }
-        },{
-          "classname": "java.lang.float",
-          "value": "1.0"
-        }]
+              "value": "0.8"
+            },
+            {
+              "classname": "java.lang.String",
+              "value": "ITHEREUM_COIN"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "loud-coin-entity",
+      "instance": {
+        "constructor": {
+          "classname": "com.ldz.entity.CurrencyEntity",
+          "parameters": [
+            {
+              "classname": "com.badlogic.gdx.math.Vector2",
+              "constructor": {
+                "classname": "com.badlogic.gdx.math.Vector2",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float",
+                    "value": "10"
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": "60"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "com.badlogic.gdx.graphics.Color",
+              "constructor": {
+                "classname": "com.badlogic.gdx.graphics.Color",
+                "parameters": [
+                  {
+                    "classname": "java.lang.int",
+                    "value": "0x00ff00ff"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "java.lang.float",
+              "value": "0.2"
+            },
+            {
+              "classname": "java.lang.String",
+              "value": "LOUD_COIN"
+            }
+          ]
+        }
       }
     }
-  },{
-    "id": "ithereum-coin-entity",
-    "instance": {
-      "constructor":{
-        "classname": "com.ldz.entity.CurrencyEntity",
-        "parameters": [{
-          "classname": "com.badlogic.gdx.math.Vector2",
-          "constructor":{
-            "classname": "com.badlogic.gdx.math.Vector2",
-            "parameters": [{
-              "classname": "java.lang.float",
-              "value": "10"
-            },{
-              "classname": "java.lang.float",
-              "value": "40"
-            }]
-          }
-        },{
-          "classname": "com.badlogic.gdx.graphics.Color",
-          "constructor":{
-            "classname": "com.badlogic.gdx.graphics.Color",
-            "parameters": [{
-              "classname": "java.lang.float",
-              "value": "0"
-            },{
-              "classname": "java.lang.float",
-              "value": "0"
-            },{
-              "classname": "java.lang.float",
-              "value": "1"
-            },{
-              "classname": "java.lang.float",
-              "value": "1"
-            }]
-          }
-        },{
-          "classname": "java.lang.float",
-          "value": "0.8"
-        }]
-      }
-    }
-  },{
-    "id": "loud-coin-entity",
-    "instance": {
-      "constructor":{
-        "classname": "com.ldz.entity.CurrencyEntity",
-        "parameters": [{
-          "classname": "com.badlogic.gdx.math.Vector2",
-          "constructor":{
-            "classname": "com.badlogic.gdx.math.Vector2",
-            "parameters": [{
-              "classname": "java.lang.float",
-              "value": "10"
-            },{
-              "classname": "java.lang.float",
-              "value": "60"
-            }]
-          }
-        },{
-          "classname": "com.badlogic.gdx.graphics.Color",
-          "constructor":{
-            "classname": "com.badlogic.gdx.graphics.Color",
-            "parameters": [{
-              "classname": "java.lang.int",
-              "value": "0x00ff00ff"
-            }]
-          }
-        },{
-          "classname": "java.lang.float",
-          "value": "0.2"
-        }]
-      }
-    }
-  }]
+  ]
 }

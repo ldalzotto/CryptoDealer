@@ -9,5 +9,6 @@ import com.badlogic.gdx.math.Rectangle;
 public class PopUpComponent implements Component {
 
     public Rectangle popupBounding;
+    public boolean screenBeingTouched = false;
 
 }

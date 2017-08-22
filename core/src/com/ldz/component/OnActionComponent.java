@@ -10,11 +10,12 @@ import java.util.function.Function;
  */
 public class OnActionComponent implements Component {
 
+    public Function<Entity, Void> function;
+    public ACTION_TYPE action_type;
+
     public enum ACTION_TYPE {
         ON_CLICK_INSIDE;
     }
 
-    public Function<Entity, Void> function;
-    public ACTION_TYPE action_type;
 
 }

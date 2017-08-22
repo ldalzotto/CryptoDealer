@@ -15,12 +15,14 @@ import com.ldz.util.CollisionChecker;
  */
 public class PopupSystem extends IteratingSystem {
 
+    private static PopupSystem instance = null;
+    private OrthographicCamera orthographicCamera;
+    private boolean screenTouching = false;
+
     public PopupSystem(OrthographicCamera orthographicCamera) {
         super(Family.all(PopUpComponent.class, ParentAndChildComponent.class).get());
         this.orthographicCamera = orthographicCamera;
     }
-
-    private static PopupSystem instance = null;
 
     public static PopupSystem getInstance(OrthographicCamera orthographicCamera) {
         if (instance == null) {
@@ -29,49 +31,53 @@ public class PopupSystem extends IteratingSystem {
         return instance;
     }
 
-    private OrthographicCamera orthographicCamera;
-    private boolean screenTouching = false;
-
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
 
         //only compute when parent is not computing
         ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
-        if(parentAndChildComponent != null){
-            if(ParentAndChildSystem.getInstance().checkProcessing()){
+        if (parentAndChildComponent != null) {
+            if (ParentAndChildSystem.getInstance().checkProcessing()) {
                 return;
             }
         }
 
-        if(Gdx.input.isTouched()){
-            if(!this.screenTouching){
-                this.screenTouching = true;
-                if(!CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
-                    this.getEngine().removeEntity(entity);
+        PopUpComponent popUpComponent = entity.getComponent(PopUpComponent.class);
 
-                    PopUpComponent popUpComponent = entity.getComponent(PopUpComponent.class);
+        if (popUpComponent != null) {
+            if (Gdx.input.isTouched()) {
+                if (!popUpComponent.screenBeingTouched) {
+                    popUpComponent.screenBeingTouched = true;
+                    if (!CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
+                        this.getEngine().removeEntity(entity);
 
-                    if(popUpComponent != null && parentAndChildComponent != null){
-                        //adding popupaccumulator
-                        Entity sourceEntity = parentAndChildComponent.parent;
-                        if(sourceEntity != null){
-                            //if displaystate component
-                            DisplayStateComponent displayStateComponent = sourceEntity.getComponent(DisplayStateComponent.class);
-                            if(displayStateComponent != null){
-                                displayStateComponent.isDisplayed = false;
+
+                        if (parentAndChildComponent != null) {
+
+                            //adding popupaccumulator
+                            Entity sourceEntity = parentAndChildComponent.parent;
+                            if (sourceEntity != null) {
+                                //if displaystate component
+                                DisplayStateComponent displayStateComponent = sourceEntity.getComponent(DisplayStateComponent.class);
+                                if (displayStateComponent != null) {
+                                    displayStateComponent.isDisplayed = false;
+                                }
+
                             }
 
                         }
                     }
                 }
+            } else {
+                popUpComponent.screenBeingTouched = false;
             }
-        } else {
-            this.screenTouching = false;
         }
+
+
     }
 
-    public boolean popupActives(){
-        if(this.getEntities().size() > 0){
+    public boolean popupActives() {
+        if (this.getEntities().size() > 0) {
             return true;
         } else {
             return false;

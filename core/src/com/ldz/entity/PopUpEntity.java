@@ -12,9 +12,9 @@ import com.ldz.entity.abstr.TextureDisplayEntity;
  */
 public class PopUpEntity extends TextureDisplayEntity {
 
-    public PopUpEntity(Vector2 position, Texture texture) {
+    public PopUpEntity(Vector2 position, Texture texture, int z) {
 
-        super(position, texture);
+        super(position, texture, z);
 
         PopUpComponent popUpComponent = new PopUpComponent();
         popUpComponent.popupBounding = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());

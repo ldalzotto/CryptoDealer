@@ -35,6 +35,10 @@
               }
             },
             {
+              "classname": "java.lang.int",
+              "value": 0
+            },
+            {
               "classname": "List|java.lang.String|",
               "constructor": {
                 "classname": "|List|java.lang.String|",

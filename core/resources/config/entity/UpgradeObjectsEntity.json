@@ -13,11 +13,11 @@
                 "parameters": [
                   {
                     "classname": "java.lang.float",
-                    "value": "110"
+                    "value": "150"
                   },
                   {
                     "classname": "java.lang.float",
-                    "value": "110"
+                    "value": "150"
                   }
                 ]
               }
@@ -33,6 +33,10 @@
                   }
                 ]
               }
+            },
+            {
+              "classname": "java.lang.int",
+              "value": 3
             },
             {
               "classname": "List|java.lang.String|",
@@ -79,7 +83,7 @@
                   },
                   {
                     "classname": "java.lang.float",
-                    "value": "600"
+                    "value": "500"
                   }
                 ]
               }
@@ -97,8 +101,28 @@
               }
             },
             {
-              "classname": "java.lang.float",
-              "value": 10
+              "classname": "java.lang.int",
+              "value": 3
+            },
+            {
+              "classname": "com.ldz.component.domain.CurrencyInstance",
+              "constructor": {
+                "classname": "com.ldz.component.domain.CurrencyInstance",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float",
+                    "value": 0
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": 10
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": 0
+                  }
+                ]
+              }
             }
           ]
         }
@@ -151,7 +175,7 @@
                   },
                   {
                     "classname": "java.lang.float",
-                    "value": "30"
+                    "value": "500"
                   }
                 ]
               }
@@ -167,6 +191,10 @@
                   }
                 ]
               }
+            },
+            {
+              "classname": "java.lang.int",
+              "value": 4
             }
           ]
         }
@@ -205,6 +233,10 @@
                   }
                 ]
               }
+            },
+            {
+              "classname": "java.lang.int",
+              "value": 4
             }
           ]
         }

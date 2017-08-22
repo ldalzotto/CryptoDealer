@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class DisplayerEntity extends TextureDisplayEntity {
 
-    public DisplayerEntity(Vector2 position, Texture texture, ArrayList<String> entityInBagIds) {
-        super(position, texture);
+    public DisplayerEntity(Vector2 position, Texture texture, int z, ArrayList<String> entityInBagIds) {
+        super(position, texture, z);
 
         DisplayStateComponent displayStateComponent = new DisplayStateComponent();
         displayStateComponent.state = DisplayStateComponent.STATE.INSTANT;

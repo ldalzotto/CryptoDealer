@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.ldz.component.BitmapFontComponent;
 import com.ldz.component.BuyableUpgradeComponent;
@@ -15,6 +16,8 @@ import com.ldz.component.ParentAndChildComponent;
  * Created by Loic on 20/08/2017.
  */
 public class BuyableUpgradePopupSystem extends IteratingSystem {
+
+    private static final String TAG = BuyableUpgradePopupSystem.class.getSimpleName();
 
     private static BuyableUpgradePopupSystem instance = null;
     private ImmutableArray<Entity> currencyEntities;
@@ -58,14 +61,18 @@ public class BuyableUpgradePopupSystem extends IteratingSystem {
                     case PENDING:
                         break;
                     case ASKING_FOR_UPGRADE:
-                        for (Entity currencyEntity :
-                                this.currencyEntities) {
-                            CurrencyComponent currencyComponent = currencyEntity.getComponent(CurrencyComponent.class);
-                            if (currencyComponent != null) {
-                                currencyComponent.scoreToAdd = (-1) * buyableUpgradeComponent.objectCost;
+
+                        //check if upgrade is buyable by the player
+                        if (checkIfUpgradeIsBuyableByThePlayer(buyableUpgradeComponent)) {
+                            for (Entity currencyEntity :
+                                    this.currencyEntities) {
+                                CurrencyComponent currencyComponent = currencyEntity.getComponent(CurrencyComponent.class);
+                                if (currencyComponent != null) {
+                                    currencyComponent.scoreToAdd = (-1) * buyableUpgradeComponent.objectCost.getCurrencies().get(currencyComponent.currencyType);
+                                }
                             }
-                            buyableUpgradeComponent.state = BuyableUpgradeComponent.STATE.PENDING;
                         }
+                        buyableUpgradeComponent.state = BuyableUpgradeComponent.STATE.PENDING;
                         break;
                 }
 
@@ -73,6 +80,34 @@ public class BuyableUpgradePopupSystem extends IteratingSystem {
         }
 
         //set the price to font
+
+    }
+
+    private boolean checkIfUpgradeIsBuyableByThePlayer(BuyableUpgradeComponent buyableUpgradeComponent) {
+
+        int nbAwaitedPositive = CurrencyComponent.CURRENCY_TYPE.values().length;
+
+        for (Entity currencyEntity :
+                this.currencyEntities) {
+
+            CurrencyComponent currencyComponent = currencyEntity.getComponent(CurrencyComponent.class);
+            if (currencyComponent != null) {
+                //get appropriate upgradeCostComponent
+
+                if (buyableUpgradeComponent.objectCost.getCurrencies().get(currencyComponent.currencyType) < currencyComponent.currentValue) {
+                    nbAwaitedPositive--;
+                }
+            }
+
+        }
+
+        if (nbAwaitedPositive == 0) {
+            Gdx.app.debug(TAG, "Allowing upgrade buy.");
+            return true;
+        } else {
+            Gdx.app.debug(TAG, "Not allowing upgrade buy.");
+            return false;
+        }
 
     }
 

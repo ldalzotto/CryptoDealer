@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ldz.component.OnActionComponent;
 import com.ldz.util.CollisionChecker;
@@ -40,12 +41,13 @@ public class OnActionSystem extends IteratingSystem {
 
         if (onActionComponent != null) {
 
+
             switch (onActionComponent.action_type) {
                 case ON_CLICK_INSIDE:
                     if (Gdx.input.isTouched()) {
-                        //if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
-                        onActionComponent.function.apply(entity);
-                        //}
+                        if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
+                            onActionComponent.function.apply(entity);
+                        }
                     }
                     break;
             }

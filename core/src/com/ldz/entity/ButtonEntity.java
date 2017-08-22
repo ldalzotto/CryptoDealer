@@ -1,16 +1,12 @@
 package com.ldz.entity;
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.BuyableUpgradeComponent;
-import com.ldz.component.CurrencyComponent;
 import com.ldz.component.OnActionComponent;
 import com.ldz.component.ParentAndChildComponent;
-import com.ldz.engine.MyEngine;
 import com.ldz.entity.abstr.TextureDisplayEntity;
-import com.ldz.system.CurrencySystem;
 
 import java.util.function.Function;
 
@@ -30,13 +26,12 @@ public class ButtonEntity extends TextureDisplayEntity {
                 buyableUpgradeComponent.state = BuyableUpgradeComponent.STATE.ASKING_FOR_UPGRADE;
             }
 
-
             return null;
         }
     };
 
-    public ButtonEntity(Vector2 position, Texture texture) {
-        super(position, texture);
+    public ButtonEntity(Vector2 position, Texture texture, int z) {
+        super(position, texture, z);
 
         ParentAndChildComponent parentAndChildComponent = new ParentAndChildComponent();
         this.add(parentAndChildComponent);

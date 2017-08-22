@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class DelayedDisplayerEntity extends TextureDisplayEntity {
 
-    public DelayedDisplayerEntity(Vector2 position, Texture texture, ArrayList<String> entityInBagIds) {
-        super(position, texture);
+    public DelayedDisplayerEntity(Vector2 position, Texture texture, int z, ArrayList<String> entityInBagIds) {
+        super(position, texture, z);
 
         TimeAccumlatorComponent timeAccumlatorComponent = new TimeAccumlatorComponent();
         this.add(timeAccumlatorComponent);

@@ -11,9 +11,11 @@ import com.ldz.component.TranformComponent;
  */
 public class CurrencyEntity extends EntityWithId {
 
-    public CurrencyEntity(Vector2 position, Color color, float tradeRate) {
+    public CurrencyEntity(Vector2 position, Color color, float tradeRate, String currencyType) {
         CurrencyComponent currencyComponent = new CurrencyComponent();
         currencyComponent.currentTradeRate = tradeRate;
+        currencyComponent.currencyType = CurrencyComponent.CURRENCY_TYPE.valueOf(currencyType);
+
 
         BitmapFontComponent bitmapFontComponent = new BitmapFontComponent();
         bitmapFontComponent.bitmapFont.setColor(color);

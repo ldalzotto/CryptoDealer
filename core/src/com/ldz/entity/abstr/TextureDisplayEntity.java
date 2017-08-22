@@ -13,10 +13,11 @@ import com.ldz.entity.EntityWithId;
  */
 public abstract class TextureDisplayEntity extends EntityWithId {
 
-    public TextureDisplayEntity(Vector2 position, Texture texture) {
+    public TextureDisplayEntity(Vector2 position, Texture texture, int z) {
 
         TranformComponent tranformComponent = new TranformComponent();
         tranformComponent.position = position;
+        tranformComponent.z = z;
 
         TextureComponent textureComponent = new TextureComponent();
         textureComponent.texture = texture;

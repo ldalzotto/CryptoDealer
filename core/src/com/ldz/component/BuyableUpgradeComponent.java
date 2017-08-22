@@ -1,13 +1,14 @@
 package com.ldz.component;
 
 import com.badlogic.ashley.core.Component;
+import com.ldz.component.domain.CurrencyInstance;
 
 /**
  * Created by Loic on 20/08/2017.
  */
 public class BuyableUpgradeComponent implements Component {
 
-    public float objectCost;
+    public CurrencyInstance objectCost;
     public STATE state = STATE.PENDING;
 
     public enum STATE {

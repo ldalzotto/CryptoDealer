@@ -9,5 +9,6 @@ import com.badlogic.gdx.math.Vector2;
 public class TranformComponent implements Component {
 
     public Vector2 position;
+    public int z = 0;
 
 }

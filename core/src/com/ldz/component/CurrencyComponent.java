@@ -12,4 +12,10 @@ public class CurrencyComponent implements Component {
 
     public float scoreToAdd = 0f;
 
+    public CURRENCY_TYPE currencyType;
+
+    public enum CURRENCY_TYPE {
+        ZIT_COIN, ITHEREUM_COIN, LOUD_COIN;
+    }
+
 }

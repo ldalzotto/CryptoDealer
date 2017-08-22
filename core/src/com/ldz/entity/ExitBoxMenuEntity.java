@@ -12,8 +12,8 @@ import com.ldz.entity.abstr.TextureDisplayEntity;
  */
 public class ExitBoxMenuEntity extends TextureDisplayEntity {
 
-    public ExitBoxMenuEntity(Vector2 position, Texture texture) {
-        super(position, texture);
+    public ExitBoxMenuEntity(Vector2 position, Texture texture, int z) {
+        super(position, texture, z);
 
         ParentAndChildComponent parentAndChildComponent = new ParentAndChildComponent();
         this.add(parentAndChildComponent);
