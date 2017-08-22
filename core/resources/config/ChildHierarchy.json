@@ -1,25 +1,49 @@
 {
   "entities": [
     {
-      "id" : "computer-entity",
-      "childs": [{
-        "id" : "upgrade-menu-popup",
-        "childs": [{
-          "id" : "exit-upgrade-menu-popup"
-        },{
-          "id" : "upgrade-1",
-          "childs": [{
-            "id": "upgrade-1-buy-popup",
-            "childs": [{
-              "id": "upgrade-1-cost-display"
-            },{
-              "id": "upgrade-1-buy-button"
-            },{
-              "id": "upgrade-1-exit-button"
-            }]
-          }]
-        }]
-      }]
+      "id": "computer-entity",
+      "childs": [
+        {
+          "id": "upgrade-menu-popup",
+          "childs": [
+            {
+              "id": "exit-upgrade-menu-popup"
+            },
+            {
+              "id": "upgrade-1",
+              "childs": [
+                {
+                  "id": "upgrade-1-buy-popup",
+                  "childs": [
+                    {
+                      "id": "upgrade-1-cost-display"
+                    },
+                    {
+                      "id": "upgrade-1-buy-button"
+                    },
+                    {
+                      "id": "upgrade-1-exit-button"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "upgrade-2",
+              "childs": [
+                {
+                  "id": "upgrade-2-buy-popup",
+                  "childs": [
+                    {
+                      "id": "upgrade-2-buy-button"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

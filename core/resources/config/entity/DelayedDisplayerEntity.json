@@ -54,6 +54,10 @@
                   {
                     "classname": "java.lang.String",
                     "value": "upgrade-1"
+                  },
+                  {
+                    "classname": "java.lang.String",
+                    "value": "upgrade-2"
                   }
                 ]
               }
