@@ -13,6 +13,7 @@ public enum EntityId {
     upgrade_1,
     upgrade_1_buy_popup,
     upgrade_1_cost_display,
+    upgrade_1_decade_display,
     upgrade_1_buy_button,
     upgrade_1_exit_button,
     upgrade_2,

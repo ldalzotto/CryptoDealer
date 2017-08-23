@@ -49,6 +49,8 @@ public class BuyableUpgradePopupSystem extends IteratingSystem {
 
         BuyableUpgradeComponent buyableUpgradeComponent = entity.getComponent(BuyableUpgradeComponent.class);
 
+        buyableUpgradeComponent.timeAccumulator += deltaTime;
+
         if (buyableUpgradeComponent != null) {
 
             ParentAndChildUtil.forEachChildsRecursively(entity, new Function<Entity, Void>() {
@@ -64,12 +66,25 @@ public class BuyableUpgradePopupSystem extends IteratingSystem {
                                 bitmapFontComponent.stringToDisplay = "Cost : " + String.valueOf(buyableUpgradeComponent.objectCost.getCurrencies().get(CurrencyComponent.CURRENCY_TYPE.ITHEREUM_COIN));
                                 bitmapFontComponent.bitmapFont.setColor(Color.BLUE);
                             }
+                        } else if (entityWithId.getId().equals(EntityId.upgrade_1_decade_display)) {
+                            BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
+                            if (bitmapFontComponent != null) {
+                                bitmapFontComponent.stringToDisplay = "Performances : " + String.valueOf(buyableUpgradeComponent.itemPerformances);
+                                bitmapFontComponent.bitmapFont.setColor(Color.RED);
+                            }
                         }
                     }
 
                     return null;
                 }
             });
+
+
+            //update decay performance
+            if (buyableUpgradeComponent.timeAccumulator >= 1.0f) {
+                buyableUpgradeComponent.itemPerformances = buyableUpgradeComponent.itemPerformances * buyableUpgradeComponent.decayRatePerSeconds;
+                buyableUpgradeComponent.timeAccumulator = 0.0f;
+            }
 
             switch (buyableUpgradeComponent.state) {
                 case PENDING:
