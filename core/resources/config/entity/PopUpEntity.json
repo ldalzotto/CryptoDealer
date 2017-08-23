@@ -1,7 +1,7 @@
 {
   "entities": [
     {
-      "id": "upgrade-menu-popup",
+      "id": "upgrade_menu_popup",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.PopUpEntity",

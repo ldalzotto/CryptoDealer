@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ldz.component.ParentAndChildComponent;
+import com.ldz.config.game.entities.EntityId;
 import com.ldz.engine.MyEngine;
 import com.ldz.entity.EntityFactory;
 import com.ldz.listener.EntityRemoveListener;
@@ -22,28 +23,24 @@ import com.ldz.system.*;
 public class MainGameScreen extends GlobalViewport implements Screen {
 
     private static final String TAG = MainGameScreen.class.getSimpleName();
-
+    private static final int MAIN_GAME_SCREEN_HEIGHT = 960;
+    private static final int MAIN_GAME_SCREEN_WIDTH = 720;
     private static MainGameScreen instance = null;
+    private SpriteBatch batch = null;
+    private OrthographicCamera camera;
+    private Viewport viewport;
+    //Ashley ECS
+    private Engine engine;
+
+    public MainGameScreen() {
+        setupViewport(MAIN_GAME_SCREEN_WIDTH, MAIN_GAME_SCREEN_HEIGHT);
+    }
 
     public static MainGameScreen getInstance() {
         if (instance == null) {
             instance = new MainGameScreen();
         }
         return instance;
-    }
-
-    private SpriteBatch batch = null;
-    private OrthographicCamera camera;
-    private Viewport viewport;
-
-    private static final int MAIN_GAME_SCREEN_HEIGHT = 960;
-    private static final int MAIN_GAME_SCREEN_WIDTH = 720;
-
-    //Ashley ECS
-    private Engine engine;
-
-    public MainGameScreen() {
-        setupViewport(MAIN_GAME_SCREEN_WIDTH, MAIN_GAME_SCREEN_HEIGHT);
     }
 
     @Override
@@ -61,10 +58,10 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine = MyEngine.getInstance();
 
         //set all entity
-        engine.addEntity(EntityFactory.getEntityFromId("zit-coin-entity"));
-        engine.addEntity(EntityFactory.getEntityFromId("ithereum-coin-entity"));
-        engine.addEntity(EntityFactory.getEntityFromId("loud-coin-entity"));
-        engine.addEntity(EntityFactory.getEntityFromId("computer-entity"));
+        engine.addEntity(EntityFactory.getEntityFromId(EntityId.zit_coin_entity));
+        engine.addEntity(EntityFactory.getEntityFromId(EntityId.ithereum_coin_entity));
+        engine.addEntity(EntityFactory.getEntityFromId(EntityId.loud_coin_entity));
+        engine.addEntity(EntityFactory.getEntityFromId(EntityId.computer_entity));
 
         //set all systems
         engine.addSystem(new RenderingSystem(camera, batch));

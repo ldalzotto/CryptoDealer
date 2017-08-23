@@ -10,6 +10,8 @@ public class BuyableUpgradeComponent implements Component {
 
     public CurrencyInstance objectCost;
     public STATE state = STATE.PENDING;
+    public float upgradePerformance = 1.0f;
+
 
     public enum STATE {
         PENDING,

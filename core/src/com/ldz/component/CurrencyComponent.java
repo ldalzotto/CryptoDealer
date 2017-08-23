@@ -11,6 +11,7 @@ public class CurrencyComponent implements Component {
     public float currentTradeRate = 1f;
 
     public float scoreToAdd = 0f;
+    public float scoreToRemove = 0f;
 
     public CURRENCY_TYPE currencyType;
 

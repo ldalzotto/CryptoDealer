@@ -47,7 +47,7 @@ public class GameEntitiesConfig {
         return gameEntities;
     }
 
-    public EntityWithId buildEntityById(String id) {
+    public EntityWithId buildEntityById(EntityId id) {
 
         //get entity
         try {

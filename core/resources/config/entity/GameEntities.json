@@ -1,7 +1,7 @@
 {
   "entities": [
     {
-      "id": "zit-coin-entity",
+      "id": "zit_coin_entity",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.CurrencyEntity",
@@ -47,7 +47,7 @@
       }
     },
     {
-      "id": "ithereum-coin-entity",
+      "id": "ithereum_coin_entity",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.CurrencyEntity",
@@ -105,7 +105,7 @@
       }
     },
     {
-      "id": "loud-coin-entity",
+      "id": "loud_coin_entity",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.CurrencyEntity",

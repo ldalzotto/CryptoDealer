@@ -1,7 +1,7 @@
 {
   "entities": [
     {
-      "id": "exit-upgrade-menu-popup",
+      "id": "exit_upgrade_menu_popup",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.ExitBoxMenuEntity",

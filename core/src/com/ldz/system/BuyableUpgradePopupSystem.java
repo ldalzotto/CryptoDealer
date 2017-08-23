@@ -11,6 +11,11 @@ import com.ldz.component.BitmapFontComponent;
 import com.ldz.component.BuyableUpgradeComponent;
 import com.ldz.component.CurrencyComponent;
 import com.ldz.component.ParentAndChildComponent;
+import com.ldz.config.game.entities.EntityId;
+import com.ldz.entity.EntityWithId;
+import com.ldz.util.ParentAndChildUtil;
+
+import java.util.function.Function;
 
 /**
  * Created by Loic on 20/08/2017.
@@ -44,39 +49,47 @@ public class BuyableUpgradePopupSystem extends IteratingSystem {
 
         BuyableUpgradeComponent buyableUpgradeComponent = entity.getComponent(BuyableUpgradeComponent.class);
 
-        //get child
-        ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
-        if (parentAndChildComponent != null && buyableUpgradeComponent != null) {
-            for (Entity childEntity :
-                    parentAndChildComponent.childs) {
+        if (buyableUpgradeComponent != null) {
 
-                //font component
-                BitmapFontComponent bitmapFontComponent = childEntity.getComponent(BitmapFontComponent.class);
-                if (bitmapFontComponent != null) {
-                    bitmapFontComponent.stringToDisplay = "Cost : " + String.valueOf(buyableUpgradeComponent.objectCost);
-                    bitmapFontComponent.bitmapFont.setColor(Color.BLUE);
-                }
+            ParentAndChildUtil.forEachChildsRecursively(entity, new Function<Entity, Void>() {
+                @Override
+                public Void apply(Entity entity) {
 
-                switch (buyableUpgradeComponent.state) {
-                    case PENDING:
-                        break;
-                    case ASKING_FOR_UPGRADE:
-
-                        //check if upgrade is buyable by the player
-                        if (checkIfUpgradeIsBuyableByThePlayer(buyableUpgradeComponent)) {
-                            for (Entity currencyEntity :
-                                    this.currencyEntities) {
-                                CurrencyComponent currencyComponent = currencyEntity.getComponent(CurrencyComponent.class);
-                                if (currencyComponent != null) {
-                                    currencyComponent.scoreToAdd = (-1) * buyableUpgradeComponent.objectCost.getCurrencies().get(currencyComponent.currencyType);
-                                }
+                    if (entity instanceof EntityWithId) {
+                        EntityWithId entityWithId = (EntityWithId) entity;
+                        if (entityWithId.getId().equals(EntityId.upgrade_1_cost_display)) {
+                            //font component
+                            BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
+                            if (bitmapFontComponent != null) {
+                                bitmapFontComponent.stringToDisplay = "Cost : " + String.valueOf(buyableUpgradeComponent.objectCost.getCurrencies().get(CurrencyComponent.CURRENCY_TYPE.ITHEREUM_COIN));
+                                bitmapFontComponent.bitmapFont.setColor(Color.BLUE);
                             }
                         }
-                        buyableUpgradeComponent.state = BuyableUpgradeComponent.STATE.PENDING;
-                        break;
-                }
+                    }
 
+                    return null;
+                }
+            });
+
+            switch (buyableUpgradeComponent.state) {
+                case PENDING:
+                    break;
+                case ASKING_FOR_UPGRADE:
+
+                    //check if upgrade is buyable by the player
+                    if (checkIfUpgradeIsBuyableByThePlayer(buyableUpgradeComponent)) {
+                        for (Entity currencyEntity :
+                                this.currencyEntities) {
+                            CurrencyComponent currencyComponent = currencyEntity.getComponent(CurrencyComponent.class);
+                            if (currencyComponent != null) {
+                                currencyComponent.scoreToRemove = (-1) * buyableUpgradeComponent.objectCost.getCurrencies().get(currencyComponent.currencyType);
+                            }
+                        }
+                    }
+                    buyableUpgradeComponent.state = BuyableUpgradeComponent.STATE.PENDING;
+                    break;
             }
+
         }
 
         //set the price to font

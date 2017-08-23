@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.component.DisplayStateComponent;
 import com.ldz.component.ParentAndChildComponent;
+import com.ldz.config.game.entities.EntityId;
 import com.ldz.entity.abstr.TextureDisplayEntity;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class DisplayerEntity extends TextureDisplayEntity {
 
         for (String entityIdsInBag :
                 entityInBagIds) {
-            bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId(entityIdsInBag));
+            bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId(EntityId.valueOf(entityIdsInBag)));
         }
 
 

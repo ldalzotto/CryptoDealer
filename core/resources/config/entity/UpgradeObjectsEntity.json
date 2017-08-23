@@ -1,7 +1,7 @@
 {
   "entities": [
     {
-      "id": "upgrade-1",
+      "id": "upgrade_1",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.DisplayerEntity",
@@ -45,19 +45,19 @@
                 "parameters": [
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade-1-buy-popup"
+                    "value": "upgrade_1_buy_popup"
                   },
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade-1-cost-display"
+                    "value": "upgrade_1_cost_display"
                   },
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade-1-buy-button"
+                    "value": "upgrade_1_buy_button"
                   },
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade-1-exit-button"
+                    "value": "upgrade_1_exit_button"
                   }
                 ]
               }
@@ -67,7 +67,7 @@
       }
     },
     {
-      "id": "upgrade-1-buy-popup",
+      "id": "upgrade_1_buy_popup",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.UpgradePopupEntity",
@@ -129,7 +129,7 @@
       }
     },
     {
-      "id": "upgrade-1-cost-display",
+      "id": "upgrade_1_cost_display",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.abstr.FontDisplayEntity",
@@ -159,7 +159,7 @@
       }
     },
     {
-      "id": "upgrade-1-buy-button",
+      "id": "upgrade_1_buy_button",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.ButtonEntity",
@@ -201,7 +201,7 @@
       }
     },
     {
-      "id": "upgrade-1-exit-button",
+      "id": "upgrade_1_exit_button",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.ExitBoxMenuEntity",
@@ -243,7 +243,7 @@
       }
     },
     {
-      "id": "upgrade-2",
+      "id": "upgrade_2",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.DisplayerEntity",
@@ -287,11 +287,11 @@
                 "parameters": [
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade-2-buy-popup"
+                    "value": "upgrade_2_buy_popup"
                   },
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade-2-buy-button"
+                    "value": "upgrade_2_buy_button"
                   }
                 ]
               }
@@ -301,7 +301,7 @@
       }
     },
     {
-      "id": "upgrade-2-buy-popup",
+      "id": "upgrade_2_buy_popup",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.UpgradePopupEntity",
@@ -363,7 +363,7 @@
       }
     },
     {
-      "id": "upgrade-2-buy-button",
+      "id": "upgrade_2_buy_button",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.ButtonEntity",

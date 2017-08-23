@@ -1,7 +1,7 @@
 {
   "entities": [
     {
-      "id": "computer-entity",
+      "id": "computer_entity",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.DelayedDisplayerEntity",
@@ -45,19 +45,19 @@
                 "parameters": [
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade-menu-popup"
+                    "value": "upgrade_menu_popup"
                   },
                   {
                     "classname": "java.lang.String",
-                    "value": "exit-upgrade-menu-popup"
+                    "value": "exit_upgrade_menu_popup"
                   },
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade-1"
+                    "value": "upgrade_1"
                   },
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade-2"
+                    "value": "upgrade_2"
                   }
                 ]
               }

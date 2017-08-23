@@ -1,5 +1,6 @@
 package com.ldz.entity;
 
+import com.ldz.config.game.entities.EntityId;
 import com.ldz.config.game.entities.GameEntitiesConfig;
 
 /**
@@ -7,7 +8,7 @@ import com.ldz.config.game.entities.GameEntitiesConfig;
  */
 public class EntityFactory {
 
-    public static EntityWithId getEntityFromId(String entityId){
+    public static EntityWithId getEntityFromId(EntityId entityId){
         return GameEntitiesConfig.getInstance().buildEntityById(entityId);
     }
 

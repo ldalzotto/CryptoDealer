@@ -1,41 +1,41 @@
 {
   "entities": [
     {
-      "id": "computer-entity",
+      "id": "computer_entity",
       "childs": [
         {
-          "id": "upgrade-menu-popup",
+          "id": "upgrade_menu_popup",
           "childs": [
             {
-              "id": "exit-upgrade-menu-popup"
+              "id": "exit_upgrade_menu_popup"
             },
             {
-              "id": "upgrade-1",
+              "id": "upgrade_1",
               "childs": [
                 {
-                  "id": "upgrade-1-buy-popup",
+                  "id": "upgrade_1_buy_popup",
                   "childs": [
                     {
-                      "id": "upgrade-1-cost-display"
+                      "id": "upgrade_1_cost_display"
                     },
                     {
-                      "id": "upgrade-1-buy-button"
+                      "id": "upgrade_1_buy_button"
                     },
                     {
-                      "id": "upgrade-1-exit-button"
+                      "id": "upgrade_1_exit_button"
                     }
                   ]
                 }
               ]
             },
             {
-              "id": "upgrade-2",
+              "id": "upgrade_2",
               "childs": [
                 {
-                  "id": "upgrade-2-buy-popup",
+                  "id": "upgrade_2_buy_popup",
                   "childs": [
                     {
-                      "id": "upgrade-2-buy-button"
+                      "id": "upgrade_2_buy_button"
                     }
                   ]
                 }

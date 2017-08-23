@@ -106,7 +106,7 @@ public class ParentAndChildSystem extends EntitySystem {
                 entityList) {
             if (entity instanceof EntityWithId) {
                 EntityWithId entityWithId = (EntityWithId) entity;
-                String id = entityWithId.getId();
+                String id = entityWithId.getId().name();
                 if (entitysById.containsKey(id)) {
                     entitysById.get(id).add(entity);
                 } else {

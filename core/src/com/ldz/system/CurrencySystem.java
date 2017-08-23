@@ -51,6 +51,10 @@ public class CurrencySystem extends EntitySystem {
                     currencyComponent.currentValue += (currencyComponent.scoreToAdd * currencyComponent.currentTradeRate);
                     currencyComponent.scoreToAdd = 0.0f;
                 }
+                if (currencyComponent.scoreToRemove != 0.0f) {
+                    currencyComponent.currentValue += currencyComponent.scoreToRemove;
+                    currencyComponent.scoreToRemove = 0.0f;
+                }
             }
         }
     }
