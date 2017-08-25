@@ -1,14 +1,14 @@
 package com.ldz.system;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ldz.component.*;
 import com.ldz.util.CollisionChecker;
+import com.ldz.util.ComponentUtil;
+
+import java.util.Map;
 
 /**
  * Created by Loic on 19/08/2017.
@@ -51,14 +51,21 @@ public class DelayedDisplayerSystem extends EntitySystem {
         for (Entity entity :
                 computerMenuEntities) {
 
-            TimeAccumlatorComponent timeAccumlatorComponent = entity.getComponent(TimeAccumlatorComponent.class);
-            ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
-            BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
-            DisplayStateComponent displayStateComponent = entity.getComponent(DisplayStateComponent.class);
+            Map<String, Component> componentContainer = null;
+            try {
+                componentContainer = ComponentUtil.getAllComponentsFromEntity(entity, TimeAccumlatorComponent.class, ParentAndChildComponent.class, BagOfEntitiesComponent.class,
+                        DisplayStateComponent.class);
+            } catch (Exception e) {
+                Gdx.app.error(TAG, e.getMessage());
+                Gdx.app.error(TAG, e.getCause().toString());
+                return;
+            }
 
-            if (timeAccumlatorComponent != null && parentAndChildComponent != null
-                    && bagOfEntitiesComponent != null
-                    && displayStateComponent.state.equals(DisplayStateComponent.STATE.DELAYED)
+            TimeAccumlatorComponent timeAccumlatorComponent = (TimeAccumlatorComponent) componentContainer.get(TimeAccumlatorComponent.class.getSimpleName());
+            BagOfEntitiesComponent bagOfEntitiesComponent = (BagOfEntitiesComponent) componentContainer.get(BagOfEntitiesComponent.class.getSimpleName());
+            DisplayStateComponent displayStateComponent = (DisplayStateComponent) componentContainer.get(DisplayStateComponent.class.getSimpleName());
+
+            if (displayStateComponent.state.equals(DisplayStateComponent.STATE.DELAYED)
                     && displayStateComponent.isDisplayed == false) {
                 if (Gdx.input.isTouched()) {
                     if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {

@@ -1,8 +1,10 @@
 package com.ldz.system;
 
+import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -11,13 +13,17 @@ import com.badlogic.gdx.math.Vector3;
 import com.ldz.component.BoudingRectangleComponent;
 import com.ldz.component.TextureComponent;
 import com.ldz.component.TranformComponent;
+import com.ldz.util.ComponentUtil;
 
 import java.util.Comparator;
+import java.util.Map;
 
 /**
  * Created by Loic on 19/08/2017.
  */
 public class RenderingSystem extends SortedIteratingSystem {
+
+    private static final String TAG = RenderingSystem.class.getSimpleName();
 
     private OrthographicCamera orthographicCamera;
     private SpriteBatch batch;
@@ -31,23 +37,29 @@ public class RenderingSystem extends SortedIteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         //retrive graphics component
-        TextureComponent textureComponent = entity.getComponent(TextureComponent.class);
-        TranformComponent tranformComponent = entity.getComponent(TranformComponent.class);
-        BoudingRectangleComponent boudingRectangleComponent = entity.getComponent(BoudingRectangleComponent.class);
-
-
-        if (textureComponent != null && tranformComponent != null && boudingRectangleComponent != null) {
-            //apply render
-            Vector2 position = tranformComponent.position;
-            Rectangle rectangle = boudingRectangleComponent.rectangle;
-
-            Vector2 oppositePoint = new Vector2(position.x + Math.abs(rectangle.width), position.y + Math.abs(rectangle.height));
-
-            Vector3 vector3 = orthographicCamera.project(new Vector3(rectangle.x, rectangle.y, 0));
-            Vector3 oppositePointProjected = orthographicCamera.project(new Vector3(oppositePoint.x, oppositePoint.y, 0));
-
-            batch.draw(textureComponent.texture, vector3.x, vector3.y, (oppositePointProjected.x - vector3.x), (oppositePointProjected.y - vector3.y));
+        Map<String, Component> componentContainer = null;
+        try {
+            componentContainer = ComponentUtil.getAllComponentsFromEntity(entity, TextureComponent.class, TranformComponent.class, BoudingRectangleComponent.class);
+        } catch (Exception e) {
+            Gdx.app.error(TAG, e.getMessage());
+            Gdx.app.error(TAG, e.getCause().toString());
+            return;
         }
+
+        TextureComponent textureComponent = (TextureComponent) componentContainer.get(TextureComponent.class.getSimpleName());
+        TranformComponent tranformComponent = (TranformComponent) componentContainer.get(TranformComponent.class.getSimpleName());
+        BoudingRectangleComponent boudingRectangleComponent = (BoudingRectangleComponent) componentContainer.get(BoudingRectangleComponent.class.getSimpleName());
+
+        //apply render
+        Vector2 position = tranformComponent.position;
+        Rectangle rectangle = boudingRectangleComponent.rectangle;
+
+        Vector2 oppositePoint = new Vector2(position.x + Math.abs(rectangle.width), position.y + Math.abs(rectangle.height));
+
+        Vector3 vector3 = orthographicCamera.project(new Vector3(rectangle.x, rectangle.y, 0));
+        Vector3 oppositePointProjected = orthographicCamera.project(new Vector3(oppositePoint.x, oppositePoint.y, 0));
+
+        batch.draw(textureComponent.texture, vector3.x, vector3.y, (oppositePointProjected.x - vector3.x), (oppositePointProjected.y - vector3.y));
     }
 
     public static class zComparator implements Comparator<Entity> {
