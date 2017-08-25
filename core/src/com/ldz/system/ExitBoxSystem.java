@@ -15,13 +15,13 @@ import com.ldz.util.CollisionChecker;
  */
 public class ExitBoxSystem extends IteratingSystem {
 
+    private static ExitBoxSystem instance = null;
+    private OrthographicCamera orthographicCamera;
+
     public ExitBoxSystem(OrthographicCamera orthographicCamera) {
         super(Family.all(ExitBoxComponent.class).get());
         this.orthographicCamera = orthographicCamera;
     }
-
-
-    private static ExitBoxSystem instance = null;
 
     public static ExitBoxSystem getInstance(OrthographicCamera orthographicCamera) {
         if (instance == null) {
@@ -30,33 +30,31 @@ public class ExitBoxSystem extends IteratingSystem {
         return instance;
     }
 
-    private OrthographicCamera orthographicCamera;
-
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        if(Gdx.input.isTouched()){
-            if(CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)){
+        if (Gdx.input.isTouched()) {
+            if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
 
                 ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
 
-                if(parentAndChildComponent != null){
+                if (parentAndChildComponent != null) {
                     //adding popupaccumulator
                     Entity sourceEntity = parentAndChildComponent.parent;
-                    if(sourceEntity != null){
+                    if (sourceEntity != null) {
                         this.getEngine().removeEntity(sourceEntity);
                     }
 
                     //get popup
                     Entity popupEntity = parentAndChildComponent.parent;
 
-                    if(popupEntity != null){
+                    if (popupEntity != null) {
                         //popup source
                         ParentAndChildComponent parentAndChildComponent1 = popupEntity.getComponent(ParentAndChildComponent.class);
-                        if(parentAndChildComponent1 != null){
+                        if (parentAndChildComponent1 != null) {
                             Entity popupSourceEntity = parentAndChildComponent1.parent;
-                            if(popupSourceEntity != null){
+                            if (popupSourceEntity != null) {
                                 DisplayStateComponent displayStateComponent = popupSourceEntity.getComponent(DisplayStateComponent.class);
-                                if(displayStateComponent != null){
+                                if (displayStateComponent != null) {
                                     displayStateComponent.isDisplayed = false;
                                 }
                             }
