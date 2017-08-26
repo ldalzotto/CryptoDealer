@@ -8,12 +8,16 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ldz.component.DisplayStateComponent;
 import com.ldz.component.ExitBoxComponent;
 import com.ldz.component.ParentAndChildComponent;
+import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import com.ldz.util.CollisionChecker;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Loic on 19/08/2017.
  */
-public class ExitBoxSystem extends IteratingSystem {
+public class ExitBoxSystem extends IteratingSystem implements IRetrieveAllEntitiesFromSystem {
 
     private static ExitBoxSystem instance = null;
     private OrthographicCamera orthographicCamera;
@@ -65,5 +69,11 @@ public class ExitBoxSystem extends IteratingSystem {
                 }
             }
         }
+    }
+
+    @Override
+    public List<Iterable<Entity>> getAllEntities() {
+        List entities = Arrays.asList(this.getEntities());
+        return entities;
     }
 }

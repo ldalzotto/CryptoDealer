@@ -13,14 +13,18 @@ import com.ldz.component.CurrencyComponent;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.config.game.entities.EntityId;
 import com.ldz.entity.EntityWithId;
+import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import com.ldz.util.ParentAndChildUtil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 /**
  * Created by Loic on 20/08/2017.
  */
-public class BuyableUpgradePopupSystem extends IteratingSystem {
+public class BuyableUpgradePopupSystem extends IteratingSystem implements IRetrieveAllEntitiesFromSystem {
 
     private static final String TAG = BuyableUpgradePopupSystem.class.getSimpleName();
 
@@ -139,5 +143,9 @@ public class BuyableUpgradePopupSystem extends IteratingSystem {
 
     }
 
-
+    @Override
+    public List<Iterable<Entity>> getAllEntities() {
+        List entities = Arrays.asList(this.getEntities(), this.currencyEntities);
+        return entities;
+    }
 }

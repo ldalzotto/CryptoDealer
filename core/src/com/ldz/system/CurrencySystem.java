@@ -8,11 +8,15 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.ldz.component.CurrencyComponent;
 import com.ldz.input.CurrencyInputProcessor;
 import com.ldz.input.MyInputMultiplexer;
+import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Loic on 19/08/2017.
  */
-public class CurrencySystem extends EntitySystem {
+public class CurrencySystem extends EntitySystem implements IRetrieveAllEntitiesFromSystem {
 
     private static CurrencySystem instance = null;
     private ImmutableArray<Entity> currencyEntities;
@@ -63,4 +67,9 @@ public class CurrencySystem extends EntitySystem {
         return currencyEntities;
     }
 
+    @Override
+    public List<Iterable<Entity>> getAllEntities() {
+        List entities = Arrays.asList(this.currencyEntities);
+        return entities;
+    }
 }

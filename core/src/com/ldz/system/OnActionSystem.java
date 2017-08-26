@@ -7,12 +7,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ldz.component.OnActionComponent;
+import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import com.ldz.util.CollisionChecker;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Loic on 20/08/2017.
  */
-public class OnActionSystem extends IteratingSystem {
+public class OnActionSystem extends IteratingSystem implements IRetrieveAllEntitiesFromSystem {
 
 
     private static OnActionSystem instance = null;
@@ -53,5 +57,11 @@ public class OnActionSystem extends IteratingSystem {
             }
 
         }
+    }
+
+    @Override
+    public List<Iterable<Entity>> getAllEntities() {
+        List entities = Arrays.asList(this.getEntities());
+        return entities;
     }
 }

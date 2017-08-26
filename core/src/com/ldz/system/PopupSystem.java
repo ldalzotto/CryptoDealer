@@ -7,15 +7,18 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ldz.component.*;
+import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import com.ldz.util.CollisionChecker;
 import com.ldz.util.ComponentUtil;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Loic on 19/08/2017.
  */
-public class PopupSystem extends IteratingSystem {
+public class PopupSystem extends IteratingSystem implements IRetrieveAllEntitiesFromSystem {
 
     private static final String TAG = PopupSystem.class.getSimpleName();
 
@@ -90,5 +93,11 @@ public class PopupSystem extends IteratingSystem {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<Iterable<Entity>> getAllEntities() {
+        List entities = Arrays.asList(this.getEntities());
+        return entities;
     }
 }

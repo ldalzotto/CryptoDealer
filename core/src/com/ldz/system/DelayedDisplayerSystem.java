@@ -5,15 +5,18 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ldz.component.*;
+import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import com.ldz.util.CollisionChecker;
 import com.ldz.util.ComponentUtil;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Loic on 19/08/2017.
  */
-public class DelayedDisplayerSystem extends EntitySystem {
+public class DelayedDisplayerSystem extends EntitySystem implements IRetrieveAllEntitiesFromSystem {
 
     private static final String TAG = DelayedDisplayerSystem.class.getSimpleName();
 
@@ -88,4 +91,9 @@ public class DelayedDisplayerSystem extends EntitySystem {
 
     }
 
+    @Override
+    public List<Iterable<Entity>> getAllEntities() {
+        List entities = Arrays.asList(this.computerMenuEntities);
+        return entities;
+    }
 }

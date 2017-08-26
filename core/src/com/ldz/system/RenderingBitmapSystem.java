@@ -12,14 +12,17 @@ import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.BitmapFontComponent;
 import com.ldz.component.CurrencyComponent;
 import com.ldz.component.TranformComponent;
+import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import com.ldz.util.ComponentUtil;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Loic on 19/08/2017.
  */
-public class RenderingBitmapSystem extends IteratingSystem {
+public class RenderingBitmapSystem extends IteratingSystem implements IRetrieveAllEntitiesFromSystem {
 
     private static final String TAG = RenderingBitmapSystem.class.getSimpleName();
 
@@ -61,5 +64,11 @@ public class RenderingBitmapSystem extends IteratingSystem {
             bitmapFontComponent.bitmapFont.draw(batch, bitmapFontComponent.stringToDisplay, position.x, position.y);
         }
 
+    }
+
+    @Override
+    public List<Iterable<Entity>> getAllEntities() {
+        List entities = Arrays.asList(this.getEntities());
+        return entities;
     }
 }

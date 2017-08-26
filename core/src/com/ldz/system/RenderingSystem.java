@@ -13,15 +13,18 @@ import com.badlogic.gdx.math.Vector3;
 import com.ldz.component.BoudingRectangleComponent;
 import com.ldz.component.TextureComponent;
 import com.ldz.component.TranformComponent;
+import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import com.ldz.util.ComponentUtil;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Loic on 19/08/2017.
  */
-public class RenderingSystem extends SortedIteratingSystem {
+public class RenderingSystem extends SortedIteratingSystem implements IRetrieveAllEntitiesFromSystem {
 
     private static final String TAG = RenderingSystem.class.getSimpleName();
 
@@ -62,6 +65,12 @@ public class RenderingSystem extends SortedIteratingSystem {
         batch.draw(textureComponent.texture, vector3.x, vector3.y, (oppositePointProjected.x - vector3.x), (oppositePointProjected.y - vector3.y));
     }
 
+    @Override
+    public List<Iterable<Entity>> getAllEntities() {
+        List entities = Arrays.asList(this.getEntities());
+        return entities;
+    }
+
     public static class zComparator implements Comparator<Entity> {
         @Override
         public int compare(Entity o1, Entity o2) {
@@ -70,5 +79,4 @@ public class RenderingSystem extends SortedIteratingSystem {
             return (int) Math.signum(tranformComponent1.z - tranformComponent2.z);
         }
     }
-
 }

@@ -10,17 +10,15 @@ import com.ldz.config.childhierarchy.ChildEntitiesConfig;
 import com.ldz.config.childhierarchy.domain.ChildEntities;
 import com.ldz.config.childhierarchy.domain.ChildEntity;
 import com.ldz.entity.EntityWithId;
+import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiFunction;
 
 /**
  * Created by Loic on 20/08/2017.
  */
-public class ParentAndChildSystem extends EntitySystem {
+public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEntitiesFromSystem {
 
     private static ParentAndChildSystem instance = null;
     private ImmutableArray<Entity> entityList;
@@ -118,5 +116,11 @@ public class ParentAndChildSystem extends EntitySystem {
 
         }
         return entitysById;
+    }
+
+    @Override
+    public List<Iterable<Entity>> getAllEntities() {
+        List entities = Arrays.asList(this.entityList);
+        return entities;
     }
 }
