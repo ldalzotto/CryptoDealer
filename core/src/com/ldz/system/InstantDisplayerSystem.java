@@ -2,21 +2,17 @@ package com.ldz.system;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.component.DisplayStateComponent;
-import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
+import com.ldz.system.custom.MyIteratingSystem;
 import com.ldz.util.CollisionChecker;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Loic on 20/08/2017.
  */
-public class InstantDisplayerSystem extends IteratingSystem implements IRetrieveAllEntitiesFromSystem {
+public class InstantDisplayerSystem extends MyIteratingSystem {
 
 
     private static InstantDisplayerSystem instance = null;
@@ -55,9 +51,4 @@ public class InstantDisplayerSystem extends IteratingSystem implements IRetrieve
 
     }
 
-    @Override
-    public List<Iterable<Entity>> getAllEntities() {
-        List entities = Arrays.asList(this.getEntities());
-        return entities;
-    }
 }

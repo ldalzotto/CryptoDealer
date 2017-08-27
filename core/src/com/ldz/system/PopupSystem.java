@@ -3,22 +3,21 @@ package com.ldz.system;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.ldz.component.*;
-import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
+import com.ldz.component.DisplayStateComponent;
+import com.ldz.component.ParentAndChildComponent;
+import com.ldz.component.PopUpComponent;
+import com.ldz.system.custom.MyIteratingSystem;
 import com.ldz.util.CollisionChecker;
 import com.ldz.util.ComponentUtil;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Loic on 19/08/2017.
  */
-public class PopupSystem extends IteratingSystem implements IRetrieveAllEntitiesFromSystem {
+public class PopupSystem extends MyIteratingSystem {
 
     private static final String TAG = PopupSystem.class.getSimpleName();
 
@@ -95,9 +94,4 @@ public class PopupSystem extends IteratingSystem implements IRetrieveAllEntities
         }
     }
 
-    @Override
-    public List<Iterable<Entity>> getAllEntities() {
-        List entities = Arrays.asList(this.getEntities());
-        return entities;
-    }
 }

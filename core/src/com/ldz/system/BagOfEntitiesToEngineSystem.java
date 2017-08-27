@@ -2,17 +2,13 @@ package com.ldz.system;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
 import com.ldz.component.BagOfEntitiesComponent;
-import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
-
-import java.util.Arrays;
-import java.util.List;
+import com.ldz.system.custom.MyIteratingSystem;
 
 /**
  * Created by Loic on 20/08/2017.
  */
-public class BagOfEntitiesToEngineSystem extends IteratingSystem implements IRetrieveAllEntitiesFromSystem {
+public class BagOfEntitiesToEngineSystem extends MyIteratingSystem {
 
     private static BagOfEntitiesToEngineSystem instance = null;
 
@@ -59,9 +55,4 @@ public class BagOfEntitiesToEngineSystem extends IteratingSystem implements IRet
         return returnBool;
     }
 
-    @Override
-    public List<Iterable<Entity>> getAllEntities() {
-        List entities = Arrays.asList(this.getEntities());
-        return entities;
-    }
 }
