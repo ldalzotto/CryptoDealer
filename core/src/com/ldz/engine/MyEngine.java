@@ -3,13 +3,13 @@ package com.ldz.engine;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.gdx.utils.Json;
 import com.ldz.DebugDataBase;
 import com.ldz.IDebugDataBase;
 import com.ldz.entity.EntityWithId;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import org.neo4j.driver.v1.AuthTokens;
 
-import java.util.AbstractMap;
 import java.util.List;
 
 /**
@@ -21,6 +21,7 @@ public class MyEngine extends Engine {
     private static MyEngine instance = null;
     private IDebugDataBase iDebugDataBase;
     private float timeAccumulator;
+    private Json json = new Json();
 
     public MyEngine() {
         super();
@@ -40,7 +41,7 @@ public class MyEngine extends Engine {
         super.addSystem(system);
 
         if (System.getenv("DEBUG_ENABLED").equals("true")) {
-            this.iDebugDataBase.addSystem(system.getClass().getSimpleName(), new AbstractMap.SimpleEntry[]{});
+            this.iDebugDataBase.addSystem(system.getClass().getSimpleName());
         }
 
     }
@@ -51,7 +52,7 @@ public class MyEngine extends Engine {
         if (System.getenv("DEBUG_ENABLED").equals("true")) {
             if (entity instanceof EntityWithId) {
                 EntityWithId entityWithId = (EntityWithId) entity;
-                this.iDebugDataBase.addEntity(entityWithId.getId().name(), new AbstractMap.SimpleEntry[]{});
+                this.iDebugDataBase.addEntity(entityWithId.getId().name());
             }
         }
 
@@ -69,6 +70,17 @@ public class MyEngine extends Engine {
             }
         }
 
+    }
+
+    @Override
+    public void removeEntity(Entity entity) {
+        super.removeEntity(entity);
+        if (System.getenv("DEBUG_ENABLED").equals("true")) {
+            if (entity instanceof EntityWithId) {
+                EntityWithId entityWithId = (EntityWithId) entity;
+                this.iDebugDataBase.deleteNode(entityWithId.getId().name());
+            }
+        }
     }
 
     private void updateDebugEngine() {

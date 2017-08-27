@@ -13,10 +13,14 @@ public interface IDebugDataBase {
 
     public void stopDatabase();
 
-    public void addSystem(String name, AbstractMap.SimpleEntry<String, String>... nodeProperties);
+    public void addSystem(String name);
 
-    public void addEntity(String name, AbstractMap.SimpleEntry<String, String>... nodeProperties);
+    public void addEntity(String name);
+
+    public void addParamterToNode(String nodeName, String nodeTag, AbstractMap.SimpleEntry<String, String> attribute);
 
     public void createLinkSystemToEntity(String systemName, String entityName);
+
+    public void deleteNode(String nodeName);
 
 }

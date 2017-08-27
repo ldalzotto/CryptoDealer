@@ -1,6 +1,9 @@
 package com.ldz;
 
-import org.neo4j.driver.v1.*;
+import org.neo4j.driver.v1.AuthToken;
+import org.neo4j.driver.v1.Driver;
+import org.neo4j.driver.v1.GraphDatabase;
+import org.neo4j.driver.v1.Session;
 
 import java.util.AbstractMap;
 
@@ -35,25 +38,21 @@ public class DebugDataBase implements IDebugDataBase {
     }
 
     @Override
-    public void addSystem(String name, AbstractMap.SimpleEntry<String, String>[] nodeProperties) {
-        this.session.run(createNodeQuery("SYSTEM", name, nodeProperties));
+    public void addSystem(String name) {
+        this.session.run(createNodeQuery("SYSTEM", name));
     }
 
     @Override
-    public void addEntity(String name, AbstractMap.SimpleEntry<String, String>[] nodeProperties) {
-        this.session.run(createNodeQuery("ENTITY", name, nodeProperties));
+    public void addEntity(String name) {
+        this.session.run(createNodeQuery("ENTITY", name));
     }
 
-    private String createNodeQuery(String nodeLabel, String name, AbstractMap.SimpleEntry<String, String>[] nodeProperties) {
+    private String createNodeQuery(String nodeLabel, String name) {
         StringBuilder query = new StringBuilder();
         query.append("CREATE (n:").append(nodeLabel);
 
         query.append("{ name:'").append(name).append("' }");
 
-        for (AbstractMap.SimpleEntry<String, String> simpleEntry :
-                nodeProperties) {
-            query.append(simpleEntry.getKey()).append(": '").append(simpleEntry.getValue()).append("', ");
-        }
         query.append(")");
         return query.toString();
     }
@@ -73,5 +72,22 @@ public class DebugDataBase implements IDebugDataBase {
                 .append("CREATE UNIQUE (u)-[:").append(relationName).append("]->(r)");
 
         return query.toString();
+    }
+
+    @Override
+    public void addParamterToNode(String nodeName, String nodeTag, AbstractMap.SimpleEntry<String, String> attribute) {
+
+        StringBuilder query = new StringBuilder();
+        query.append("MATCH (n:").append(nodeTag).append(" {name: '").append(nodeName).append("'})\n")
+                .append("SET n.").append(attribute.getKey()).append(" = '").append(attribute.getValue()).append("'");
+        this.session.run(query.toString());
+
+    }
+
+    @Override
+    public void deleteNode(String nodeName) {
+        StringBuilder query = new StringBuilder();
+        query.append("MATCH (n { name: '").append(nodeName).append("' })").append("\n").append("DETACH DELETE n");
+        this.session.run(query.toString());
     }
 }
