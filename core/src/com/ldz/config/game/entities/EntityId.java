@@ -10,6 +10,8 @@ public enum EntityId {
     computer_entity,
     upgrade_menu_popup,
     exit_upgrade_menu_popup,
+    persistant_upgrade_1,
+    persistant_upgrade_2,
     upgrade_1,
     upgrade_1_buy_popup,
     upgrade_1_cost_display,

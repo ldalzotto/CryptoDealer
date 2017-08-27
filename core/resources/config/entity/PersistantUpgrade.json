@@ -1,0 +1,80 @@
+{
+  "entities": [
+    {
+      "id": "persistant_upgrade_1",
+      "instance": {
+        "constructor": {
+          "classname": "com.ldz.entity.PersistantUpgradeEntity",
+          "parameters": [
+            {
+              "classname": "java.lang.String",
+              "value": "UPGRADE_1"
+            },
+            {
+              "classname": "java.lang.float",
+              "value": 0.01
+            },
+            {
+              "classname": "com.ldz.component.domain.CurrencyInstance",
+              "constructor": {
+                "classname": "com.ldz.component.domain.CurrencyInstance",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float",
+                    "value": 0
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": 10
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "persistant_upgrade_2",
+      "instance": {
+        "constructor": {
+          "classname": "com.ldz.entity.PersistantUpgradeEntity",
+          "parameters": [
+            {
+              "classname": "java.lang.String",
+              "value": "UPGRADE_2"
+            },
+            {
+              "classname": "java.lang.float",
+              "value": 0.01
+            },
+            {
+              "classname": "com.ldz.component.domain.CurrencyInstance",
+              "constructor": {
+                "classname": "com.ldz.component.domain.CurrencyInstance",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float",
+                    "value": 3
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": 0
+                  },
+                  {
+                    "classname": "java.lang.float",
+                    "value": 10
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -63,6 +63,10 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine.addEntity(EntityFactory.getEntityFromId(EntityId.loud_coin_entity));
         engine.addEntity(EntityFactory.getEntityFromId(EntityId.computer_entity));
 
+        //add persistant upgrade entity
+        engine.addEntity(EntityFactory.getEntityFromId(EntityId.persistant_upgrade_1));
+        engine.addEntity(EntityFactory.getEntityFromId(EntityId.persistant_upgrade_2));
+
         //set all systems
         engine.addSystem(new RenderingSystem(camera, batch));
         engine.addSystem(new RenderingBitmapSystem(camera, batch));
@@ -75,6 +79,7 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine.addSystem(InstantDisplayerSystem.getInstance(camera));
         engine.addSystem(BuyableUpgradePopupSystem.getInstance());
         engine.addSystem(OnActionSystem.getInstance(camera));
+        engine.addSystem(PersistantUpgradeSystem.getInstance());
 
 
         engine.addEntityListener(Family.all(ParentAndChildComponent.class).get(), new EntityRemoveListener());

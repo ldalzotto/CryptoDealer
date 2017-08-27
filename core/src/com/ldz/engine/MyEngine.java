@@ -25,8 +25,10 @@ public class MyEngine extends Engine {
 
     public MyEngine() {
         super();
-        iDebugDataBase = DebugDataBase.getInstance();
-        iDebugDataBase.connectTodatabase("bolt://localhost:7687", AuthTokens.basic("neo4j", "Abc01234"));
+        if (System.getenv("DEBUG_ENABLED").equals("true")) {
+            iDebugDataBase = DebugDataBase.getInstance();
+            iDebugDataBase.connectTodatabase("bolt://localhost:7687", AuthTokens.basic("neo4j", "Abc01234"));
+        }
     }
 
     public static MyEngine getInstance() {
