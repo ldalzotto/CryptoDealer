@@ -10,6 +10,8 @@ public class PersistantUpgradeComponent implements Component {
 
     public UpgradeId upgradeId;
     public CurrencyInstance objectCost;
+    public CurrencyInstance objectBonus;
+
     public float itemPerformances = 1.0f;
     public float decayRatePerSeconds = 0.01f;
     public float timeAccumulator = 0f;

@@ -12,6 +12,7 @@ import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Loic on 28/08/2017.
@@ -40,13 +41,36 @@ public class TappingSystem extends EntitySystem implements IRetrieveAllEntitiesF
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        if (Gdx.input.justTouched()) {
+        if (Gdx.input.justTouched() && !PopupSystem.getInstance(null).popupActives()) {
             //adding to score
             for (Entity currencyEntity :
                     currencyEntities) {
                 CurrencyComponent currencyComponent = currencyEntity.getComponent(CurrencyComponent.class);
                 if (currencyComponent != null) {
                     currencyComponent.scoreToAdd = 1.0f;
+                }
+            }
+
+            for (Entity persistantUpgradeNeitty :
+                    persistantUpgradeEntities) {
+                PersistantUpgradeComponent persistantUpgradeComponent = persistantUpgradeNeitty.getComponent(PersistantUpgradeComponent.class);
+                if (persistantUpgradeComponent != null) {
+                    //apply decay
+                    persistantUpgradeComponent.objectBonus.multiplyAllBy(persistantUpgradeComponent.itemPerformances);
+                    for (Map.Entry<CurrencyComponent.CURRENCY_TYPE, Float> entry :
+                            persistantUpgradeComponent.objectBonus.getCurrencies().entrySet()) {
+
+                        for (Entity currencyEntity :
+                                currencyEntities) {
+                            CurrencyComponent currencyComponent = currencyEntity.getComponent(CurrencyComponent.class);
+                            if (currencyComponent != null) {
+                                if (entry.getKey().equals(currencyComponent.currencyType)) {
+                                    currencyComponent.scoreToAdd += entry.getValue();
+                                }
+                            }
+                        }
+
+                    }
                 }
             }
 

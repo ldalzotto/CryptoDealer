@@ -61,6 +61,7 @@ public class PersistantUpgradeSystem extends MyIteratingSystem {
                 persistantUpgradeComponent.itemPerformances = 1.0f;
                 persistantUpgradeComponent.upgradeLevel += 1;
                 //TODO calculate UP cost
+                //TODO calculate BONUS UP
                 persistantUpgradeComponent.state = PersistantUpgradeComponent.STATE.PENDING;
                 break;
         }
