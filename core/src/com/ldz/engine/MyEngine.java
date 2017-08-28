@@ -10,7 +10,9 @@ import com.ldz.entity.EntityWithId;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import org.neo4j.driver.v1.AuthTokens;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Loic on 20/08/2017.
@@ -54,7 +56,9 @@ public class MyEngine extends Engine {
         if (System.getenv("DEBUG_ENABLED").equals("true")) {
             if (entity instanceof EntityWithId) {
                 EntityWithId entityWithId = (EntityWithId) entity;
-                this.iDebugDataBase.addEntity(entityWithId.getId().name());
+                Map<String, String> entityParameters = new HashMap<>();
+                entityParameters.put("DESCRIPTION", entityWithId.getId().getDescription());
+                this.iDebugDataBase.addEntity(entityWithId.getId().name(), entityParameters);
             }
         }
 

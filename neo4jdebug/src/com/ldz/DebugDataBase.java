@@ -6,6 +6,7 @@ import org.neo4j.driver.v1.GraphDatabase;
 import org.neo4j.driver.v1.Session;
 
 import java.util.AbstractMap;
+import java.util.Map;
 
 /**
  * Created by Loic on 26/08/2017.
@@ -39,19 +40,34 @@ public class DebugDataBase implements IDebugDataBase {
 
     @Override
     public void addSystem(String name) {
-        this.session.run(createNodeQuery("SYSTEM", name));
+        this.session.run(createNodeQuery("SYSTEM", name, null));
     }
 
     @Override
     public void addEntity(String name) {
-        this.session.run(createNodeQuery("ENTITY", name));
+        this.session.run(createNodeQuery("ENTITY", name, null));
     }
 
-    private String createNodeQuery(String nodeLabel, String name) {
+    @Override
+    public void addEntity(String name, Map<String, String> parameters) {
+        this.session.run(createNodeQuery("ENTITY", name, parameters));
+    }
+
+    private String createNodeQuery(String nodeLabel, String name, Map<String, String> parameters) {
+
         StringBuilder query = new StringBuilder();
         query.append("CREATE (n:").append(nodeLabel);
 
-        query.append("{ name:'").append(name).append("' }");
+        if (parameters == null) {
+            query.append("{ name:'").append(name).append("' }");
+        } else {
+            query.append("{ name:'").append(name).append("'");
+            for (Map.Entry<String, String> entry :
+                    parameters.entrySet()) {
+                query.append(", ").append(entry.getKey()).append(": '").append(entry.getValue()).append("'");
+            }
+            query.append("}");
+        }
 
         query.append(")");
         return query.toString();
