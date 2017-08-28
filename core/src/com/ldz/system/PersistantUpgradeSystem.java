@@ -54,5 +54,16 @@ public class PersistantUpgradeSystem extends MyIteratingSystem {
             persistantUpgradeComponent.timeAccumulator = 0.0f;
         }
 
+        switch (persistantUpgradeComponent.state) {
+            case PENDING:
+                break;
+            case UPGRADING:
+                persistantUpgradeComponent.itemPerformances = 1.0f;
+                persistantUpgradeComponent.upgradeLevel += 1;
+                //TODO calculate UP cost
+                persistantUpgradeComponent.state = PersistantUpgradeComponent.STATE.PENDING;
+                break;
+        }
+
     }
 }

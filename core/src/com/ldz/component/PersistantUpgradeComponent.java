@@ -13,11 +13,18 @@ public class PersistantUpgradeComponent implements Component {
     public float itemPerformances = 1.0f;
     public float decayRatePerSeconds = 0.01f;
     public float timeAccumulator = 0f;
+    public int upgradeLevel = 0;
 
+    public STATE state = STATE.PENDING;
 
     public enum UpgradeId {
         UPGRADE_1,
         UPGRADE_2;
+    }
+
+    public enum STATE {
+        PENDING,
+        UPGRADING;
     }
 
 }

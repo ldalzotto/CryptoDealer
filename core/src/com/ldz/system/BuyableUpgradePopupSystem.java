@@ -51,6 +51,7 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
         BuyableUpgradeComponent buyableUpgradeComponent = entity.getComponent(BuyableUpgradeComponent.class);
 
         if (buyableUpgradeComponent != null) {
+            PersistantUpgradeComponent persistantUpgradeComponent = retrievePersistantUpgradeFromUpgradePopupComponent(buyableUpgradeComponent);
 
             ParentAndChildUtil.forEachChildsRecursively(entity, new Function<Entity, Void>() {
                 @Override
@@ -62,14 +63,12 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
                             //font component
                             BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
                             if (bitmapFontComponent != null) {
-                                PersistantUpgradeComponent persistantUpgradeComponent = retrievePersistantUpgradeFromUpgradePopupComponent(buyableUpgradeComponent);
                                 bitmapFontComponent.stringToDisplay = "Cost : " + String.valueOf(persistantUpgradeComponent.objectCost.getCurrencies().get(CurrencyComponent.CURRENCY_TYPE.ITHEREUM_COIN));
                                 bitmapFontComponent.bitmapFont.setColor(Color.BLUE);
                             }
                         } else if (entityWithId.getId().equals(EntityId.upgrade_1_decade_display)) {
                             BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
                             if (bitmapFontComponent != null) {
-                                PersistantUpgradeComponent persistantUpgradeComponent = retrievePersistantUpgradeFromUpgradePopupComponent(buyableUpgradeComponent);
                                 bitmapFontComponent.stringToDisplay = "Performances : " + String.valueOf(persistantUpgradeComponent.itemPerformances);
                                 bitmapFontComponent.bitmapFont.setColor(Color.RED);
                             }
@@ -85,7 +84,6 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
                 case PENDING:
                     break;
                 case ASKING_FOR_UPGRADE:
-                    PersistantUpgradeComponent persistantUpgradeComponent = retrievePersistantUpgradeFromUpgradePopupComponent(buyableUpgradeComponent);
 
                     //check if upgrade is buyable by the player
                     if (checkIfUpgradeIsBuyableByThePlayer(persistantUpgradeComponent)) {
@@ -94,6 +92,7 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
                             CurrencyComponent currencyComponent = currencyEntity.getComponent(CurrencyComponent.class);
                             if (currencyComponent != null) {
                                 currencyComponent.scoreToRemove = (-1) * persistantUpgradeComponent.objectCost.getCurrencies().get(currencyComponent.currencyType);
+                                persistantUpgradeComponent.state = PersistantUpgradeComponent.STATE.UPGRADING; //upgrading persistance component
                             }
                         }
                     }
