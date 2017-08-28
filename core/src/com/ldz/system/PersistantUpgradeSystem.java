@@ -50,7 +50,7 @@ public class PersistantUpgradeSystem extends MyIteratingSystem {
 
         //update decay performance
         if (persistantUpgradeComponent.timeAccumulator >= 1.0f) {
-            persistantUpgradeComponent.itemPerformances = persistantUpgradeComponent.itemPerformances * persistantUpgradeComponent.decayRatePerSeconds;
+            persistantUpgradeComponent.itemPerformances = persistantUpgradeComponent.itemPerformances - (persistantUpgradeComponent.itemPerformances * persistantUpgradeComponent.decayRatePerSeconds / 100);
             persistantUpgradeComponent.timeAccumulator = 0.0f;
         }
 
