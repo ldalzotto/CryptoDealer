@@ -105,6 +105,7 @@ project(":core") {
         compile project(":neo4jdebug")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
 
     }
 }

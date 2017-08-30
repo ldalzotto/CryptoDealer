@@ -211,6 +211,13 @@
               }
             },
             {
+              "classname": "com.ldz.component.action.impl.BuyableUpgradeButtonAction",
+              "constructor": {
+                "classname": "com.ldz.component.action.impl.BuyableUpgradeButtonAction",
+                "parameters": []
+              }
+            },
+            {
               "classname": "java.lang.int",
               "value": 4
             }
@@ -396,6 +403,13 @@
                     "value": "assets/buy_upgrade_button.bmp"
                   }
                 ]
+              }
+            },
+            {
+              "classname": "com.ldz.component.action.impl.BuyableUpgradeButtonAction",
+              "constructor": {
+                "classname": "com.ldz.component.action.impl.BuyableUpgradeButtonAction",
+                "parameters": []
               }
             },
             {

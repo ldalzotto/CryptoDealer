@@ -7,6 +7,7 @@ import com.ldz.config.game.entities.domain.GameEntities;
 import com.ldz.config.game.entities.domain.GameEntity;
 import com.ldz.config.game.entities.domain.Parameter;
 import com.ldz.entity.EntityWithId;
+import org.apache.commons.lang3.ClassUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
  * Created by Loic on 20/08/2017.
  */
 public class GameEntitiesConfig {
+
+    private static final String TAG = GameEntitiesConfig.class.getSimpleName();
 
     private static GameEntitiesConfig instance = null;
     private Json json = new Json();
@@ -84,7 +87,8 @@ public class GameEntitiesConfig {
             buildParemeter(types, parametersValues, parameter);
         }
 
-        java.lang.reflect.Constructor objectConstructor = currentClass.getConstructor(types.toArray(new Class[]{}));
+        java.lang.reflect.Constructor objectConstructor = getJavaConstructorFromClass(currentClass, types.toArray(new Class[]{}),
+                new ArrayList<>(types));
         return objectConstructor.newInstance((Object[]) parametersValues.toArray());
     }
 
@@ -144,6 +148,57 @@ public class GameEntitiesConfig {
 
         }
 
+    }
+
+    private java.lang.reflect.Constructor getJavaConstructorFromClass(Class classWhereConstructorIs, Class[] constructorParameters,
+                                                                      List<Class> initialConstructorParameters) {
+
+        List<Exception> exceptionsOccured = new ArrayList<>();
+
+        java.lang.reflect.Constructor constructorReturn = null;
+
+        try {
+            constructorReturn = classWhereConstructorIs.getConstructor(constructorParameters);
+        } catch (NoSuchMethodException e) {
+
+            //try with interface ?
+            int contructorParameterIndex = 0;
+
+            constructorParametersLoop:
+            for (Class aClass :
+                    constructorParameters) {
+                List<Class<?>> interfaces = ClassUtils.getAllInterfaces(aClass);
+                for (Class interfaceClass :
+                        interfaces) {
+                    Class[] constructorParametersClone = new ArrayList<>(initialConstructorParameters).toArray(new Class[]{});
+                    constructorParametersClone[contructorParameterIndex] = interfaceClass;
+
+                    try {
+                        constructorReturn = classWhereConstructorIs.getConstructor(constructorParametersClone);
+                    } catch (NoSuchMethodException e1) {
+                        exceptionsOccured.add(e1);
+                    }
+
+                    if (constructorReturn != null) {
+                        break constructorParametersLoop;
+                    }
+                }
+                contructorParameterIndex += 1;
+            }
+
+            exceptionsOccured.add(e);
+        }
+
+
+        //error log if occur
+        if (constructorReturn == null && exceptionsOccured.size() > 0) {
+            for (Exception e :
+                    exceptionsOccured) {
+                Gdx.app.debug(TAG, e.getMessage() + " " + e.getStackTrace());
+            }
+        }
+
+        return constructorReturn;
     }
 
 }

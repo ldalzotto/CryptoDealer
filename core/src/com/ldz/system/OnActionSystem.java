@@ -46,7 +46,7 @@ public class OnActionSystem extends MyIteratingSystem {
                 case ON_CLICK_INSIDE:
                     if (Gdx.input.justTouched()) {
                         if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
-                            onActionComponent.function.apply(entity);
+                            onActionComponent.action.apply(entity);
                         }
                     }
                     break;
