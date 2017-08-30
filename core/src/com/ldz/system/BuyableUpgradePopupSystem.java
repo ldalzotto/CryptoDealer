@@ -6,8 +6,11 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.ldz.component.*;
-import com.ldz.config.game.entities.EntityId;
+import com.ldz.component.BitmapFontComponent;
+import com.ldz.component.BuyableUpgradeComponent;
+import com.ldz.component.CurrencyComponent;
+import com.ldz.component.PersistantUpgradeComponent;
+import com.ldz.config.game.entities.EntityType;
 import com.ldz.entity.EntityWithId;
 import com.ldz.system.custom.MyIteratingSystem;
 import com.ldz.util.ParentAndChildUtil;
@@ -59,14 +62,14 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
 
                     if (entity instanceof EntityWithId) {
                         EntityWithId entityWithId = (EntityWithId) entity;
-                        if (entityWithId.getId().equals(EntityId.upgrade_1_cost_display)) {
+                        if (entityWithId.getId().getEntityType().equals(EntityType.COST_DISPLAY)) {
                             //font component
                             BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
                             if (bitmapFontComponent != null) {
                                 bitmapFontComponent.stringToDisplay = "Cost : " + String.valueOf(persistantUpgradeComponent.objectCost.getCurrencies().get(CurrencyComponent.CURRENCY_TYPE.ITHEREUM_COIN));
                                 bitmapFontComponent.bitmapFont.setColor(Color.BLUE);
                             }
-                        } else if (entityWithId.getId().equals(EntityId.upgrade_1_decade_display)) {
+                        } else if (entityWithId.getId().getEntityType().equals(EntityType.COST_DISPLAY)) {
                             BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
                             if (bitmapFontComponent != null) {
                                 bitmapFontComponent.stringToDisplay = "Performances : " + String.valueOf(persistantUpgradeComponent.itemPerformances);
