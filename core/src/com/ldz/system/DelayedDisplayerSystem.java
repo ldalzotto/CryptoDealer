@@ -8,6 +8,7 @@ import com.ldz.component.*;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 import com.ldz.util.CollisionChecker;
 import com.ldz.util.ComponentUtil;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -75,7 +76,10 @@ public class DelayedDisplayerSystem extends EntitySystem implements IRetrieveAll
                         timeAccumlatorComponent.accumulatedTime += deltaTime;
 
                         if (timeAccumlatorComponent.accumulatedTime >= timeAccumlatorComponent.timeLimit) {
+                            Gdx.app.debug(TAG, "Displaying childs entities inside ********** " + bagOfEntitiesComponent.toString() + " " + ReflectionToStringBuilder.toString(bagOfEntitiesComponent));
                             timeAccumlatorComponent.accumulatedTime = 0;
+
+                            Gdx.app.debug(TAG, "Current entity set to isDisplayed = true ********** " + ReflectionToStringBuilder.toString(entity));
                             displayStateComponent.isDisplayed = true;
                             bagOfEntitiesComponent.addEntityToEngine = true;
                             ParentAndChildSystem.getInstance().setProcessing(true);
@@ -85,7 +89,6 @@ public class DelayedDisplayerSystem extends EntitySystem implements IRetrieveAll
                 } else {
                     timeAccumlatorComponent.accumulatedTime = 0f;
                 }
-                Gdx.app.debug(TAG, String.valueOf(timeAccumlatorComponent.accumulatedTime));
             }
         }
 

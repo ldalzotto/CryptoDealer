@@ -27,10 +27,11 @@ public class MyEngine extends Engine {
 
     public MyEngine() {
         super();
-        if (System.getenv("DEBUG_ENABLED").equals("true")) {
+        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
             iDebugDataBase = DebugDataBase.getInstance();
             iDebugDataBase.connectTodatabase("bolt://localhost:7687", AuthTokens.basic("neo4j", "Abc01234"));
         }
+
     }
 
     public static MyEngine getInstance() {
@@ -44,16 +45,18 @@ public class MyEngine extends Engine {
     public void addSystem(EntitySystem system) {
         super.addSystem(system);
 
-        if (System.getenv("DEBUG_ENABLED").equals("true")) {
+        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
             this.iDebugDataBase.addSystem(system.getClass().getSimpleName());
         }
+
 
     }
 
     @Override
     public void addEntity(Entity entity) {
         super.addEntity(entity);
-        if (System.getenv("DEBUG_ENABLED").equals("true")) {
+
+        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
             if (entity instanceof EntityWithId) {
                 EntityWithId entityWithId = (EntityWithId) entity;
                 Map<String, String> entityParameters = new HashMap<>();
@@ -62,13 +65,15 @@ public class MyEngine extends Engine {
             }
         }
 
+
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        if (System.getenv("DEBUG_ENABLED").equals("true")) {
+
+        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
             this.timeAccumulator += deltaTime;
             if (this.timeAccumulator > this.DEBUG_INTERVAL) {
                 updateDebugEngine();
@@ -76,17 +81,20 @@ public class MyEngine extends Engine {
             }
         }
 
+
     }
 
     @Override
     public void removeEntity(Entity entity) {
         super.removeEntity(entity);
-        if (System.getenv("DEBUG_ENABLED").equals("true")) {
+
+        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
             if (entity instanceof EntityWithId) {
                 EntityWithId entityWithId = (EntityWithId) entity;
                 this.iDebugDataBase.deleteNode(entityWithId.getId().name());
             }
         }
+
     }
 
     private void updateDebugEngine() {
@@ -97,12 +105,13 @@ public class MyEngine extends Engine {
                 List<Iterable<Entity>> entities = ((IRetrieveAllEntitiesFromSystem) entitySystem).getAllEntities();
                 for (Iterable<Entity> entityIter :
                         entities) {
-                    entityIter.forEach(entity -> {
+                    for (Entity entity :
+                            entityIter) {
                         if (entity instanceof EntityWithId) {
                             EntityWithId entityWithId = (EntityWithId) entity;
                             this.iDebugDataBase.createLinkSystemToEntity(entitySystem.getClass().getSimpleName(), entityWithId.getId().name());
                         }
-                    });
+                    }
                 }
 
             }

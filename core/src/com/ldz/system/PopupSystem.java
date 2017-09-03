@@ -11,6 +11,7 @@ import com.ldz.component.PopUpComponent;
 import com.ldz.system.custom.MyIteratingSystem;
 import com.ldz.util.CollisionChecker;
 import com.ldz.util.ComponentUtil;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.Map;
 
@@ -63,8 +64,11 @@ public class PopupSystem extends MyIteratingSystem {
             if (!popUpComponent.screenBeingTouched) {
                 popUpComponent.screenBeingTouched = true;
                 if (!CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
-                    this.getEngine().removeEntity(entity);
 
+                    Gdx.app.debug(TAG, "Tap pressed outside of this entity ********** " + ReflectionToStringBuilder.toString(entity));
+                    Gdx.app.debug(TAG, "Removing entity from engine ********** " + ReflectionToStringBuilder.toString(entity));
+
+                    this.getEngine().removeEntity(entity);
 
                     //adding popupaccumulator
                     Entity sourceEntity = parentAndChildComponent.parent;

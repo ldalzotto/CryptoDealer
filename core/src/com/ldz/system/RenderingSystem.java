@@ -6,18 +6,20 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
+import com.ldz.component.AnimationComponent;
 import com.ldz.component.BoudingRectangleComponent;
 import com.ldz.component.TextureComponent;
 import com.ldz.component.TranformComponent;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
+import com.ldz.util.CameraProjectionUtil;
 import com.ldz.util.ComponentUtil;
+import com.ldz.util.zComparator;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +34,8 @@ public class RenderingSystem extends SortedIteratingSystem implements IRetrieveA
     private SpriteBatch batch;
 
     public RenderingSystem(OrthographicCamera orthographicCamera, SpriteBatch spriteBatch) {
-        super(Family.all(TextureComponent.class, TranformComponent.class, BoudingRectangleComponent.class).get(), new zComparator());
+        super(Family.all(TranformComponent.class, BoudingRectangleComponent.class)
+                .one(TextureComponent.class, AnimationComponent.class).get(), new zComparator());
         this.orthographicCamera = orthographicCamera;
         this.batch = spriteBatch;
     }
@@ -42,27 +45,34 @@ public class RenderingSystem extends SortedIteratingSystem implements IRetrieveA
         //retrive graphics component
         Map<String, Component> componentContainer = null;
         try {
-            componentContainer = ComponentUtil.getAllComponentsFromEntity(entity, TextureComponent.class, TranformComponent.class, BoudingRectangleComponent.class);
+            componentContainer = ComponentUtil.getAllComponentsFromEntity(entity, TextureComponent.class, TranformComponent.class, BoudingRectangleComponent.class, AnimationComponent.class);
         } catch (Exception e) {
             Gdx.app.error(TAG, e.getMessage());
             Gdx.app.error(TAG, e.getCause().toString());
             return;
         }
 
-        TextureComponent textureComponent = (TextureComponent) componentContainer.get(TextureComponent.class.getSimpleName());
         TranformComponent tranformComponent = (TranformComponent) componentContainer.get(TranformComponent.class.getSimpleName());
         BoudingRectangleComponent boudingRectangleComponent = (BoudingRectangleComponent) componentContainer.get(BoudingRectangleComponent.class.getSimpleName());
 
-        //apply render
+        TextureComponent textureComponent = (TextureComponent) componentContainer.get(TextureComponent.class.getSimpleName());
+        AnimationComponent animationComponent = (AnimationComponent) componentContainer.get(AnimationComponent.class.getSimpleName());
+
         Vector2 position = tranformComponent.position;
         Rectangle rectangle = boudingRectangleComponent.rectangle;
+        Map<CameraProjectionUtil.MapKey, Float> mapKeyFloatMap = CameraProjectionUtil.getWidthAndHeight(rectangle, position, this.orthographicCamera);
+        Texture textureToDraw = null;
 
-        Vector2 oppositePoint = new Vector2(position.x + Math.abs(rectangle.width), position.y + Math.abs(rectangle.height));
+        if (textureComponent != null) {
+            textureToDraw = textureComponent.texture;
+        } else if (animationComponent != null) {
+            animationComponent.currentAnimationTime += deltaTime;
+            textureToDraw = animationComponent.animation.getKeyFrame(animationComponent.currentAnimationTime);
+        }
 
-        Vector3 vector3 = orthographicCamera.project(new Vector3(rectangle.x, rectangle.y, 0));
-        Vector3 oppositePointProjected = orthographicCamera.project(new Vector3(oppositePoint.x, oppositePoint.y, 0));
+        batch.draw(textureToDraw, mapKeyFloatMap.get(CameraProjectionUtil.MapKey.X), mapKeyFloatMap.get(CameraProjectionUtil.MapKey.Y),
+                mapKeyFloatMap.get(CameraProjectionUtil.MapKey.WIDHT), mapKeyFloatMap.get(CameraProjectionUtil.MapKey.HEIGHT));
 
-        batch.draw(textureComponent.texture, vector3.x, vector3.y, (oppositePointProjected.x - vector3.x), (oppositePointProjected.y - vector3.y));
     }
 
     @Override
@@ -71,12 +81,4 @@ public class RenderingSystem extends SortedIteratingSystem implements IRetrieveA
         return entities;
     }
 
-    public static class zComparator implements Comparator<Entity> {
-        @Override
-        public int compare(Entity o1, Entity o2) {
-            TranformComponent tranformComponent1 = o1.getComponent(TranformComponent.class);
-            TranformComponent tranformComponent2 = o2.getComponent(TranformComponent.class);
-            return (int) Math.signum(tranformComponent1.z - tranformComponent2.z);
-        }
-    }
 }

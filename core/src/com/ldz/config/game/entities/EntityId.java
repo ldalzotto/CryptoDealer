@@ -13,6 +13,7 @@ public enum EntityId {
     persistant_upgrade_1("The first upgrade available.", EntityType.NONE),
     persistant_upgrade_2("The second upgrade available.", EntityType.NONE),
     upgrade_1("The first upgrade displayed in upgrade menu.", EntityType.NONE),
+    upgrade_1_critical_state_display("The animation of critical state feedback", EntityType.NONE),
     upgrade_1_buy_popup("The upgrade popup for buying.", EntityType.NONE),
     upgrade_1_cost_display("The cost of upgrade.", EntityType.COST_DISPLAY),
     upgrade_1_decade_display("The visualiszation of efficiency decay.", EntityType.DECADE_DISPLAY),

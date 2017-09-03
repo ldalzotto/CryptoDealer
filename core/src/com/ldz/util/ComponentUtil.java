@@ -10,23 +10,15 @@ import java.util.*;
  */
 public class ComponentUtil {
 
-    public static <T extends Component> T getComponentFromEntity(Entity entity, Class<T> componentClass) throws Exception {
+    public static <T extends Component> T getComponentFromEntity(Entity entity, Class<T> componentClass) {
 
         T component = null;
-        try {
-            if (entity == null || componentClass == null) {
-                throw new RuntimeException("Cannont extract component from null !");
-            }
-
-            component = entity.getComponent(componentClass);
-
-            if (component == null) {
-                throw new RuntimeException("Cannont extract component from null !");
-            }
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            throw new Exception(e);
+        if (entity == null || componentClass == null) {
+            throw new RuntimeException("Cannont extract component from null !");
         }
+
+        component = entity.getComponent(componentClass);
+
 
         return component;
 
@@ -40,7 +32,10 @@ public class ComponentUtil {
 
         for (Class<? extends Component> cclass :
                 componentClassList) {
-            cClassContainer.put(cclass.getSimpleName(), ComponentUtil.getComponentFromEntity(entity, cclass));
+            Component component = ComponentUtil.getComponentFromEntity(entity, cclass);
+            if (component != null) {
+                cClassContainer.put(cclass.getSimpleName(), component);
+            }
         }
 
         return cClassContainer;
