@@ -2,6 +2,7 @@ package com.ldz.system;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.Gdx;
 import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.system.custom.MyIteratingSystem;
 
@@ -10,6 +11,7 @@ import com.ldz.system.custom.MyIteratingSystem;
  */
 public class BagOfEntitiesToEngineSystem extends MyIteratingSystem {
 
+    private static final String TAG = BagOfEntitiesToEngineSystem.class.getSimpleName();
     private static BagOfEntitiesToEngineSystem instance = null;
 
     public BagOfEntitiesToEngineSystem() {
@@ -32,7 +34,11 @@ public class BagOfEntitiesToEngineSystem extends MyIteratingSystem {
         if (bagOfEntitiesComponent != null && bagOfEntitiesComponent.addEntityToEngine) {
             for (Entity bagEntity :
                     bagOfEntitiesComponent.entities) {
-                this.getEngine().addEntity(bagEntity);
+                try {
+                    this.getEngine().addEntity(bagEntity);
+                } catch (Exception e) {
+                    Gdx.app.error(TAG, e.getMessage(), e);
+                }
             }
             bagOfEntitiesComponent.addEntityToEngine = false;
         }

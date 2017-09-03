@@ -1,6 +1,7 @@
 package com.ldz.entity.abstr;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.AnimationComponent;
@@ -17,6 +18,7 @@ public abstract class TextureAnimationEntity extends EntityWithId {
     public TextureAnimationEntity(Vector2 position, TextureAnimation animation, int z) {
 
         AnimationComponent animationComponent = new AnimationComponent();
+        animation.setPlayMode(Animation.PlayMode.LOOP);
         animationComponent.animation = animation;
 
         this.add(animationComponent);

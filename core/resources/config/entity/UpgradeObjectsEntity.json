@@ -453,7 +453,7 @@
                 "parameters": [
                   {
                     "classname": "java.lang.float",
-                    "value": "2"
+                    "value": "0.5"
                   },
                   {
                     "classname": "List|com.badlogic.gdx.graphics.Texture|",
