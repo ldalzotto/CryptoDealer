@@ -25,7 +25,7 @@ public class MyEngine extends Engine {
 
     public MyEngine() {
         super();
-        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
+        if (this.isDebugGraphEnabled()) {
             iDebugDataBase = DebugDataBase.getInstance();
             iDebugDataBase.connectTodatabase("bolt://localhost:7687", AuthTokens.basic("neo4j", "Abc01234"));
         }
@@ -43,7 +43,7 @@ public class MyEngine extends Engine {
     public void addSystem(EntitySystem system) {
         super.addSystem(system);
 
-        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
+        if (this.isDebugGraphEnabled()) {
             this.iDebugDataBase.addSystem(system.getClass().getSimpleName());
         }
 
@@ -54,7 +54,7 @@ public class MyEngine extends Engine {
     public void addEntity(Entity entity) {
         super.addEntity(entity);
 
-        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
+        if (this.isDebugGraphEnabled()) {
             if (entity instanceof EntityWithId) {
                 EntityWithId entityWithId = (EntityWithId) entity;
                 Map<String, String> entityParameters = new HashMap<>();
@@ -71,7 +71,7 @@ public class MyEngine extends Engine {
         super.update(deltaTime);
 
 
-        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
+        if (this.isDebugGraphEnabled()) {
             this.timeAccumulator += deltaTime;
             if (this.timeAccumulator > this.DEBUG_INTERVAL) {
                 updateDebugEngine();
@@ -86,7 +86,7 @@ public class MyEngine extends Engine {
     public void removeEntity(Entity entity) {
         super.removeEntity(entity);
 
-        if (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true")) {
+        if (this.isDebugGraphEnabled()) {
             if (entity instanceof EntityWithId) {
                 EntityWithId entityWithId = (EntityWithId) entity;
                 this.iDebugDataBase.deleteNode(entityWithId.getId().name());
@@ -114,6 +114,10 @@ public class MyEngine extends Engine {
 
             }
         }
+    }
+
+    private boolean isDebugGraphEnabled() {
+        return (System.getenv("DEBUG_ENABLED") != null && System.getenv("DEBUG_ENABLED").equals("true"));
     }
 
 }
