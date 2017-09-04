@@ -62,6 +62,10 @@
                   {
                     "classname": "java.lang.String",
                     "value": "upgrade_1_decade_display"
+                  },
+                  {
+                    "classname": "java.lang.String",
+                    "value": "upgrade_1_resp_button"
                   }
                 ]
               }
@@ -366,10 +370,6 @@
                   {
                     "classname": "java.lang.String",
                     "value": "upgrade_2_buy_button"
-                  },
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_1_resp_button"
                   }
                 ]
               }
