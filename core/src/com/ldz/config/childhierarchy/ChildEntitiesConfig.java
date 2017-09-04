@@ -5,10 +5,10 @@ import com.badlogic.gdx.utils.Json;
 import com.ldz.config.childhierarchy.domain.ChildEntities;
 import com.ldz.config.childhierarchy.domain.ChildEntity;
 import com.ldz.config.game.entities.EntityId;
+import com.ldz.util.ParentAndChildUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
 
 /**
  * Created by Loic on 20/08/2017.
@@ -34,7 +34,7 @@ public class ChildEntitiesConfig {
         return childEntities;
     }
 
-    public void iterateThroughChildRecursively(BiFunction<EntityId, List<EntityId>, Void> stringListVoidBiFunction, List<ChildEntity> childEntities) {
+    public void applyLinkingThroughChildRecursively(List<ChildEntity> childEntities) {
         for (ChildEntity childEntity :
                 childEntities) {
 
@@ -47,10 +47,10 @@ public class ChildEntitiesConfig {
                 }
             }
 
-            stringListVoidBiFunction.apply(childEntity.getId(), classNames);
+            ParentAndChildUtil.linkParentAndChildOfEntity(childEntity.getId(), classNames);
 
             if (childEntity.getChilds() != null) {
-                this.iterateThroughChildRecursively(stringListVoidBiFunction, childEntity.getChilds());
+                this.applyLinkingThroughChildRecursively(childEntity.getChilds());
             }
 
         }

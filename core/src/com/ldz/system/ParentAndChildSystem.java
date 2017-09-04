@@ -5,15 +5,16 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.config.childhierarchy.ChildEntitiesConfig;
 import com.ldz.config.childhierarchy.domain.ChildEntities;
 import com.ldz.config.game.entities.EntityId;
 import com.ldz.entity.EntityWithId;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.*;
-import java.util.function.BiFunction;
 
 /**
  * Created by Loic on 20/08/2017.
@@ -27,50 +28,12 @@ import java.util.function.BiFunction;
  */
 public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEntitiesFromSystem {
 
+    private static final String TAG = ParentAndChildSystem.class.getSimpleName();
+
     private static ParentAndChildSystem instance = null;
     private ImmutableArray<Entity> entityList;
     private ChildEntitiesConfig childEntitiesConfig = ChildEntitiesConfig.getInstance();
     private Map<EntityId, List<Entity>> entityById = new HashMap<>();
-    private BiFunction<EntityId, List<EntityId>, Void> addingListOfChilds;
-
-    private ParentAndChildSystem() {
-        addingListOfChilds = new BiFunction<EntityId, List<EntityId>, Void>() {
-            @Override
-            public Void apply(EntityId s, List<EntityId> strings) {
-                Map<EntityId, List<Entity>> entityById = ParentAndChildSystem.getInstance().entityById;
-                if (entityById.containsKey(s)) {
-                    List<Entity> parentEntitys = entityById.get(s);
-                    for (Entity parentEntity :
-                            parentEntitys) {
-
-                        //get component
-                        ParentAndChildComponent parentAndChildComponent = parentEntity.getComponent(ParentAndChildComponent.class);
-                        if (parentAndChildComponent != null) {
-
-                            //setting childs
-                            for (EntityId childClassNames :
-                                    strings) {
-                                if (entityById.containsKey(childClassNames)) {
-                                    parentAndChildComponent.childs.addAll(entityById.get(childClassNames));
-                                    //setting parend
-                                    for (Entity childEntity :
-                                            entityById.get(childClassNames)) {
-                                        ParentAndChildComponent childParentAndChildComponent = childEntity.getComponent(ParentAndChildComponent.class);
-                                        if (childParentAndChildComponent != null) {
-                                            childParentAndChildComponent.parent = parentEntity;
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-
-                }
-                return null;
-            }
-        };
-    }
 
     public static ParentAndChildSystem getInstance() {
         if (instance == null) {
@@ -90,15 +53,33 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
         super.removedFromEngine(engine);
     }
 
+    /**
+     * <p>
+     * The update method is :
+     * <ul><li>
+     * Initializing the list of all parent and child entity {@link ParentAndChildSystem#initializeEntityById(Map)}
+     * </li><li>
+     * Get the parent and child hierarchy config {@link ChildEntitiesConfig} -> {@link ChildEntities} {@code childEntities}
+     * </li><li>
+     * Apply the parent and child linking based on the tree {@code childEntities} on entites contained in {@link ParentAndChildSystem#entityById}
+     * </li></ul>
+     * </p>
+     *
+     * @param deltaTime the delta time of Engine update
+     */
     @Override
     public void update(float deltaTime) {
         if (BagOfEntitiesToEngineSystem.getInstance().allBagsDisplayed()) {
+
             super.update(deltaTime);
 
+            Gdx.app.debug(TAG, "Starting setting parent and child of : " + ReflectionToStringBuilder.toString(this.entityList));
             this.entityById = initializeEntityById(new HashMap<>());
+            Gdx.app.debug(TAG, "Setting parent and child ending successfully.");
 
             ChildEntities childEntities = this.childEntitiesConfig.getChildEntities();
-            this.childEntitiesConfig.iterateThroughChildRecursively(this.addingListOfChilds, childEntities.getEntities());
+
+            this.childEntitiesConfig.applyLinkingThroughChildRecursively(childEntities.getEntities());
 
             this.setProcessing(false);
         }
@@ -107,7 +88,7 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
 
     /**
      * <p>
-     * Tranform every entites possessing a {@link ParentAndChildComponent} defined in {@link ParentAndChildSystem#entityList} to a {@link Map<String id, List<Entity> entitybyid>}. This allow to retreive every entity by their {@link com.ldz.config.game.entities.EntityId}
+     * Tranform every entites possessing a {@link ParentAndChildComponent} defined in {@link ParentAndChildSystem#entityList} to a {@link Map<EntityId id, List<Entity> entitybyid>}. This allow to retreive every entity by their {@link com.ldz.config.game.entities.EntityId}
      * </p>
      *
      * @param entitysById an accumulator Map
@@ -130,6 +111,10 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
 
         }
         return entitysById;
+    }
+
+    public Map<EntityId, List<Entity>> getEntityById() {
+        return entityById;
     }
 
     @Override
