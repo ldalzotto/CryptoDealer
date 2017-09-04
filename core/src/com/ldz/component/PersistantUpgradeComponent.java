@@ -29,22 +29,22 @@ public class PersistantUpgradeComponent implements Component {
         UPGRADE_2(EntityId.upgrade_1_critical_state_display, null);
 
         private EntityId entityId;
-        private EntityWithId entityWithId;
+        private EntityWithId criticalStateEntity;
 
-        UpgradeId(EntityId entityId, EntityWithId entityWithId) {
+        UpgradeId(EntityId entityId, EntityWithId criticalStateEntity) {
             this.entityId = entityId;
-            this.entityWithId = entityWithId;
+            this.criticalStateEntity = criticalStateEntity;
         }
 
         public EntityId getEntityId() {
             return entityId;
         }
 
-        public EntityWithId getEntityWithId() {
-            if (entityWithId == null) {
-                entityWithId = EntityFactory.getEntityFromId(entityId);
+        public EntityWithId getCriticalStateEntity() {
+            if (criticalStateEntity == null) {
+                criticalStateEntity = EntityFactory.getEntityFromId(entityId);
             }
-            return entityWithId;
+            return criticalStateEntity;
         }
     }
 
