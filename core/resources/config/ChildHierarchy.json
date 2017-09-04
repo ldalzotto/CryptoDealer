@@ -29,6 +29,9 @@
                     },
                     {
                       "id": "upgrade_1_exit_button"
+                    },
+                    {
+                      "id": "upgrade_1_resp_button"
                     }
                   ]
                 }

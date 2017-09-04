@@ -18,6 +18,7 @@ public enum EntityId {
     upgrade_1_cost_display("The cost of upgrade.", EntityType.COST_DISPLAY),
     upgrade_1_decade_display("The visualiszation of efficiency decay.", EntityType.DECADE_DISPLAY),
     upgrade_1_buy_button("The buy button allowing to buy upgrade.", EntityType.NONE),
+    upgrade_1_resp_button("The button to resplendish the upgrade performances.", EntityType.NONE),
     upgrade_1_exit_button("The exit button to exit buy popup.", EntityType.NONE),
     upgrade_2("The second upgrade displayed in upgrade menu.", EntityType.NONE),
     upgrade_2_buy_popup("The upgrade popup for buying.", EntityType.NONE),

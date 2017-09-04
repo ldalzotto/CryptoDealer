@@ -101,6 +101,10 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
                     }
                     buyableUpgradeComponent.state = BuyableUpgradeComponent.STATE.PENDING;
                     break;
+                case ASKING_FOR_RESPLENDISH:
+                    persistantUpgradeComponent.itemPerformances = 1f;
+                    buyableUpgradeComponent.state = BuyableUpgradeComponent.STATE.PENDING;
+                    break;
             }
 
         }

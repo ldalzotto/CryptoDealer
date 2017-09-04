@@ -13,7 +13,8 @@ public class BuyableUpgradeComponent implements Component {
 
     public enum STATE {
         PENDING,
-        ASKING_FOR_UPGRADE;
+        ASKING_FOR_UPGRADE,
+        ASKING_FOR_RESPLENDISH;
     }
 
 }
