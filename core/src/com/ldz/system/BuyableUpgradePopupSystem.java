@@ -69,7 +69,7 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
                                 bitmapFontComponent.stringToDisplay = "Cost : " + String.valueOf(persistantUpgradeComponent.objectCost.getCurrencies().get(CurrencyComponent.CURRENCY_TYPE.ITHEREUM_COIN));
                                 bitmapFontComponent.bitmapFont.setColor(Color.BLUE);
                             }
-                        } else if (entityWithId.getId().getEntityType().equals(EntityType.COST_DISPLAY)) {
+                        } else if (entityWithId.getId().getEntityType().equals(EntityType.DECADE_DISPLAY)) {
                             BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
                             if (bitmapFontComponent != null) {
                                 bitmapFontComponent.stringToDisplay = "Performances : " + String.valueOf(persistantUpgradeComponent.itemPerformances);

@@ -33,7 +33,7 @@ public class GameEntitiesConfig {
         gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/PopUpEntity.json")));
         gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/UpgradeObjectsEntity.json")));
         gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/PersistantUpgrade.json")));
-
+        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/CriticalStateDisplayEntity.json")));
 
         for (GameEntities gameEntities1 :
                 gameEntities) {

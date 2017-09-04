@@ -88,7 +88,7 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
 
     /**
      * <p>
-     * Tranform every entites possessing a {@link ParentAndChildComponent} defined in {@link ParentAndChildSystem#entityList} to a {@link Map<EntityId id, List<Entity> entitybyid>}. This allow to retreive every entity by their {@link com.ldz.config.game.entities.EntityId}
+     * Tranform every entites possessing a {@link ParentAndChildComponent} defined in {@link ParentAndChildSystem#entityList} to a {@link Map<EntityId, List<Entity> entitybyid>}. This allow to retreive every entity by their {@link com.ldz.config.game.entities.EntityId}
      * </p>
      *
      * @param entitysById an accumulator Map

@@ -62,10 +62,6 @@
                   {
                     "classname": "java.lang.String",
                     "value": "upgrade_1_decade_display"
-                  },
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_1_critical_state_display"
                   }
                 ]
               }
@@ -414,92 +410,6 @@
               "constructor": {
                 "classname": "com.ldz.component.action.impl.BuyableUpgradeButtonAction",
                 "parameters": []
-              }
-            },
-            {
-              "classname": "java.lang.int",
-              "value": 4
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "upgrade_1_critical_state_display",
-      "instance": {
-        "constructor": {
-          "classname": "com.ldz.entity.CriticalStateAnimationEntity",
-          "parameters": [
-            {
-              "classname": "com.badlogic.gdx.math.Vector2",
-              "constructor": {
-                "classname": "com.badlogic.gdx.math.Vector2",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": "300"
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": "30"
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "com.ldz.entity.custom.TextureAnimation",
-              "constructor": {
-                "classname": "com.ldz.entity.custom.TextureAnimation",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": "0.5"
-                  },
-                  {
-                    "classname": "List|com.badlogic.gdx.graphics.Texture|",
-                    "constructor": {
-                      "classname": "List|com.badlogic.gdx.graphics.Texture|",
-                      "parameters": [
-                        {
-                          "classname": "com.badlogic.gdx.graphics.Texture",
-                          "constructor": {
-                            "classname": "com.badlogic.gdx.graphics.Texture",
-                            "parameters": [
-                              {
-                                "classname": "java.lang.String",
-                                "value": "assets/state_animation/Fichier 1.png"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "classname": "com.badlogic.gdx.graphics.Texture",
-                          "constructor": {
-                            "classname": "com.badlogic.gdx.graphics.Texture",
-                            "parameters": [
-                              {
-                                "classname": "java.lang.String",
-                                "value": "assets/state_animation/Fichier 2.png"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "classname": "com.badlogic.gdx.graphics.Texture",
-                          "constructor": {
-                            "classname": "com.badlogic.gdx.graphics.Texture",
-                            "parameters": [
-                              {
-                                "classname": "java.lang.String",
-                                "value": "assets/state_animation/Fichier 3.png"
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  }
-                ]
               }
             },
             {

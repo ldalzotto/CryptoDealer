@@ -54,6 +54,8 @@ public class PersistantUpgradeSystem extends MyIteratingSystem {
             persistantUpgradeComponent.timeAccumulator = 0.0f;
         }
 
+        displayCriticalState(persistantUpgradeComponent);
+
         switch (persistantUpgradeComponent.state) {
             case PENDING:
                 break;
@@ -66,5 +68,18 @@ public class PersistantUpgradeSystem extends MyIteratingSystem {
                 break;
         }
 
+    }
+
+    private void displayCriticalState(PersistantUpgradeComponent persistantUpgradeComponent) {
+        if (persistantUpgradeComponent.itemPerformances <= persistantUpgradeComponent.CRITICAL_PERFORMANCE_LEVEL) {
+            //display critical feedback
+            if (!this.getEngine().getEntities().contains(persistantUpgradeComponent.upgradeId.getEntityWithId(), false)) {
+                this.getEngine().addEntity(persistantUpgradeComponent.upgradeId.getEntityWithId());
+            }
+        } else {
+            if (this.getEngine().getEntities().contains(persistantUpgradeComponent.upgradeId.getEntityWithId(), false)) {
+                this.getEngine().removeEntity(persistantUpgradeComponent.upgradeId.getEntityWithId());
+            }
+        }
     }
 }
