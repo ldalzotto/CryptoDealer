@@ -1,5 +1,7 @@
 package com.ldz.config.childhierarchy.domain;
 
+import com.ldz.config.game.entities.EntityId;
+
 import java.util.List;
 
 /**
@@ -7,14 +9,14 @@ import java.util.List;
  */
 public class ChildEntity {
 
-    private String id;
+    private EntityId id;
     private List<ChildEntity> childs;
 
-    public String getId() {
+    public EntityId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(EntityId id) {
         this.id = id;
     }
 

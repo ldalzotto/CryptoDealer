@@ -8,7 +8,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.config.childhierarchy.ChildEntitiesConfig;
 import com.ldz.config.childhierarchy.domain.ChildEntities;
-import com.ldz.config.childhierarchy.domain.ChildEntity;
+import com.ldz.config.game.entities.EntityId;
 import com.ldz.entity.EntityWithId;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
 
@@ -17,20 +17,27 @@ import java.util.function.BiFunction;
 
 /**
  * Created by Loic on 20/08/2017.
+ * <p>
+ * This {@link System} allow linking parent and childs of all entities. Only entities possessing {@link ParentAndChildComponent} are tagged for child and parent linking.
+ * The processing of entites is executed only after the completion of adding all entities contained in bag of entites in engine {@link BagOfEntitiesToEngineSystem#allBagsDisplayed()}.
+ * </p>
+ * <p>
+ * Parent and child link of all entites are defined in {@link ChildEntitiesConfig}.
+ * <p/>
  */
 public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEntitiesFromSystem {
 
     private static ParentAndChildSystem instance = null;
     private ImmutableArray<Entity> entityList;
     private ChildEntitiesConfig childEntitiesConfig = ChildEntitiesConfig.getInstance();
-    private Map<String, List<Entity>> entityById = new HashMap<>();
-    private BiFunction<String, List<String>, Void> addingListOfChilds;
+    private Map<EntityId, List<Entity>> entityById = new HashMap<>();
+    private BiFunction<EntityId, List<EntityId>, Void> addingListOfChilds;
 
     private ParentAndChildSystem() {
-        addingListOfChilds = new BiFunction<String, List<String>, Void>() {
+        addingListOfChilds = new BiFunction<EntityId, List<EntityId>, Void>() {
             @Override
-            public Void apply(String s, List<String> strings) {
-                Map<String, List<Entity>> entityById = ParentAndChildSystem.getInstance().entityById;
+            public Void apply(EntityId s, List<EntityId> strings) {
+                Map<EntityId, List<Entity>> entityById = ParentAndChildSystem.getInstance().entityById;
                 if (entityById.containsKey(s)) {
                     List<Entity> parentEntitys = entityById.get(s);
                     for (Entity parentEntity :
@@ -41,7 +48,7 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
                         if (parentAndChildComponent != null) {
 
                             //setting childs
-                            for (String childClassNames :
+                            for (EntityId childClassNames :
                                     strings) {
                                 if (entityById.containsKey(childClassNames)) {
                                     parentAndChildComponent.childs.addAll(entityById.get(childClassNames));
@@ -91,7 +98,6 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
             this.entityById = initializeEntityById(new HashMap<>());
 
             ChildEntities childEntities = this.childEntitiesConfig.getChildEntities();
-
             this.childEntitiesConfig.iterateThroughChildRecursively(this.addingListOfChilds, childEntities.getEntities());
 
             this.setProcessing(false);
@@ -99,12 +105,20 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
 
     }
 
-    private Map<String, List<Entity>> initializeEntityById(Map<String, List<Entity>> entitysById) {
+    /**
+     * <p>
+     * Tranform every entites possessing a {@link ParentAndChildComponent} defined in {@link ParentAndChildSystem#entityList} to a {@link Map<String id, List<Entity> entitybyid>}. This allow to retreive every entity by their {@link com.ldz.config.game.entities.EntityId}
+     * </p>
+     *
+     * @param entitysById an accumulator Map
+     * @return all entities associated to their {@link com.ldz.config.game.entities.EntityId}
+     */
+    private Map<EntityId, List<Entity>> initializeEntityById(Map<EntityId, List<Entity>> entitysById) {
         for (Entity entity :
                 entityList) {
             if (entity instanceof EntityWithId) {
                 EntityWithId entityWithId = (EntityWithId) entity;
-                String id = entityWithId.getId().name();
+                EntityId id = entityWithId.getId();
                 if (entitysById.containsKey(id)) {
                     entitysById.get(id).add(entity);
                 } else {

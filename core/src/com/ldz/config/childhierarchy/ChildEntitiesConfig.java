@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.ldz.config.childhierarchy.domain.ChildEntities;
 import com.ldz.config.childhierarchy.domain.ChildEntity;
+import com.ldz.config.game.entities.EntityId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +16,6 @@ import java.util.function.BiFunction;
 public class ChildEntitiesConfig {
 
     private static ChildEntitiesConfig instance = null;
-
-    public static ChildEntitiesConfig getInstance(){
-        if(instance == null){
-            instance = new ChildEntitiesConfig();
-        }
-        return instance;
-    }
-
-
     private Json json = new Json();
     private ChildEntities childEntities;
 
@@ -31,26 +23,33 @@ public class ChildEntitiesConfig {
         this.childEntities = json.fromJson(ChildEntities.class, Gdx.files.internal("config/ChildHierarchy.json"));
     }
 
+    public static ChildEntitiesConfig getInstance() {
+        if (instance == null) {
+            instance = new ChildEntitiesConfig();
+        }
+        return instance;
+    }
+
     public ChildEntities getChildEntities() {
         return childEntities;
     }
 
-    public void iterateThroughChildRecursively(BiFunction<String, List<String>, Void> stringListVoidBiFunction, List<ChildEntity> childEntities){
-        for (ChildEntity childEntity:
+    public void iterateThroughChildRecursively(BiFunction<EntityId, List<EntityId>, Void> stringListVoidBiFunction, List<ChildEntity> childEntities) {
+        for (ChildEntity childEntity :
                 childEntities) {
 
-                //get the list of string
-                List<String> classNames = new ArrayList<>();
-                if(childEntity.getChilds() != null){
-                    for (ChildEntity childEntity1:
-                         childEntity.getChilds()) {
-                        classNames.add(childEntity1.getId());
-                    }
+            //get the list of string
+            List<EntityId> classNames = new ArrayList<>();
+            if (childEntity.getChilds() != null) {
+                for (ChildEntity childEntity1 :
+                        childEntity.getChilds()) {
+                    classNames.add(childEntity1.getId());
                 }
+            }
 
-                stringListVoidBiFunction.apply(childEntity.getId(), classNames);
+            stringListVoidBiFunction.apply(childEntity.getId(), classNames);
 
-            if(childEntity.getChilds() != null){
+            if (childEntity.getChilds() != null) {
                 this.iterateThroughChildRecursively(stringListVoidBiFunction, childEntity.getChilds());
             }
 
