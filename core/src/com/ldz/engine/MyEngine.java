@@ -3,7 +3,6 @@ package com.ldz.engine;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.gdx.utils.Json;
 import com.ldz.DebugDataBase;
 import com.ldz.IDebugDataBase;
 import com.ldz.entity.EntityWithId;
@@ -23,7 +22,6 @@ public class MyEngine extends Engine {
     private static MyEngine instance = null;
     private IDebugDataBase iDebugDataBase;
     private float timeAccumulator;
-    private Json json = new Json();
 
     public MyEngine() {
         super();
