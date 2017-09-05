@@ -4,7 +4,7 @@
       "id": "upgrade_1",
       "instance": {
         "constructor": {
-          "classname": "com.ldz.entity.DisplayerEntity",
+          "classname": "com.ldz.entity.abstr.DisplayerEntity",
           "parameters": [
             {
               "classname": "com.badlogic.gdx.math.Vector2",
@@ -324,7 +324,7 @@
       "id": "upgrade_2",
       "instance": {
         "constructor": {
-          "classname": "com.ldz.entity.DisplayerEntity",
+          "classname": "com.ldz.entity.abstr.DisplayerEntity",
           "parameters": [
             {
               "classname": "com.badlogic.gdx.math.Vector2",

@@ -3,12 +3,12 @@ package com.ldz.component.action.impl;
 import com.badlogic.ashley.core.Entity;
 import com.ldz.component.BuyableUpgradeComponent;
 import com.ldz.component.ParentAndChildComponent;
-import com.ldz.component.action.IOnAction;
+import com.ldz.component.action.IAction;
 
 /**
  * Created by Loic on 30/08/2017.
  */
-public class BuyableUpgradeButtonAction implements IOnAction {
+public class BuyableUpgradeButtonAction implements IAction {
 
     @Override
     public void apply(Entity entity) {

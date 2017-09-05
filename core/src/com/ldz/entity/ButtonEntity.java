@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.OnActionComponent;
 import com.ldz.component.ParentAndChildComponent;
-import com.ldz.component.action.IOnAction;
+import com.ldz.component.action.IAction;
 import com.ldz.entity.abstr.TextureDisplayEntity;
 
 /**
@@ -13,7 +13,7 @@ import com.ldz.entity.abstr.TextureDisplayEntity;
 public class ButtonEntity extends TextureDisplayEntity {
 
 
-    public ButtonEntity(Vector2 position, Texture texture, IOnAction actionToExecute, int z) {
+    public ButtonEntity(Vector2 position, Texture texture, IAction actionToExecute, int z) {
         super(position, texture, z);
 
         ParentAndChildComponent parentAndChildComponent = new ParentAndChildComponent();
