@@ -5,8 +5,13 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.ldz.component.PersistantUpgradeComponent;
+import com.ldz.component.domain.CurrencyInstance;
+import com.ldz.config.upgrade.referential.UpgradeReferential;
+import com.ldz.config.upgrade.referential.domain.PriceCurrencies;
 import com.ldz.system.custom.MyIteratingSystem;
 import com.ldz.util.ComponentUtil;
+import com.ldz.util.LoggingUtil;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,8 +67,26 @@ public class PersistantUpgradeSystem extends MyIteratingSystem {
             case UPGRADING:
                 persistantUpgradeComponent.itemPerformances = 1.0f;
                 persistantUpgradeComponent.upgradeLevel += 1;
-                //TODO calculate UP cost
-                //TODO calculate BONUS UP
+
+                Map<UpgradeReferential.UPGRADE_DETAILS_TYPE, PriceCurrencies> upgradeDetailsTypePriceCurrenciesMap =
+                        UpgradeReferential.getInstance().extractUpgradeInfoFromIdAndDesiredLevel(persistantUpgradeComponent.upgradeId, persistantUpgradeComponent.upgradeLevel);
+
+
+                if (upgradeDetailsTypePriceCurrenciesMap != null || upgradeDetailsTypePriceCurrenciesMap.size() == 0) {
+                    PriceCurrencies upgradeBonusCurrencies = upgradeDetailsTypePriceCurrenciesMap.get(UpgradeReferential.UPGRADE_DETAILS_TYPE.UPGRADE_BONUSES);
+                    PriceCurrencies upgradeCostCurrencies = upgradeDetailsTypePriceCurrenciesMap.get(UpgradeReferential.UPGRADE_DETAILS_TYPE.UPGRADE_COST);
+
+                    if (upgradeBonusCurrencies != null) {
+                        persistantUpgradeComponent.objectBonus = new CurrencyInstance(upgradeBonusCurrencies.getCurrencies());
+                    }
+
+                    if (upgradeCostCurrencies != null) {
+                        persistantUpgradeComponent.objectCost = new CurrencyInstance(upgradeCostCurrencies.getCurrencies());
+                    }
+                } else {
+                    LoggingUtil.DEBUG(TAG, "The upgrade has not been founded for this component", ReflectionToStringBuilder.toString(persistantUpgradeComponent));
+                }
+
                 persistantUpgradeComponent.state = PersistantUpgradeComponent.STATE.PENDING;
                 break;
         }

@@ -1,7 +1,5 @@
 package com.ldz.config.upgrade.referential.domain;
 
-import com.ldz.component.CurrencyComponent;
-
 import java.util.List;
 
 /**
@@ -27,4 +25,5 @@ public class PriceCurrencies {
     public void setCurrencies(List<Currency> currencies) {
         this.currencies = currencies;
     }
+
 }

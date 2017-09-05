@@ -4,7 +4,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.ldz.component.BitmapFontComponent;
 import com.ldz.component.BuyableUpgradeComponent;
@@ -13,6 +12,7 @@ import com.ldz.component.PersistantUpgradeComponent;
 import com.ldz.config.game.entities.EntityType;
 import com.ldz.entity.EntityWithId;
 import com.ldz.system.custom.MyIteratingSystem;
+import com.ldz.util.LoggingUtil;
 import com.ldz.util.ParentAndChildUtil;
 
 import java.util.Arrays;
@@ -132,10 +132,10 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
         }
 
         if (nbAwaitedPositive == 0) {
-            Gdx.app.debug(TAG, "Allowing upgrade buy.");
+            LoggingUtil.DEBUG(TAG, "Allowing upgrade buy.");
             return true;
         } else {
-            Gdx.app.debug(TAG, "Not allowing upgrade buy.");
+            LoggingUtil.DEBUG(TAG, "Not allowing upgrade buy.");
             return false;
         }
 

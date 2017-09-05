@@ -17,6 +17,7 @@ public class CurrencyComponent implements Component {
 
     public enum CURRENCY_TYPE {
         ZIT_COIN, ITHEREUM_COIN, LOUD_COIN;
+
     }
 
 }

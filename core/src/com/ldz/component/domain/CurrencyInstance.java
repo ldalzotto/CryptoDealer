@@ -1,8 +1,10 @@
 package com.ldz.component.domain;
 
 import com.ldz.component.CurrencyComponent;
+import com.ldz.config.upgrade.referential.domain.Currency;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,6 +13,21 @@ import java.util.Map;
 public class CurrencyInstance {
 
     Map<CurrencyComponent.CURRENCY_TYPE, Float> currencies = new HashMap<>();
+
+    public CurrencyInstance(List<Currency> currenciesFromReferential) {
+        for (Currency currency :
+                currenciesFromReferential) {
+            this.currencies.put(currency.getCurrency(), currency.getValue());
+        }
+
+        for (CurrencyComponent.CURRENCY_TYPE currency_type :
+                CurrencyComponent.CURRENCY_TYPE.values()) {
+            if (this.currencies.get(currency_type) == null) {
+                this.currencies.put(currency_type, 0f);
+            }
+        }
+
+    }
 
     public CurrencyInstance(float zitCoinVal, float ithereumVal, float loudCoinVal) {
         this.currencies.put(CurrencyComponent.CURRENCY_TYPE.ITHEREUM_COIN, ithereumVal);

@@ -11,6 +11,10 @@ public class LoggingUtil {
 
     static final String SEPARATOR = "************";
 
+    public static void DEBUG(String tag, String messageBefore) {
+        Gdx.app.debug(tag, LocalDateTime.now().toString() + " " + messageBefore);
+    }
+
     public static void DEBUG(String tag, String messageBefore, String messageAfter) {
         Gdx.app.debug(tag, LocalDateTime.now().toString() + " " + messageBefore + " " + SEPARATOR + " " + messageAfter);
     }
