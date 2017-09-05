@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.config.game.entities.EntityId;
+import com.ldz.config.upgrade.referential.UpgradeReferential;
 import com.ldz.engine.MyEngine;
 import com.ldz.entity.EntityFactory;
 import com.ldz.listener.EntityRemoveListener;
@@ -81,7 +82,6 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine.addSystem(OnActionSystem.getInstance(camera));
         engine.addSystem(PersistantUpgradeSystem.getInstance());
         engine.addSystem(TappingSystem.getInstance());
-
 
         engine.addEntityListener(Family.all(ParentAndChildComponent.class).get(), new EntityRemoveListener());
 
