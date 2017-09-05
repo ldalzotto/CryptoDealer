@@ -15,6 +15,19 @@
               "value": 40.0
             }
           ]
+        },
+        {
+          "levelNumber": 0,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 2.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 4.0
+            }
+          ]
         }
       ],
       "upgradeBonuses": [
@@ -28,6 +41,78 @@
             {
               "currency": "ZIT_COIN",
               "value": 40.0
+            }
+          ]
+        },
+        {
+          "levelNumber": 0,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 2.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 4.0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "upgradeId": "UPGRADE_2",
+      "upgradesCosts": [
+        {
+          "levelNumber": 1,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 20.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 40.0
+            }
+          ]
+        },
+        {
+          "levelNumber": 0,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 2.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 4.0
+            }
+          ]
+        }
+      ],
+      "upgradeBonuses": [
+        {
+          "levelNumber": 1,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 20.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 40.0
+            }
+          ]
+        },
+        {
+          "levelNumber": 0,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 2.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 4.0
             }
           ]
         }

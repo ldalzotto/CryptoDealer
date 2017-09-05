@@ -39,7 +39,6 @@ public class CurrencyInstance {
         return currencies;
     }
 
-
     public CurrencyInstance multiplyAllBy(float multiplier) {
         for (Map.Entry<CurrencyComponent.CURRENCY_TYPE, Float> entry :
                 this.currencies.entrySet()) {

@@ -13,46 +13,6 @@
             {
               "classname": "java.lang.float",
               "value": 15
-            },
-            {
-              "classname": "com.ldz.component.domain.CurrencyInstance",
-              "constructor": {
-                "classname": "com.ldz.component.domain.CurrencyInstance",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": 0
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": 10
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": 0
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "com.ldz.component.domain.CurrencyInstance",
-              "constructor": {
-                "classname": "com.ldz.component.domain.CurrencyInstance",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": 0
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": 10
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": 0
-                  }
-                ]
-              }
             }
           ]
         }
@@ -71,46 +31,6 @@
             {
               "classname": "java.lang.float",
               "value": 0.01
-            },
-            {
-              "classname": "com.ldz.component.domain.CurrencyInstance",
-              "constructor": {
-                "classname": "com.ldz.component.domain.CurrencyInstance",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": 3
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": 0
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": 10
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "com.ldz.component.domain.CurrencyInstance",
-              "constructor": {
-                "classname": "com.ldz.component.domain.CurrencyInstance",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": 3
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": 0
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": 10
-                  }
-                ]
-              }
             }
           ]
         }
