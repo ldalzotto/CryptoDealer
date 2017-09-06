@@ -1,1 +1,1 @@
-include 'desktop', 'android', 'ios', 'html', 'core', 'neo4jdebug'
+include 'desktop', 'android', 'ios', 'html', 'core', 'neo4jdebug', 'configgenerator'
