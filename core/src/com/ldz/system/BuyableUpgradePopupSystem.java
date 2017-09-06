@@ -14,6 +14,7 @@ import com.ldz.entity.EntityWithId;
 import com.ldz.system.custom.MyIteratingSystem;
 import com.ldz.util.LoggingUtil;
 import com.ldz.util.ParentAndChildUtil;
+import com.ldz.util.UpgradeUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +55,7 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
         BuyableUpgradeComponent buyableUpgradeComponent = entity.getComponent(BuyableUpgradeComponent.class);
 
         if (buyableUpgradeComponent != null) {
-            PersistantUpgradeComponent persistantUpgradeComponent = retrievePersistantUpgradeFromUpgradePopupComponent(buyableUpgradeComponent);
+            PersistantUpgradeComponent persistantUpgradeComponent = UpgradeUtil.retrievePersistantUpgrade(buyableUpgradeComponent, this.persistantUpgradeEntity);
 
             ParentAndChildUtil.forEachChildsRecursively(entity, new Function<Entity, Void>() {
                 @Override
@@ -139,20 +140,6 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
             return false;
         }
 
-    }
-
-    private PersistantUpgradeComponent retrievePersistantUpgradeFromUpgradePopupComponent(BuyableUpgradeComponent buyableUpgradeComponent) {
-        PersistantUpgradeComponent.UpgradeId upgradeId = buyableUpgradeComponent.upgradeId;
-        for (Entity persistanceEntity :
-                this.persistantUpgradeEntity) {
-            PersistantUpgradeComponent persistantUpgradeComponent = persistanceEntity.getComponent(PersistantUpgradeComponent.class);
-            if (persistantUpgradeComponent != null) {
-                if (persistantUpgradeComponent.upgradeId.equals(upgradeId)) {
-                    return persistantUpgradeComponent;
-                }
-            }
-        }
-        return null;
     }
 
     @Override

@@ -46,4 +46,8 @@ public class CurrencyInstance {
         }
         return this;
     }
+
+    public Float extractValue(CurrencyComponent.CURRENCY_TYPE currency_type) {
+        return this.currencies.get(currency_type);
+    }
 }

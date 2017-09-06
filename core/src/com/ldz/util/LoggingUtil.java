@@ -19,6 +19,11 @@ public class LoggingUtil {
         Gdx.app.debug(tag, LocalDateTime.now().toString() + " " + messageBefore + " " + SEPARATOR + " " + messageAfter);
     }
 
+    public static void DEBUG(String tag, String messageBefore, Throwable error) {
+        DEBUG(tag, messageBefore);
+        Gdx.app.error(tag, error.getMessage(), error);
+    }
+
     public static void DEBUG(String tag, String messageBefore, String messageAfter, Throwable error) {
         DEBUG(tag, messageBefore, messageAfter);
         Gdx.app.error(tag, error.getMessage(), error);

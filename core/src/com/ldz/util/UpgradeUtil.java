@@ -1,5 +1,8 @@
 package com.ldz.util;
 
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.utils.ImmutableArray;
+import com.ldz.component.BuyableUpgradeComponent;
 import com.ldz.component.PersistantUpgradeComponent;
 import com.ldz.component.domain.CurrencyInstance;
 import com.ldz.config.upgrade.referential.UpgradeReferential;
@@ -38,5 +41,22 @@ public class UpgradeUtil {
         return persistantUpgradeComponent;
     }
 
+    public static PersistantUpgradeComponent retrievePersistantUpgrade(BuyableUpgradeComponent buyableUpgradeComponent, ImmutableArray<Entity> persistantUpgradeEntity) {
+        PersistantUpgradeComponent.UpgradeId upgradeId = buyableUpgradeComponent.upgradeId;
+        return retrievePersistantUpgrade(upgradeId, persistantUpgradeEntity);
+    }
+
+    public static PersistantUpgradeComponent retrievePersistantUpgrade(PersistantUpgradeComponent.UpgradeId upgradeId, ImmutableArray<Entity> persistantUpgradeEntity) {
+        for (Entity persistanceEntity :
+                persistantUpgradeEntity) {
+            PersistantUpgradeComponent persistantUpgradeComponent = persistanceEntity.getComponent(PersistantUpgradeComponent.class);
+            if (persistantUpgradeComponent != null) {
+                if (persistantUpgradeComponent.upgradeId.equals(upgradeId)) {
+                    return persistantUpgradeComponent;
+                }
+            }
+        }
+        return null;
+    }
 
 }

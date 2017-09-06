@@ -24,6 +24,14 @@ public class PersistantUpgradeComponent implements Component {
 
     public STATE state = STATE.PENDING;
 
+    public Float extractFromObjectCost(CurrencyComponent.CURRENCY_TYPE currency_type) {
+        return this.objectCost.extractValue(currency_type);
+    }
+
+    public Float extractFromObjectBonus(CurrencyComponent.CURRENCY_TYPE currency_type) {
+        return this.objectBonus.extractValue(currency_type);
+    }
+
     public enum UpgradeId {
         UPGRADE_1(EntityId.upgrade_1_critical_state_display, null),
         UPGRADE_2(EntityId.upgrade_1_critical_state_display, null);

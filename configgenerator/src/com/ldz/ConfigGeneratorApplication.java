@@ -20,7 +20,7 @@ public class ConfigGeneratorApplication {
         String outputJsonFileName = args.get(OUTPUT_JSON_FILE_ARG);
 
         if (outputJsonFileName != null) {
-            
+
         }
 
     }
