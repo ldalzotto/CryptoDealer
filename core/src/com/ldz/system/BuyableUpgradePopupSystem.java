@@ -4,18 +4,16 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.graphics.Color;
-import com.ldz.component.*;
-import com.ldz.config.game.entities.EntityType;
-import com.ldz.entity.EntityWithId;
+import com.ldz.component.BuyableUpgradeComponent;
+import com.ldz.component.CurrencyComponent;
+import com.ldz.component.ParentAndChildComponent;
+import com.ldz.component.PersistantUpgradeComponent;
 import com.ldz.system.custom.MyIteratingSystem;
 import com.ldz.util.LoggingUtil;
-import com.ldz.util.ParentAndChildUtil;
 import com.ldz.util.UpgradeUtil;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Created by Loic on 20/08/2017.
@@ -58,33 +56,13 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
             ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
             if (parentAndChildComponent != null && persistantUpgradeComponent != null) {
                 parentAndChildComponent.dataToTransit.put(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.UPGRADE_ID_KEY, persistantUpgradeComponent.upgradeId);
+                parentAndChildComponent.dataToTransit.put(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.UPGRADE_PERFORMANCE, persistantUpgradeComponent.itemPerformances);
             }
-
-            ParentAndChildUtil.forEachChildsRecursively(entity, new Function<Entity, Void>() {
-                @Override
-                public Void apply(Entity entity) {
-
-                    if (entity instanceof EntityWithId) {
-                        EntityWithId entityWithId = (EntityWithId) entity;
-                        if (entityWithId.getId().getEntityType().equals(EntityType.DECADE_DISPLAY)) {
-                            BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
-                            if (bitmapFontComponent != null) {
-                                bitmapFontComponent.stringToDisplay = "Performances : " + String.valueOf(persistantUpgradeComponent.itemPerformances);
-                                bitmapFontComponent.bitmapFont.setColor(Color.RED);
-                            }
-                        }
-                    }
-
-                    return null;
-                }
-            });
-
 
             switch (buyableUpgradeComponent.state) {
                 case PENDING:
                     break;
                 case ASKING_FOR_UPGRADE:
-
                     //check if upgrade is buyable by the player
                     if (checkIfUpgradeIsBuyableByThePlayer(persistantUpgradeComponent)) {
                         for (Entity currencyEntity :

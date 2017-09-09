@@ -57,7 +57,7 @@
                   },
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade_1_decade_display"
+                    "value": "upgrade_decade_display"
                   },
                   {
                     "classname": "java.lang.String",
@@ -121,7 +121,7 @@
       }
     },
     {
-      "id": "upgrade_1_decade_display",
+      "id": "upgrade_decade_display",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.abstr.FontDisplayEntity",

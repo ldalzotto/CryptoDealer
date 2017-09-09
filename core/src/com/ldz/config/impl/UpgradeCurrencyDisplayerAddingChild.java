@@ -33,7 +33,6 @@ public class UpgradeCurrencyDisplayerAddingChild implements IAddingInstanceChild
 
                 bagOfEntitiesComponent.entities.add(fontDisplayEntity);
 
-
                 initFloat += 50;
             }
             bagOfEntitiesComponent.addEntityToEngine = true;

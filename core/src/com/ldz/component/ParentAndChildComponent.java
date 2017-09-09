@@ -26,17 +26,8 @@ public class ParentAndChildComponent implements Component {
     }
 
     public enum DATA_TO_TRANSIT_KEY {
-        UPGRADE_ID_KEY(PersistantUpgradeComponent.UpgradeId.class);
-
-        private Class classValue;
-
-        DATA_TO_TRANSIT_KEY(Class classValue) {
-            this.classValue = classValue;
-        }
-
-        public Class getClassValue() {
-            return classValue;
-        }
+        UPGRADE_ID_KEY,
+        UPGRADE_PERFORMANCE;
     }
 
 }

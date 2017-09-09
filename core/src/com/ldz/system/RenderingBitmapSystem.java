@@ -3,14 +3,16 @@ package com.ldz.system;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.BitmapFontComponent;
 import com.ldz.component.CurrencyComponent;
+import com.ldz.component.ParentAndChildComponent;
 import com.ldz.component.TranformComponent;
+import com.ldz.config.game.entities.EntityId;
+import com.ldz.entity.EntityWithId;
 import com.ldz.system.custom.MyIteratingSystem;
 import com.ldz.util.ComponentUtil;
 
@@ -35,19 +37,19 @@ public class RenderingBitmapSystem extends MyIteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
 
-        Map<String, Component> componentContainer;
-        try {
-            componentContainer = ComponentUtil.getAllComponentsFromEntity(entity, BitmapFontComponent.class, TranformComponent.class);
-        } catch (Exception e) {
-            Gdx.app.error(TAG, e.getMessage());
-            Gdx.app.error(TAG, e.getCause().toString());
-            return;
-        }
+        Map<String, Component> componentContainer = ComponentUtil.getAllComponentsFromEntity(entity);
 
-        //get components
+        ParentAndChildComponent parentAndChildComponent = (ParentAndChildComponent) componentContainer.get(ParentAndChildComponent.class.getSimpleName());
         BitmapFontComponent bitmapFontComponent = (BitmapFontComponent) componentContainer.get(BitmapFontComponent.class.getSimpleName());
         TranformComponent tranformComponent = (TranformComponent) componentContainer.get(TranformComponent.class.getSimpleName());
 
+        if (entity instanceof EntityWithId && parentAndChildComponent != null && bitmapFontComponent != null) {
+            EntityWithId entityWithId = (EntityWithId) entity;
+            if (entityWithId.getId().equals(EntityId.upgrade_decade_display)) {
+                Float performanceRate = (Float) parentAndChildComponent.extractFromDataToTransit(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.UPGRADE_PERFORMANCE);
+                bitmapFontComponent.stringToDisplay = "Perfrmance : " + performanceRate;
+            }
+        }
 
         //position
         Vector2 position = tranformComponent.position;

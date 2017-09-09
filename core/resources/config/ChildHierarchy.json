@@ -19,7 +19,7 @@
                   "id": "upgrade_1_buy_popup",
                   "childs": [
                     {
-                      "id": "upgrade_1_decade_display"
+                      "id": "upgrade_decade_display"
                     },
                     {
                       "id": "upgrade_1_buy_button"
