@@ -18,9 +18,7 @@ public class EntityUtil {
 
     public static EntityWithId addtextureEntityComponents(Vector2 position, Texture texture, int z, EntityWithId entity) {
 
-        TranformComponent tranformComponent = new TranformComponent();
-        tranformComponent.position = position;
-        tranformComponent.z = z;
+        EntityUtil.addTransformComponent(position, z, entity);
 
         TextureComponent textureComponent = new TextureComponent();
         textureComponent.texture = texture;
@@ -28,7 +26,6 @@ public class EntityUtil {
         BoudingRectangleComponent boudingRectangleComponent = new BoudingRectangleComponent();
         boudingRectangleComponent.rectangle = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 
-        entity.add(tranformComponent);
         entity.add(textureComponent);
         entity.add(boudingRectangleComponent);
 
@@ -70,6 +67,15 @@ public class EntityUtil {
 
         ParentAndChildComponent parentAndChildComponent = new ParentAndChildComponent();
         entityWithId.add(parentAndChildComponent);
+    }
+
+    private static void addTransformComponent(Vector2 position, int z, EntityWithId entityWithId) {
+
+        TranformComponent tranformComponent = new TranformComponent();
+        tranformComponent.position = position;
+        tranformComponent.z = z;
+
+        entityWithId.add(tranformComponent);
     }
 
 

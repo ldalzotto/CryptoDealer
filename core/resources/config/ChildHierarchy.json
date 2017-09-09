@@ -32,6 +32,14 @@
                     },
                     {
                       "id": "upgrade_1_resp_button"
+                    },
+                    {
+                      "id": "upgrade_currency_entity",
+                      "childs": [
+                        {
+                          "id": "upgrade_currency_displayer"
+                        }
+                      ]
                     }
                   ]
                 }

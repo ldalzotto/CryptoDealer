@@ -41,7 +41,7 @@ public class InstantDisplayerSystem extends MyIteratingSystem {
 
             if (Gdx.input.isTouched()) {
                 if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
-                    bagOfEntitiesComponent.addEntityToEngine = true;
+                    BagOfEntitiesComponent.addTagToEngineFromBagOfEntitiesRecursively(bagOfEntitiesComponent);
                     displayStateComponent.isDisplayed = true;
                     ParentAndChildSystem.getInstance().setProcessing(true);
                 }
@@ -50,5 +50,6 @@ public class InstantDisplayerSystem extends MyIteratingSystem {
         }
 
     }
+
 
 }

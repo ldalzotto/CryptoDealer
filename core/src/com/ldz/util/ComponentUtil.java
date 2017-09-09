@@ -2,6 +2,7 @@ package com.ldz.util;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.utils.ImmutableArray;
 
 import java.util.*;
 
@@ -24,6 +25,23 @@ public class ComponentUtil {
 
     }
 
+
+    public static Map<String, Component> getAllComponentsFromEntity(Entity entity) {
+
+        Map<String, Component> cClassContainer = new HashMap<>();
+        ImmutableArray<Component> componentList = entity.getComponents();
+
+        for (Component component :
+                componentList) {
+            Class<? extends Component> cclass = component.getClass();
+            if (component != null) {
+                cClassContainer.put(cclass.getSimpleName(), component);
+            }
+        }
+
+        return cClassContainer;
+
+    }
 
     public static Map<String, Component> getAllComponentsFromEntity(Entity entity, Class<? extends Component>... componentClass) throws Exception {
 

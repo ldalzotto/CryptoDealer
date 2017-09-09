@@ -81,7 +81,7 @@ public class DelayedDisplayerSystem extends EntitySystem implements IRetrieveAll
 
                             Gdx.app.debug(TAG, "Current entity set to isDisplayed = true ********** " + ReflectionToStringBuilder.toString(entity));
                             displayStateComponent.isDisplayed = true;
-                            bagOfEntitiesComponent.addEntityToEngine = true;
+                            BagOfEntitiesComponent.addTagToEngineFromBagOfEntitiesRecursively(bagOfEntitiesComponent);
                             ParentAndChildSystem.getInstance().setProcessing(true);
                         }
                     }

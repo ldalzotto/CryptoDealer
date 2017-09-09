@@ -6,6 +6,7 @@ import com.ldz.config.game.entities.domain.Constructor;
 import com.ldz.config.game.entities.domain.GameEntities;
 import com.ldz.config.game.entities.domain.GameEntity;
 import com.ldz.config.game.entities.domain.Parameter;
+import com.ldz.config.itf.IAddingInstanceChildOnComplete;
 import com.ldz.entity.EntityWithId;
 import org.apache.commons.lang3.ClassUtils;
 
@@ -64,6 +65,13 @@ public class GameEntitiesConfig {
 
                     EntityWithId entityWithId = (EntityWithId) buildInstance(jsonConstructor);
                     entityWithId.setId(id);
+
+                    if (gameEntity.getAddChildOnComplete() != null) {
+                        Constructor addingChildConstructor = gameEntity.getAddChildOnComplete().getConstructor();
+                        IAddingInstanceChildOnComplete iAddingInstanceChildOnComplete = (IAddingInstanceChildOnComplete) buildInstance(addingChildConstructor);
+                        iAddingInstanceChildOnComplete.addingChilds(entityWithId);
+                    }
+
                     return entityWithId;
 
                 }

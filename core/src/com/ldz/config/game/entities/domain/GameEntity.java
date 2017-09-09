@@ -9,6 +9,7 @@ public class GameEntity {
 
     private EntityId id;
     private Instance instance;
+    private Instance addChildOnComplete;
 
     public EntityId getId() {
         return id;
@@ -24,5 +25,13 @@ public class GameEntity {
 
     public void setInstance(Instance instance) {
         this.instance = instance;
+    }
+
+    public Instance getAddChildOnComplete() {
+        return addChildOnComplete;
+    }
+
+    public void setAddChildOnComplete(Instance addChildOnComplete) {
+        this.addChildOnComplete = addChildOnComplete;
     }
 }

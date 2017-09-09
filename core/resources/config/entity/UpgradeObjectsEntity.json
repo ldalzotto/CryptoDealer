@@ -66,6 +66,10 @@
                   {
                     "classname": "java.lang.String",
                     "value": "upgrade_1_resp_button"
+                  },
+                  {
+                    "classname": "java.lang.String",
+                    "value": "upgrade_currency_entity"
                   }
                 ]
               }
@@ -470,6 +474,21 @@
               "value": 4
             }
           ]
+        }
+      }
+    },
+    {
+      "id": "upgrade_currency_entity",
+      "addChildOnComplete": {
+        "constructor": {
+          "classname": "com.ldz.config.impl.UpgradeCurrencyDisplayerAddingChild",
+          "parameters": []
+        }
+      },
+      "instance": {
+        "constructor": {
+          "classname": "com.ldz.entity.abstr.DisplayerEntity",
+          "parameters": []
         }
       }
     }

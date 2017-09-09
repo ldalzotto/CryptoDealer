@@ -22,7 +22,9 @@ public enum EntityId {
     upgrade_1_exit_button("The exit button to exit buy popup.", EntityType.NONE),
     upgrade_2("The second upgrade displayed in upgrade menu.", EntityType.NONE),
     upgrade_2_buy_popup("The upgrade popup for buying.", EntityType.NONE),
-    upgrade_2_buy_button("The buy button allowing to buy upgrade.", EntityType.NONE);
+    upgrade_2_buy_button("The buy button allowing to buy upgrade.", EntityType.NONE),
+    upgrade_currency_entity("Container displaying upgrade price.", EntityType.NONE),
+    upgrade_currency_displayer("Display one currency of the upgrade.", EntityType.NONE);
 
     private String description;
     private EntityType entityType;
