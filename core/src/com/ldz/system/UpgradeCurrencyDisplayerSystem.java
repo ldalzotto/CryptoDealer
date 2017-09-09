@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.ldz.component.BitmapFontComponent;
+import com.ldz.component.ParentAndChildComponent;
 import com.ldz.component.PersistantUpgradeComponent;
 import com.ldz.component.UpgradeCurrencyDisplayerComponent;
 import com.ldz.system.custom.MyIteratingSystem;
@@ -43,6 +44,8 @@ public class UpgradeCurrencyDisplayerSystem extends MyIteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+
+
         Map<String, Component> componentMap = null;
         try {
             componentMap = ComponentUtil.getAllComponentsFromEntity(entity, UpgradeCurrencyDisplayerComponent.class, BitmapFontComponent.class);
@@ -54,9 +57,24 @@ public class UpgradeCurrencyDisplayerSystem extends MyIteratingSystem {
         UpgradeCurrencyDisplayerComponent upgradeCurrencyDisplayerComponent = (UpgradeCurrencyDisplayerComponent) componentMap.get(UpgradeCurrencyDisplayerComponent.class.getSimpleName());
         BitmapFontComponent bitmapFontComponent = (BitmapFontComponent) componentMap.get(BitmapFontComponent.class.getSimpleName());
 
+
+        //extract entity from parent
+        ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
+        if (parentAndChildComponent != null) {
+            Object upgradeId = parentAndChildComponent.dataToTransit.get(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.UPGRADE_ID_KEY);
+            if (upgradeId != null) {
+                PersistantUpgradeComponent.UpgradeId currentUpgradeId = (PersistantUpgradeComponent.UpgradeId) upgradeId;
+                upgradeCurrencyDisplayerComponent.upgradeId = currentUpgradeId;
+            }
+        }
+
         PersistantUpgradeComponent persistantUpgradeComponent = UpgradeUtil.retrievePersistantUpgrade(upgradeCurrencyDisplayerComponent.upgradeId, this.persistantUpgradeEntities);
-        Float objectCost = persistantUpgradeComponent.extractFromObjectCost(upgradeCurrencyDisplayerComponent.currencyType);
-        bitmapFontComponent.stringToDisplay = Float.toString(objectCost);
+
+        if (persistantUpgradeComponent != null) {
+            Float objectCost = persistantUpgradeComponent.extractFromObjectCost(upgradeCurrencyDisplayerComponent.currencyType);
+            bitmapFontComponent.stringToDisplay = Float.toString(objectCost);
+
+        }
 
     }
 }

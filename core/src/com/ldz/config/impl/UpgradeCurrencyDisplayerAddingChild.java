@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.component.CurrencyComponent;
+import com.ldz.component.UpgradeCurrencyDisplayerComponent;
 import com.ldz.config.game.entities.EntityId;
 import com.ldz.config.itf.IAddingInstanceChildOnComplete;
 import com.ldz.entity.EntityWithId;
@@ -27,7 +28,15 @@ public class UpgradeCurrencyDisplayerAddingChild implements IAddingInstanceChild
                     CurrencyComponent.CURRENCY_TYPE.values()) {
                 EntityWithId fontDisplayEntity = new FontDisplayEntity(new Vector2(20f, initFloat), "tess");
                 fontDisplayEntity.setId(EntityId.upgrade_currency_displayer);
+
+                UpgradeCurrencyDisplayerComponent upgradeCurrencyDisplayerComponent = new UpgradeCurrencyDisplayerComponent();
+                upgradeCurrencyDisplayerComponent.currencyType = currency_type;
+
+                fontDisplayEntity.add(upgradeCurrencyDisplayerComponent);
+
                 bagOfEntitiesComponent.entities.add(fontDisplayEntity);
+
+
                 initFloat += 50;
             }
             bagOfEntitiesComponent.addEntityToEngine = true;

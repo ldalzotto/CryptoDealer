@@ -5,10 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.Color;
-import com.ldz.component.BitmapFontComponent;
-import com.ldz.component.BuyableUpgradeComponent;
-import com.ldz.component.CurrencyComponent;
-import com.ldz.component.PersistantUpgradeComponent;
+import com.ldz.component.*;
 import com.ldz.config.game.entities.EntityType;
 import com.ldz.entity.EntityWithId;
 import com.ldz.system.custom.MyIteratingSystem;
@@ -57,20 +54,19 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
         if (buyableUpgradeComponent != null) {
             PersistantUpgradeComponent persistantUpgradeComponent = UpgradeUtil.retrievePersistantUpgrade(buyableUpgradeComponent, this.persistantUpgradeEntity);
 
+            //send data to childs
+            ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
+            if (parentAndChildComponent != null && persistantUpgradeComponent != null) {
+                parentAndChildComponent.dataToTransit.put(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.UPGRADE_ID_KEY, persistantUpgradeComponent.upgradeId);
+            }
+
             ParentAndChildUtil.forEachChildsRecursively(entity, new Function<Entity, Void>() {
                 @Override
                 public Void apply(Entity entity) {
 
                     if (entity instanceof EntityWithId) {
                         EntityWithId entityWithId = (EntityWithId) entity;
-                        if (entityWithId.getId().getEntityType().equals(EntityType.COST_DISPLAY)) {
-                            //font component
-                            BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
-                            if (bitmapFontComponent != null) {
-                                bitmapFontComponent.stringToDisplay = "Cost : " + String.valueOf(persistantUpgradeComponent.objectCost.getCurrencies().get(CurrencyComponent.CURRENCY_TYPE.ITHEREUM_COIN));
-                                bitmapFontComponent.bitmapFont.setColor(Color.BLUE);
-                            }
-                        } else if (entityWithId.getId().getEntityType().equals(EntityType.DECADE_DISPLAY)) {
+                        if (entityWithId.getId().getEntityType().equals(EntityType.DECADE_DISPLAY)) {
                             BitmapFontComponent bitmapFontComponent = entity.getComponent(BitmapFontComponent.class);
                             if (bitmapFontComponent != null) {
                                 bitmapFontComponent.stringToDisplay = "Performances : " + String.valueOf(persistantUpgradeComponent.itemPerformances);
