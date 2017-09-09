@@ -17,8 +17,26 @@ public class ParentAndChildComponent implements Component {
     public Entity parent;
     public Map<DATA_TO_TRANSIT_KEY, Object> dataToTransit = new HashMap<>();
 
+    public Object extractFromDataToTransit(DATA_TO_TRANSIT_KEY dataToTransitKey) {
+        if (dataToTransit != null && dataToTransit.get(dataToTransitKey) != null) {
+            return dataToTransit.get(dataToTransitKey);
+        }
+
+        return null;
+    }
+
     public enum DATA_TO_TRANSIT_KEY {
-        UPGRADE_ID_KEY;
+        UPGRADE_ID_KEY(PersistantUpgradeComponent.UpgradeId.class);
+
+        private Class classValue;
+
+        DATA_TO_TRANSIT_KEY(Class classValue) {
+            this.classValue = classValue;
+        }
+
+        public Class getClassValue() {
+            return classValue;
+        }
     }
 
 }

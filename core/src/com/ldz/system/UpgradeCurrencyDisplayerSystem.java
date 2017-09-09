@@ -61,10 +61,9 @@ public class UpgradeCurrencyDisplayerSystem extends MyIteratingSystem {
         //extract entity from parent
         ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
         if (parentAndChildComponent != null) {
-            Object upgradeId = parentAndChildComponent.dataToTransit.get(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.UPGRADE_ID_KEY);
+            Object upgradeId = parentAndChildComponent.extractFromDataToTransit(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.UPGRADE_ID_KEY);
             if (upgradeId != null) {
-                PersistantUpgradeComponent.UpgradeId currentUpgradeId = (PersistantUpgradeComponent.UpgradeId) upgradeId;
-                upgradeCurrencyDisplayerComponent.upgradeId = currentUpgradeId;
+                upgradeCurrencyDisplayerComponent.upgradeId = (PersistantUpgradeComponent.UpgradeId) upgradeId;
             }
         }
 

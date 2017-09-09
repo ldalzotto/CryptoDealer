@@ -49,10 +49,6 @@
                   },
                   {
                     "classname": "java.lang.String",
-                    "value": "upgrade_1_cost_display"
-                  },
-                  {
-                    "classname": "java.lang.String",
                     "value": "upgrade_1_buy_button"
                   },
                   {
@@ -119,36 +115,6 @@
             {
               "classname": "java.lang.String",
               "value": "UPGRADE_1"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "upgrade_1_cost_display",
-      "instance": {
-        "constructor": {
-          "classname": "com.ldz.entity.abstr.FontDisplayEntity",
-          "parameters": [
-            {
-              "classname": "com.badlogic.gdx.math.Vector2",
-              "constructor": {
-                "classname": "com.badlogic.gdx.math.Vector2",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": "300"
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": "30"
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "java.lang.String",
-              "value": "TEMEMEME"
             }
           ]
         }

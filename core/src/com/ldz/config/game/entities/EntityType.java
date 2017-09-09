@@ -5,7 +5,6 @@ package com.ldz.config.game.entities;
  */
 public enum EntityType {
     NONE,
-    COST_DISPLAY,
     DECADE_DISPLAY;
 
 }

@@ -60,6 +60,29 @@ public class EntityUtil {
         return entityWithId;
     }
 
+    public static EntityWithId addFontDisplayComponentsFromEntityId(Vector2 position, String stringToDisplay, EntityWithId entityWithId) {
+        TranformComponent tranformComponent = new TranformComponent();
+        tranformComponent.position = position;
+        entityWithId.add(tranformComponent);
+
+        BitmapFontComponent bitmapFontComponent = new BitmapFontComponent();
+        bitmapFontComponent.stringToDisplay = stringToDisplay;
+        entityWithId.add(bitmapFontComponent);
+
+        ParentAndChildComponent parentAndChildComponent = new ParentAndChildComponent();
+        entityWithId.add(parentAndChildComponent);
+
+        return entityWithId;
+    }
+
+    public static EntityWithId addUpgradeCurrencyDisplayerCompoent(CurrencyComponent.CURRENCY_TYPE currency_type, EntityWithId entityWithId) {
+        UpgradeCurrencyDisplayerComponent upgradeCurrencyDisplayerComponent = new UpgradeCurrencyDisplayerComponent();
+        upgradeCurrencyDisplayerComponent.currencyType = currency_type;
+
+        entityWithId.add(upgradeCurrencyDisplayerComponent);
+        return entityWithId;
+    }
+
     private static void addDisplayerCoreComponents(EntityWithId entityWithId) {
         DisplayStateComponent displayStateComponent = new DisplayStateComponent();
         displayStateComponent.state = DisplayStateComponent.STATE.INSTANT;
