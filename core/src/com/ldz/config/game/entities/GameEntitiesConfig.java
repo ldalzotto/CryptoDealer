@@ -92,7 +92,16 @@ public class GameEntitiesConfig {
                     Constructor constructor = gameEntityToInstantiate.getInstance().getConstructor();
 
                     EntityWithId entityWithId = (EntityWithId) this.buildInstance(constructor, constructedConstructorArgs.toArray());
+                    entityWithId.setId(entityId);
                     entityWithId.setIstanceId(instanceEntityId);
+
+
+                    if (gameEntityInstance.getAddChildOnComplete() != null) {
+                        Constructor addingChildConstructor = gameEntityInstance.getAddChildOnComplete().getConstructor();
+                        IAddingInstanceChildOnComplete iAddingInstanceChildOnComplete = (IAddingInstanceChildOnComplete) buildInstance(addingChildConstructor);
+                        iAddingInstanceChildOnComplete.addingChilds(entityWithId);
+                    }
+
                     return entityWithId;
                 }
             }
