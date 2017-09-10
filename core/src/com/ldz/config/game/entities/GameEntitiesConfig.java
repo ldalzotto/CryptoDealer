@@ -6,6 +6,8 @@ import com.ldz.config.game.entities.domain.Constructor;
 import com.ldz.config.game.entities.domain.GameEntities;
 import com.ldz.config.game.entities.domain.GameEntity;
 import com.ldz.config.game.entities.domain.Parameter;
+import com.ldz.config.game.entities.instance.domain.GameEntitiesInstance;
+import com.ldz.config.game.entities.instance.domain.GameEntityInstance;
 import com.ldz.config.itf.IAddingInstanceChildOnComplete;
 import com.ldz.entity.EntityWithId;
 import org.apache.commons.lang3.ClassUtils;
@@ -23,6 +25,7 @@ public class GameEntitiesConfig {
     private static GameEntitiesConfig instance = null;
     private Json json = new Json();
     private GameEntities gameEntities = new GameEntities();
+    private GameEntitiesInstance gameEntitiesInstance = new GameEntitiesInstance();
 
     private GameEntitiesConfig() {
         this.gameEntities.setEntities(new ArrayList<>());
@@ -40,6 +43,18 @@ public class GameEntitiesConfig {
                 gameEntities) {
             this.gameEntities.getEntities().addAll(gameEntities1.getEntities());
         }
+
+
+        this.gameEntitiesInstance.setEntities(new ArrayList<>());
+        List<GameEntitiesInstance> gameEntitiesInstances = new ArrayList<>();
+
+        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/entityinstance.json")));
+
+        for (GameEntitiesInstance gameEntitiesInstance :
+                gameEntitiesInstances) {
+            this.gameEntitiesInstance.getEntities().addAll(gameEntitiesInstance.getEntities());
+        }
+
     }
 
     public static GameEntitiesConfig getInstance() {
@@ -53,6 +68,42 @@ public class GameEntitiesConfig {
         return gameEntities;
     }
 
+
+    public EntityWithId buildEntityByInstanceEntityid(InstanceEntityId instanceEntityId) {
+
+        try {
+            //get entity
+            for (GameEntityInstance gameEntityInstance :
+                    this.gameEntitiesInstance.getEntities()) {
+
+                if (gameEntityInstance.getInstanceId().equals(instanceEntityId)) {
+                    List<Object> constructedConstructorArgs = new ArrayList<>();
+                    for (Parameter parameter :
+                            gameEntityInstance.getConstructorArgs()) {
+
+                        constructedConstructorArgs
+                                .add(this.buildParemeter(new ArrayList<>(), new ArrayList<>(), parameter));
+
+                    }
+
+                    //call constructor of entityId
+                    EntityId entityId = gameEntityInstance.getEntityId();
+                    GameEntity gameEntityToInstantiate = this.findGameEntityFromEntityId(entityId);
+                    Constructor constructor = gameEntityToInstantiate.getInstance().getConstructor();
+
+                    EntityWithId entityWithId = (EntityWithId) this.buildInstance(constructor, constructedConstructorArgs.toArray());
+                    entityWithId.setIstanceId(instanceEntityId);
+                    return entityWithId;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+    }
+
+    @Deprecated
     public EntityWithId buildEntityById(EntityId id) {
 
         //get entity
@@ -100,6 +151,20 @@ public class GameEntitiesConfig {
         return objectConstructor.newInstance((Object[]) parametersValues.toArray());
     }
 
+    private Object buildInstance(Constructor jsonConstructor, Object... constructorArgs) throws Exception {
+        Class currentClass = Class.forName(jsonConstructor.getClassname());
+        List<Class> types = new ArrayList<>();
+
+
+        for (Parameter parameter :
+                jsonConstructor.getParameters()) {
+            types.add(this.determineClassWithLittleType(parameter.getClassname()));
+        }
+
+        java.lang.reflect.Constructor objectConstructor = getJavaConstructorFromClass(currentClass, types.toArray(new Class[]{}),
+                new ArrayList<>(types));
+        return objectConstructor.newInstance(constructorArgs);
+    }
 
     private Object buildParemeter(List<Class> types, List<Object> parametersValues, Parameter parameter) throws Exception {
 
@@ -207,6 +272,33 @@ public class GameEntitiesConfig {
         }
 
         return constructorReturn;
+    }
+
+    private GameEntity findGameEntityFromEntityId(EntityId entityId) {
+        for (GameEntity gameEntity :
+                this.gameEntities.getEntities()) {
+            if (gameEntity.getId().equals(entityId)) {
+                return gameEntity;
+            }
+        }
+        return null;
+    }
+
+    private Class determineClassWithLittleType(String className) throws Exception {
+
+        if (className.contains("Integer")) {
+            return Integer.class;
+        } else if (className.contains("int")) {
+            return int.class;
+        } else if (className.contains("Float")) {
+            return Float.class;
+        } else if (className.contains("float")) {
+            return float.class;
+        } else if (className.contains("List|")) {
+            return ArrayList.class;
+        } else {
+            return Class.forName(className);
+        }
     }
 
 }

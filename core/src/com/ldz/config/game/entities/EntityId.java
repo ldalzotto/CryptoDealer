@@ -4,9 +4,7 @@ package com.ldz.config.game.entities;
  * Created by Loic on 23/08/2017.
  */
 public enum EntityId {
-    zit_coin_entity("Entity managing input/output zit coins."),
-    ithereum_coin_entity("Entity managing input/output ithereum coins."),
-    loud_coin_entity("Entity managing input/output loud coins."),
+    currency_entity("Entity managing input/output zit coins."),
     computer_entity("The computer accessing to upgrade menu."),
     upgrade_menu_popup("The upgrade menu. Listing all upgrades and allow player to buy some."),
     exit_upgrade_menu_popup("The exit button to the upgrade menu."),

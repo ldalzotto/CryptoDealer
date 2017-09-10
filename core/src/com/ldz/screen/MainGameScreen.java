@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.config.game.entities.EntityId;
+import com.ldz.config.game.entities.InstanceEntityId;
 import com.ldz.engine.MyEngine;
 import com.ldz.entity.EntityFactory;
 import com.ldz.listener.EntityRemoveListener;
@@ -58,9 +59,9 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine = MyEngine.getInstance();
 
         //set all entity
-        engine.addEntity(EntityFactory.getEntityFromId(EntityId.zit_coin_entity));
-        engine.addEntity(EntityFactory.getEntityFromId(EntityId.ithereum_coin_entity));
-        engine.addEntity(EntityFactory.getEntityFromId(EntityId.loud_coin_entity));
+        engine.addEntity(EntityFactory.getEntityFromInstanceId(InstanceEntityId.zit_coin_entity));
+        engine.addEntity(EntityFactory.getEntityFromInstanceId(InstanceEntityId.ithereum_coin_entity));
+        engine.addEntity(EntityFactory.getEntityFromInstanceId(InstanceEntityId.loud_coin_entity));
         engine.addEntity(EntityFactory.getEntityFromId(EntityId.computer_entity));
 
         //add persistant upgrade entity
