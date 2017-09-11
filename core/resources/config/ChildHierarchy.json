@@ -10,25 +10,25 @@
               "id": "exit_upgrade_menu_popup"
             },
             {
-              "id": "upgrade_1",
+              "id": "upgrade",
               "childs": [
                 {
                   "id": "upgrade_1_critical_state_display"
                 },
                 {
-                  "id": "upgrade_1_buy_popup",
+                  "id": "upgrade_buy_popup",
                   "childs": [
                     {
                       "id": "upgrade_decade_display"
                     },
                     {
-                      "id": "upgrade_1_buy_button"
+                      "id": "upgrade_buy_button"
                     },
                     {
-                      "id": "upgrade_1_exit_button"
+                      "id": "upgrade_exit_button"
                     },
                     {
-                      "id": "upgrade_1_resp_button"
+                      "id": "upgrade_resp_button"
                     },
                     {
                       "id": "upgrade_currency_entity",
@@ -37,19 +37,6 @@
                           "id": "upgrade_currency_displayer"
                         }
                       ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "upgrade_2",
-              "childs": [
-                {
-                  "id": "upgrade_2_buy_popup",
-                  "childs": [
-                    {
-                      "id": "upgrade_2_buy_button"
                     }
                   ]
                 }

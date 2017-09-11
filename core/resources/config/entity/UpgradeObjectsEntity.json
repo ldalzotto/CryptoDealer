@@ -1,7 +1,7 @@
 {
   "entities": [
     {
-      "id": "upgrade_1",
+      "id": "upgrade",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.abstr.DisplayerEntity",
@@ -12,12 +12,10 @@
                 "classname": "com.badlogic.gdx.math.Vector2",
                 "parameters": [
                   {
-                    "classname": "java.lang.float",
-                    "value": "150"
+                    "classname": "java.lang.float"
                   },
                   {
-                    "classname": "java.lang.float",
-                    "value": "150"
+                    "classname": "java.lang.float"
                   }
                 ]
               }
@@ -28,46 +26,19 @@
                 "classname": "com.badlogic.gdx.graphics.Texture",
                 "parameters": [
                   {
-                    "classname": "java.lang.String",
-                    "value": "assets/upgrade.bmp"
+                    "classname": "java.lang.String"
                   }
                 ]
               }
             },
             {
-              "classname": "java.lang.int",
-              "value": 3
+              "classname": "java.lang.int"
             },
             {
               "classname": "List|java.lang.String|",
               "constructor": {
                 "classname": "|List|java.lang.String|",
-                "parameters": [
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_1_buy_popup"
-                  },
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_1_buy_button"
-                  },
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_1_exit_button"
-                  },
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_decade_display"
-                  },
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_1_resp_button"
-                  },
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_currency_entity"
-                  }
-                ]
+                "parameters": []
               }
             }
           ]
@@ -75,7 +46,7 @@
       }
     },
     {
-      "id": "upgrade_1_buy_popup",
+      "id": "upgrade_buy_popup",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.UpgradePopupEntity",
@@ -86,12 +57,10 @@
                 "classname": "com.badlogic.gdx.math.Vector2",
                 "parameters": [
                   {
-                    "classname": "java.lang.float",
-                    "value": "200"
+                    "classname": "java.lang.float"
                   },
                   {
-                    "classname": "java.lang.float",
-                    "value": "500"
+                    "classname": "java.lang.float"
                   }
                 ]
               }
@@ -102,19 +71,16 @@
                 "classname": "com.badlogic.gdx.graphics.Texture",
                 "parameters": [
                   {
-                    "classname": "java.lang.String",
-                    "value": "assets/buy_upgrade.bmp"
+                    "classname": "java.lang.String"
                   }
                 ]
               }
             },
             {
-              "classname": "java.lang.int",
-              "value": 3
+              "classname": "java.lang.int"
             },
             {
-              "classname": "java.lang.String",
-              "value": "UPGRADE_1"
+              "classname": "java.lang.String"
             }
           ]
         }
@@ -132,26 +98,23 @@
                 "classname": "com.badlogic.gdx.math.Vector2",
                 "parameters": [
                   {
-                    "classname": "java.lang.float",
-                    "value": "300"
+                    "classname": "java.lang.float"
                   },
                   {
-                    "classname": "java.lang.float",
-                    "value": "60"
+                    "classname": "java.lang.float"
                   }
                 ]
               }
             },
             {
-              "classname": "java.lang.String",
-              "value": "TEMEMEME"
+              "classname": "java.lang.String"
             }
           ]
         }
       }
     },
     {
-      "id": "upgrade_1_buy_button",
+      "id": "upgrade_buy_button",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.ButtonEntity",
@@ -162,12 +125,10 @@
                 "classname": "com.badlogic.gdx.math.Vector2",
                 "parameters": [
                   {
-                    "classname": "java.lang.float",
-                    "value": "300"
+                    "classname": "java.lang.float"
                   },
                   {
-                    "classname": "java.lang.float",
-                    "value": "500"
+                    "classname": "java.lang.float"
                   }
                 ]
               }
@@ -178,8 +139,7 @@
                 "classname": "com.badlogic.gdx.graphics.Texture",
                 "parameters": [
                   {
-                    "classname": "java.lang.String",
-                    "value": "assets/buy_upgrade_button.bmp"
+                    "classname": "java.lang.String"
                   }
                 ]
               }
@@ -192,15 +152,14 @@
               }
             },
             {
-              "classname": "java.lang.int",
-              "value": 4
+              "classname": "java.lang.int"
             }
           ]
         }
       }
     },
     {
-      "id": "upgrade_1_resp_button",
+      "id": "upgrade_resp_button",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.ButtonEntity",
@@ -211,12 +170,10 @@
                 "classname": "com.badlogic.gdx.math.Vector2",
                 "parameters": [
                   {
-                    "classname": "java.lang.float",
-                    "value": "250"
+                    "classname": "java.lang.float"
                   },
                   {
-                    "classname": "java.lang.float",
-                    "value": "500"
+                    "classname": "java.lang.float"
                   }
                 ]
               }
@@ -227,8 +184,7 @@
                 "classname": "com.badlogic.gdx.graphics.Texture",
                 "parameters": [
                   {
-                    "classname": "java.lang.String",
-                    "value": "assets/resplendish_upgrade_button.bmp"
+                    "classname": "java.lang.String"
                   }
                 ]
               }
@@ -241,15 +197,14 @@
               }
             },
             {
-              "classname": "java.lang.int",
-              "value": 4
+              "classname": "java.lang.int"
             }
           ]
         }
       }
     },
     {
-      "id": "upgrade_1_exit_button",
+      "id": "upgrade_exit_button",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.ExitBoxMenuEntity",
@@ -260,12 +215,10 @@
                 "classname": "com.badlogic.gdx.math.Vector2",
                 "parameters": [
                   {
-                    "classname": "java.lang.float",
-                    "value": "300"
+                    "classname": "java.lang.float"
                   },
                   {
-                    "classname": "java.lang.float",
-                    "value": "300"
+                    "classname": "java.lang.float"
                   }
                 ]
               }
@@ -276,168 +229,13 @@
                 "classname": "com.badlogic.gdx.graphics.Texture",
                 "parameters": [
                   {
-                    "classname": "java.lang.String",
-                    "value": "assets/exit_cross.jpg"
+                    "classname": "java.lang.String"
                   }
                 ]
               }
             },
             {
-              "classname": "java.lang.int",
-              "value": 4
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "upgrade_2",
-      "instance": {
-        "constructor": {
-          "classname": "com.ldz.entity.abstr.DisplayerEntity",
-          "parameters": [
-            {
-              "classname": "com.badlogic.gdx.math.Vector2",
-              "constructor": {
-                "classname": "com.badlogic.gdx.math.Vector2",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": "150"
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": "250"
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "com.badlogic.gdx.graphics.Texture",
-              "constructor": {
-                "classname": "com.badlogic.gdx.graphics.Texture",
-                "parameters": [
-                  {
-                    "classname": "java.lang.String",
-                    "value": "assets/upgrade.bmp"
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "java.lang.int",
-              "value": 3
-            },
-            {
-              "classname": "List|java.lang.String|",
-              "constructor": {
-                "classname": "|List|java.lang.String|",
-                "parameters": [
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_2_buy_popup"
-                  },
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_2_buy_button"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "upgrade_2_buy_popup",
-      "instance": {
-        "constructor": {
-          "classname": "com.ldz.entity.UpgradePopupEntity",
-          "parameters": [
-            {
-              "classname": "com.badlogic.gdx.math.Vector2",
-              "constructor": {
-                "classname": "com.badlogic.gdx.math.Vector2",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": "200"
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": "300"
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "com.badlogic.gdx.graphics.Texture",
-              "constructor": {
-                "classname": "com.badlogic.gdx.graphics.Texture",
-                "parameters": [
-                  {
-                    "classname": "java.lang.String",
-                    "value": "assets/buy_upgrade.bmp"
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "java.lang.int",
-              "value": 3
-            },
-            {
-              "classname": "java.lang.String",
-              "value": "UPGRADE_2"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "upgrade_2_buy_button",
-      "instance": {
-        "constructor": {
-          "classname": "com.ldz.entity.ButtonEntity",
-          "parameters": [
-            {
-              "classname": "com.badlogic.gdx.math.Vector2",
-              "constructor": {
-                "classname": "com.badlogic.gdx.math.Vector2",
-                "parameters": [
-                  {
-                    "classname": "java.lang.float",
-                    "value": "300"
-                  },
-                  {
-                    "classname": "java.lang.float",
-                    "value": "400"
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "com.badlogic.gdx.graphics.Texture",
-              "constructor": {
-                "classname": "com.badlogic.gdx.graphics.Texture",
-                "parameters": [
-                  {
-                    "classname": "java.lang.String",
-                    "value": "assets/buy_upgrade_button.bmp"
-                  }
-                ]
-              }
-            },
-            {
-              "classname": "com.ldz.component.action.impl.BuyableUpgradeButtonAction",
-              "constructor": {
-                "classname": "com.ldz.component.action.impl.BuyableUpgradeButtonAction",
-                "parameters": []
-              }
-            },
-            {
-              "classname": "java.lang.int",
-              "value": 4
+              "classname": "java.lang.int"
             }
           ]
         }

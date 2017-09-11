@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.*;
-import com.ldz.config.game.entities.EntityId;
+import com.ldz.config.game.entities.InstanceEntityId;
 import com.ldz.entity.EntityFactory;
 import com.ldz.entity.EntityWithId;
 
@@ -52,7 +52,7 @@ public class EntityUtil {
 
         for (String entityIdsInBag :
                 entityInBagIds) {
-            bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromId(EntityId.valueOf(entityIdsInBag)));
+            bagOfEntitiesComponent.entities.add(EntityFactory.getEntityFromInstanceId(InstanceEntityId.valueOf(entityIdsInBag)));
         }
 
         entityWithId.add(bagOfEntitiesComponent);

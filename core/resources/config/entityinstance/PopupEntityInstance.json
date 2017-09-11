@@ -1,0 +1,42 @@
+{
+  "entities": [
+    {
+      "entityId": "upgrade_menu_popup",
+      "instanceId": "upgrade_menu_popup",
+      "constructorArgs": [
+        {
+          "classname": "com.badlogic.gdx.math.Vector2",
+          "constructor": {
+            "classname": "com.badlogic.gdx.math.Vector2",
+            "parameters": [
+              {
+                "classname": "java.lang.float",
+                "value": "150"
+              },
+              {
+                "classname": "java.lang.float",
+                "value": "150"
+              }
+            ]
+          }
+        },
+        {
+          "classname": "com.badlogic.gdx.graphics.Texture",
+          "constructor": {
+            "classname": "com.badlogic.gdx.graphics.Texture",
+            "parameters": [
+              {
+                "classname": "java.lang.String",
+                "value": "assets/compuer_upgrade_menu.jpg"
+              }
+            ]
+          }
+        },
+        {
+          "classname": "java.lang.int",
+          "value": 2
+        }
+      ]
+    }
+  ]
+}

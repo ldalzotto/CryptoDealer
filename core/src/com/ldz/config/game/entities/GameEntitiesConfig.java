@@ -48,7 +48,11 @@ public class GameEntitiesConfig {
         this.gameEntitiesInstance.setEntities(new ArrayList<>());
         List<GameEntitiesInstance> gameEntitiesInstances = new ArrayList<>();
 
-        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/entityinstance.json")));
+        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/GameEntityInstance.json")));
+        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/ExitBoxEntityInstace.json")));
+        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/UpgradeObjectEntityInstance.json")));
+        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/PopupEntityInstance.json")));
+
 
         for (GameEntitiesInstance gameEntitiesInstance :
                 gameEntitiesInstances) {
