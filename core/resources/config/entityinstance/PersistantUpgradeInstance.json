@@ -1,0 +1,32 @@
+{
+  "entities": [
+    {
+      "entityId": "persistant_upgrade",
+      "instanceId": "persistant_upgrade_1",
+      "constructorArgs": [
+        {
+          "classname": "java.lang.String",
+          "value": "UPGRADE_1"
+        },
+        {
+          "classname": "java.lang.float",
+          "value": 15
+        }
+      ]
+    },
+    {
+      "entityId": "persistant_upgrade",
+      "instanceId": "persistant_upgrade_2",
+      "constructorArgs": [
+        {
+          "classname": "java.lang.String",
+          "value": "UPGRADE_2"
+        },
+        {
+          "classname": "java.lang.float",
+          "value": 0.01
+        }
+      ]
+    }
+  ]
+}

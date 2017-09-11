@@ -17,5 +17,6 @@ public enum InstanceEntityId {
     upgrade_2_buy_button,
     upgrade_1_resp_button,
     upgrade_1_exit_button,
-    upgrade_menu_popup, upgrade_1_currency_entity
+    upgrade_menu_popup, upgrade_1_currency_entity,
+    persistant_upgrade_1, persistant_upgrade_2, upgrade_1_critical_state_display
 }

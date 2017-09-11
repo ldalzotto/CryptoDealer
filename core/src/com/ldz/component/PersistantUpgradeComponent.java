@@ -2,7 +2,7 @@ package com.ldz.component;
 
 import com.badlogic.ashley.core.Component;
 import com.ldz.component.domain.CurrencyInstance;
-import com.ldz.config.game.entities.EntityId;
+import com.ldz.config.game.entities.InstanceEntityId;
 import com.ldz.entity.EntityFactory;
 import com.ldz.entity.EntityWithId;
 
@@ -33,24 +33,24 @@ public class PersistantUpgradeComponent implements Component {
     }
 
     public enum UpgradeId {
-        UPGRADE_1(EntityId.upgrade_1_critical_state_display, null),
-        UPGRADE_2(EntityId.upgrade_1_critical_state_display, null);
+        UPGRADE_1(InstanceEntityId.upgrade_1_critical_state_display, null),
+        UPGRADE_2(InstanceEntityId.upgrade_1_critical_state_display, null);
 
-        private EntityId entityId;
+        private InstanceEntityId entityId;
         private EntityWithId criticalStateEntity;
 
-        UpgradeId(EntityId entityId, EntityWithId criticalStateEntity) {
+        UpgradeId(InstanceEntityId entityId, EntityWithId criticalStateEntity) {
             this.entityId = entityId;
             this.criticalStateEntity = criticalStateEntity;
         }
 
-        public EntityId getEntityId() {
+        public InstanceEntityId getEntityId() {
             return entityId;
         }
 
         public EntityWithId getCriticalStateEntity() {
             if (criticalStateEntity == null) {
-                criticalStateEntity = EntityFactory.getEntityFromId(entityId);
+                criticalStateEntity = EntityFactory.getEntityFromInstanceId(entityId);
             }
             return criticalStateEntity;
         }

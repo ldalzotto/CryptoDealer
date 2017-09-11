@@ -13,7 +13,7 @@
               "id": "upgrade",
               "childs": [
                 {
-                  "id": "upgrade_1_critical_state_display"
+                  "id": "upgrade_critical_state_display"
                 },
                 {
                   "id": "upgrade_buy_popup",

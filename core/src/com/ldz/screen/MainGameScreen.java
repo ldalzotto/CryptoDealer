@@ -65,8 +65,8 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine.addEntity(EntityFactory.getEntityFromId(EntityId.computer_entity));
 
         //add persistant upgrade entity
-        engine.addEntity(EntityFactory.getEntityFromId(EntityId.persistant_upgrade_1));
-        engine.addEntity(EntityFactory.getEntityFromId(EntityId.persistant_upgrade_2));
+        engine.addEntity(EntityFactory.getEntityFromInstanceId(InstanceEntityId.persistant_upgrade_1));
+        engine.addEntity(EntityFactory.getEntityFromInstanceId(InstanceEntityId.persistant_upgrade_2));
 
         //set all systems
         engine.addSystem(new RenderingSystem(camera, batch));

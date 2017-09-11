@@ -1,7 +1,7 @@
 {
   "entities": [
     {
-      "id": "upgrade_1_critical_state_display",
+      "id": "upgrade_critical_state_display",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.CriticalStateAnimationEntity",
@@ -12,12 +12,10 @@
                 "classname": "com.badlogic.gdx.math.Vector2",
                 "parameters": [
                   {
-                    "classname": "java.lang.float",
-                    "value": "300"
+                    "classname": "java.lang.float"
                   },
                   {
-                    "classname": "java.lang.float",
-                    "value": "30"
+                    "classname": "java.lang.float"
                   }
                 ]
               }
@@ -28,8 +26,7 @@
                 "classname": "com.ldz.entity.custom.TextureAnimation",
                 "parameters": [
                   {
-                    "classname": "java.lang.float",
-                    "value": "0.5"
+                    "classname": "java.lang.float"
                   },
                   {
                     "classname": "List|com.badlogic.gdx.graphics.Texture|",
@@ -42,8 +39,7 @@
                             "classname": "com.badlogic.gdx.graphics.Texture",
                             "parameters": [
                               {
-                                "classname": "java.lang.String",
-                                "value": "assets/state_animation/Fichier 1.png"
+                                "classname": "java.lang.String"
                               }
                             ]
                           }
@@ -54,8 +50,7 @@
                             "classname": "com.badlogic.gdx.graphics.Texture",
                             "parameters": [
                               {
-                                "classname": "java.lang.String",
-                                "value": "assets/state_animation/Fichier 2.png"
+                                "classname": "java.lang.String"
                               }
                             ]
                           }
@@ -66,8 +61,7 @@
                             "classname": "com.badlogic.gdx.graphics.Texture",
                             "parameters": [
                               {
-                                "classname": "java.lang.String",
-                                "value": "assets/state_animation/Fichier 3.png"
+                                "classname": "java.lang.String"
                               }
                             ]
                           }
@@ -79,8 +73,7 @@
               }
             },
             {
-              "classname": "java.lang.int",
-              "value": 4
+              "classname": "java.lang.int"
             }
           ]
         }

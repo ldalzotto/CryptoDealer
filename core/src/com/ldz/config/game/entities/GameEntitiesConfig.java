@@ -52,6 +52,8 @@ public class GameEntitiesConfig {
         gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/ExitBoxEntityInstace.json")));
         gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/UpgradeObjectEntityInstance.json")));
         gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/PopupEntityInstance.json")));
+        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/PersistantUpgradeInstance.json")));
+        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/CriticalStateDisplayEntityInstance.json")));
 
 
         for (GameEntitiesInstance gameEntitiesInstance :

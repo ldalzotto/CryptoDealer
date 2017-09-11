@@ -1,36 +1,16 @@
 {
   "entities": [
     {
-      "id": "persistant_upgrade_1",
+      "id": "persistant_upgrade",
       "instance": {
         "constructor": {
           "classname": "com.ldz.entity.PersistantUpgradeEntity",
           "parameters": [
             {
-              "classname": "java.lang.String",
-              "value": "UPGRADE_1"
+              "classname": "java.lang.String"
             },
             {
-              "classname": "java.lang.float",
-              "value": 15
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "persistant_upgrade_2",
-      "instance": {
-        "constructor": {
-          "classname": "com.ldz.entity.PersistantUpgradeEntity",
-          "parameters": [
-            {
-              "classname": "java.lang.String",
-              "value": "UPGRADE_2"
-            },
-            {
-              "classname": "java.lang.float",
-              "value": 0.01
+              "classname": "java.lang.float"
             }
           ]
         }
