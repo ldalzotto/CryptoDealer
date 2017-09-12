@@ -19,8 +19,7 @@ public class EntityFactory {
     }
 
     public static EntityWithId createInstanceFromEntityId(EntityId entityId, Object... arguments) {
-        //TODO instancier à la volée.
-        return null;
+        return GameEntitiesConfig.getInstance().buildEntityFromEntityIdAndArguments(entityId, arguments);
     }
 
 }

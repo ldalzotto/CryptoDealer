@@ -10,7 +10,10 @@ import com.ldz.config.game.entities.instance.domain.GameEntitiesInstance;
 import com.ldz.config.game.entities.instance.domain.GameEntityInstance;
 import com.ldz.config.itf.IAddingInstanceChildOnComplete;
 import com.ldz.entity.EntityWithId;
+import com.ldz.util.LoggingUtil;
 import org.apache.commons.lang3.ClassUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,10 +73,45 @@ public class GameEntitiesConfig {
         return instance;
     }
 
+    public EntityWithId buildEntityFromEntityIdAndArguments(EntityId entityId, Object... args) {
+
+        String classNameToinstantiate = StringUtils.EMPTY;
+        for (GameEntity gameEntity :
+                this.getGameEntities().getEntities()) {
+            if (entityId.equals(gameEntity.getId())) {
+                classNameToinstantiate = gameEntity.getInstance().getConstructor().getClassname();
+            }
+        }
+
+        EntityWithId entityToReturn = null;
+
+        try {
+            if (!classNameToinstantiate.equals(StringUtils.EMPTY)) {
+
+                List<Class> constructorClassParam = new ArrayList<>();
+                for (Object arg :
+                        args) {
+                    constructorClassParam.add(this.convertWrapperClassToPrimitive(arg.getClass()));
+                }
+
+                java.lang.reflect.Constructor constructor = this.getJavaConstructorFromClass(Class.forName(classNameToinstantiate),
+                        constructorClassParam.toArray(new Class[]{}), new ArrayList<>(constructorClassParam));
+                entityToReturn = (EntityWithId) constructor.newInstance(args);
+                entityToReturn.setId(entityId);
+            } else {
+                throw new RuntimeException("Cannot instante the entity with id " + ReflectionToStringBuilder.toString(entityId) + " with arguments : + "
+                        + ReflectionToStringBuilder.toString(args));
+            }
+        } catch (Exception e) {
+            LoggingUtil.DEBUG(TAG, e.getMessage(), e);
+        }
+
+        return entityToReturn;
+    }
+
     public GameEntities getGameEntities() {
         return gameEntities;
     }
-
 
     public EntityWithId buildEntityByInstanceEntityid(InstanceEntityId instanceEntityId) {
 
@@ -314,6 +352,22 @@ public class GameEntitiesConfig {
         } else {
             return Class.forName(className);
         }
+    }
+
+    private Class convertWrapperClassToPrimitive(Class aClass) {
+
+        if (aClass.getName().contains("Integer")) {
+            return int.class;
+        } else if (aClass.getName().contains("Float")) {
+            return float.class;
+        } else if (aClass.getName().contains("Double")) {
+            return double.class;
+        } else if (aClass.getName().contains("Long")) {
+            return long.class;
+        } else {
+            return aClass;
+        }
+
     }
 
 }
