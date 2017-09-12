@@ -71,7 +71,10 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
             this.entityById = initializeEntityById(new HashMap<>());
             Gdx.app.debug(TAG, "Setting parent and child ending successfully.");
 
-            linkParentAndChildRecursively(this.entityById.get(EntityId.computer_entity));
+            for (Map.Entry<EntityId, List<Entity>> listEntry :
+                    this.entityById.entrySet()) {
+                linkParentAndChildRecursively(listEntry.getValue());
+            }
 
             this.setProcessing(false);
         }
