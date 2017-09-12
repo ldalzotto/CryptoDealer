@@ -1,17 +1,14 @@
 package com.ldz.system;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.component.ParentAndChildComponent;
-import com.ldz.config.childhierarchy.ChildEntitiesConfig;
-import com.ldz.config.childhierarchy.domain.ChildEntities;
 import com.ldz.config.game.entities.EntityId;
 import com.ldz.entity.EntityWithId;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
+import com.ldz.util.ComponentUtil;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.*;
@@ -22,9 +19,6 @@ import java.util.*;
  * This {@link System} allow linking parent and childs of all entities. Only entities possessing {@link ParentAndChildComponent} are tagged for child and parent linking.
  * The processing of entites is executed only after the completion of adding all entities contained in bag of entites in engine {@link BagOfEntitiesToEngineSystem#allBagsDisplayed()}.
  * </p>
- * <p>
- * Parent and child link of all entites are defined in {@link ChildEntitiesConfig}.
- * <p/>
  */
 public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEntitiesFromSystem {
 
@@ -32,7 +26,6 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
 
     private static ParentAndChildSystem instance = null;
     private ImmutableArray<Entity> entityList;
-    private ChildEntitiesConfig childEntitiesConfig = ChildEntitiesConfig.getInstance();
     private Map<EntityId, List<Entity>> entityById = new HashMap<>();
 
     public static ParentAndChildSystem getInstance() {
@@ -45,7 +38,8 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
     @Override
     public void addedToEngine(Engine engine) {
         super.addedToEngine(engine);
-        this.entityList = engine.getEntitiesFor(Family.all(ParentAndChildComponent.class).get());
+        this.entityList = engine.getEntitiesFor(Family.all(ParentAndChildComponent.class, BagOfEntitiesComponent.class)
+                .get());
     }
 
     @Override
@@ -58,8 +52,6 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
      * The update method is :
      * <ul><li>
      * Initializing the list of all parent and child entity {@link ParentAndChildSystem#initializeEntityById(Map)}
-     * </li><li>
-     * Get the parent and child hierarchy config {@link ChildEntitiesConfig} -> {@link ChildEntities} {@code childEntities}
      * </li><li>
      * Apply the parent and child linking based on the tree {@code childEntities} on entites contained in {@link ParentAndChildSystem#entityById}
      * </li></ul>
@@ -77,9 +69,7 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
             this.entityById = initializeEntityById(new HashMap<>());
             Gdx.app.debug(TAG, "Setting parent and child ending successfully.");
 
-            ChildEntities childEntities = this.childEntitiesConfig.getChildEntities();
-
-            this.childEntitiesConfig.applyLinkingThroughChildRecursively(childEntities.getEntities());
+            linkParentAndChildRecursively(this.entityById.get(EntityId.computer_entity));
 
             this.setProcessing(false);
         }
@@ -115,6 +105,34 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
 
     public Map<EntityId, List<Entity>> getEntityById() {
         return entityById;
+    }
+
+    private void linkParentAndChildRecursively(List<Entity> entitiesToBind) {
+        for (Entity entity :
+                entitiesToBind) {
+            //get component
+            BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
+            if (bagOfEntitiesComponent != null) {
+                applyLinking(entity, bagOfEntitiesComponent.entities);
+                linkParentAndChildRecursively(bagOfEntitiesComponent.entities);
+            }
+        }
+    }
+
+    private void applyLinking(Entity parentEntity, List<Entity> childEntities) {
+        ParentAndChildComponent parentAndChildComponent = parentEntity.getComponent(ParentAndChildComponent.class);
+        if (parentAndChildComponent != null) {
+            parentAndChildComponent.childs.clear();
+            parentAndChildComponent.childs.addAll(childEntities);
+        }
+
+        //set parents
+        for (Entity entityChild :
+                childEntities) {
+            ParentAndChildComponent parentAndChildComponentChild = entityChild.getComponent(ParentAndChildComponent.class);
+            parentAndChildComponentChild.parent = parentEntity;
+        }
+
     }
 
     @Override

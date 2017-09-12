@@ -35,6 +35,26 @@
         {
           "classname": "java.lang.int",
           "value": 2
+        },
+        {
+          "classname": "List|java.lang.String|",
+          "constructor": {
+            "classname": "|List|java.lang.String|",
+            "parameters": [
+              {
+                "classname": "java.lang.String",
+                "value": "exit_upgrade_1_menu_popup"
+              },
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_1"
+              },
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_2"
+              }
+            ]
+          }
         }
       ]
     }

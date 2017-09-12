@@ -1,0 +1,21 @@
+{
+  "upgrades": [
+    {
+      "upgradeId": "UPGRADE_1",
+      "upgradesCosts": [
+        {
+          "levelNumber": 1,
+          "ITHEREUM_COIN": 20.0,
+          "ZIT_COIN": 40.0
+        }
+      ],
+      "upgradeBonuses": [
+        {
+          "levelNumber": 1,
+          "ITHEREUM_COIN": 20.0,
+          "ZIT_COIN": 40.0
+        }
+      ]
+    }
+  ]
+}

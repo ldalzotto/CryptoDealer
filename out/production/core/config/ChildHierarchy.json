@@ -1,0 +1,58 @@
+{
+  "entities": [
+    {
+      "id": "computer_entity",
+      "childs": [
+        {
+          "id": "upgrade_menu_popup",
+          "childs": [
+            {
+              "id": "exit_upgrade_menu_popup"
+            },
+            {
+              "id": "upgrade_1",
+              "childs": [
+                {
+                  "id": "upgrade_1_critical_state_display"
+                },
+                {
+                  "id": "upgrade_1_buy_popup",
+                  "childs": [
+                    {
+                      "id": "upgrade_1_cost_display"
+                    },
+                    {
+                      "id": "upgrade_1_decade_display"
+                    },
+                    {
+                      "id": "upgrade_1_buy_button"
+                    },
+                    {
+                      "id": "upgrade_1_exit_button"
+                    },
+                    {
+                      "id": "upgrade_1_resp_button"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "upgrade_2",
+              "childs": [
+                {
+                  "id": "upgrade_2_buy_popup",
+                  "childs": [
+                    {
+                      "id": "upgrade_2_buy_button"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

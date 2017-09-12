@@ -10,6 +10,7 @@ import com.ldz.entity.EntityFactory;
 import com.ldz.entity.EntityWithId;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Loic on 05/09/2017.
@@ -48,6 +49,12 @@ public class EntityUtil {
 
         addDisplayerCoreComponents(entityWithId);
 
+        addBagOfEntitiesComponent(entityInBagIds, entityWithId);
+
+        return entityWithId;
+    }
+
+    public static void addBagOfEntitiesComponent(List<String> entityInBagIds, EntityWithId entityWithId) {
         BagOfEntitiesComponent bagOfEntitiesComponent = new BagOfEntitiesComponent();
 
         for (String entityIdsInBag :
@@ -56,8 +63,6 @@ public class EntityUtil {
         }
 
         entityWithId.add(bagOfEntitiesComponent);
-
-        return entityWithId;
     }
 
     public static EntityWithId addFontDisplayComponentsFromEntityId(Vector2 position, String stringToDisplay, EntityWithId entityWithId) {

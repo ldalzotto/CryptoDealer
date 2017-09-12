@@ -1,10 +1,10 @@
 {
   "entities": [
     {
-      "id": "computer_entity",
+      "id": "upgrade_menu_popup",
       "instance": {
         "constructor": {
-          "classname": "com.ldz.entity.DelayedDisplayerEntity",
+          "classname": "com.ldz.entity.PopUpEntity",
           "parameters": [
             {
               "classname": "com.badlogic.gdx.math.Vector2",
@@ -13,11 +13,11 @@
                 "parameters": [
                   {
                     "classname": "java.lang.float",
-                    "value": "10"
+                    "value": "150"
                   },
                   {
                     "classname": "java.lang.float",
-                    "value": "20"
+                    "value": "150"
                   }
                 ]
               }
@@ -29,26 +29,14 @@
                 "parameters": [
                   {
                     "classname": "java.lang.String",
-                    "value": "assets/ordinateur.jpg"
+                    "value": "assets/compuer_upgrade_menu.jpg"
                   }
                 ]
               }
             },
             {
               "classname": "java.lang.int",
-              "value": 0
-            },
-            {
-              "classname": "List|java.lang.String|",
-              "constructor": {
-                "classname": "|List|java.lang.String|",
-                "parameters": [
-                  {
-                    "classname": "java.lang.String",
-                    "value": "upgrade_menu_popup"
-                  }
-                ]
-              }
+              "value": 2
             }
           ]
         }

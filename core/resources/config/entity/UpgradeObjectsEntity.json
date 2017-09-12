@@ -81,6 +81,13 @@
             },
             {
               "classname": "java.lang.String"
+            },
+            {
+              "classname": "List|java.lang.String|",
+              "constructor": {
+                "classname": "|List|java.lang.String|",
+                "parameters": []
+              }
             }
           ]
         }

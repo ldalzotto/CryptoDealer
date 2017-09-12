@@ -46,6 +46,18 @@
                   {
                     "classname": "java.lang.String",
                     "value": "upgrade_menu_popup"
+                  },
+                  {
+                    "classname": "java.lang.String",
+                    "value": "exit_upgrade_menu_popup"
+                  },
+                  {
+                    "classname": "java.lang.String",
+                    "value": "upgrade_1"
+                  },
+                  {
+                    "classname": "java.lang.String",
+                    "value": "upgrade_2"
                   }
                 ]
               }
