@@ -1,6 +1,9 @@
 package com.ldz.system;
 
-import com.badlogic.ashley.core.*;
+import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.ldz.component.BagOfEntitiesComponent;
@@ -8,7 +11,6 @@ import com.ldz.component.ParentAndChildComponent;
 import com.ldz.config.game.entities.EntityId;
 import com.ldz.entity.EntityWithId;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
-import com.ldz.util.ComponentUtil;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.*;
@@ -107,6 +109,16 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
         return entityById;
     }
 
+    /**
+     * <p>Applique de manière récursive le lien parent/enfant entre les différentes entitées contenues dans {@code entitiesToBind}.
+     * Un lien parent/enfant est créé lorsque une composante {@link BagOfEntitiesComponent} est présente dans l'entité parent.
+     * Cette composant permet d'identifier les entitées à lier.</p>
+     * <p>Cette méthode est récursive, si une entitée présente dans un {@link BagOfEntitiesComponent} d'une des entitées de
+     * {@code entitiesToBind} possède également son propre {@link BagOfEntitiesComponent}, alors cette méthode est re-appliquée
+     * pour les dernières entitées trouvées.</p>
+     *
+     * @param entitiesToBind la liste d'entité sur laquelle nous souhaitons appliquer les liens parent/enfant.
+     */
     private void linkParentAndChildRecursively(List<Entity> entitiesToBind) {
         for (Entity entity :
                 entitiesToBind) {
@@ -119,6 +131,14 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
         }
     }
 
+    /**
+     * <p>Effectue un lien parent/enfant entre l'entité parent {@code parentEntity} et les entitées enfant {@code childEntities}.</p>
+     * <p>Ce lien est porté par la composante {@link ParentAndChildComponent} de toutes les entités.</p>
+     * <p>Le lien est bi-directionel.</p>
+     *
+     * @param parentEntity  l'entité parent
+     * @param childEntities les entitées enfant.
+     */
     private void applyLinking(Entity parentEntity, List<Entity> childEntities) {
         ParentAndChildComponent parentAndChildComponent = parentEntity.getComponent(ParentAndChildComponent.class);
         if (parentAndChildComponent != null) {
