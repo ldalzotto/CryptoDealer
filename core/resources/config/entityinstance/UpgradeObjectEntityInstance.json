@@ -44,26 +44,6 @@
               {
                 "classname": "java.lang.String",
                 "value": "upgrade_1_buy_popup"
-              },
-              {
-                "classname": "java.lang.String",
-                "value": "upgrade_1_buy_button"
-              },
-              {
-                "classname": "java.lang.String",
-                "value": "upgrade_1_exit_button"
-              },
-              {
-                "classname": "java.lang.String",
-                "value": "upgrade_1_decade_display"
-              },
-              {
-                "classname": "java.lang.String",
-                "value": "upgrade_1_resp_button"
-              },
-              {
-                "classname": "java.lang.String",
-                "value": "upgrade_1_currency_entity"
               }
             ]
           }
@@ -114,10 +94,6 @@
               {
                 "classname": "java.lang.String",
                 "value": "upgrade_2_buy_popup"
-              },
-              {
-                "classname": "java.lang.String",
-                "value": "upgrade_2_buy_button"
               }
             ]
           }
@@ -163,6 +139,34 @@
         {
           "classname": "java.lang.String",
           "value": "UPGRADE_1"
+        },
+        {
+          "classname": "List|java.lang.String|",
+          "constructor": {
+            "classname": "|List|java.lang.String|",
+            "parameters": [
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_1_buy_button"
+              },
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_1_exit_button"
+              },
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_1_decade_display"
+              },
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_1_resp_button"
+              },
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_1_currency_entity"
+              }
+            ]
+          }
         }
       ]
     },
@@ -205,6 +209,18 @@
         {
           "classname": "java.lang.String",
           "value": "UPGRADE_2"
+        },
+        {
+          "classname": "List|java.lang.String|",
+          "constructor": {
+            "classname": "|List|java.lang.String|",
+            "parameters": [
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_2_buy_button"
+              }
+            ]
+          }
         }
       ]
     },

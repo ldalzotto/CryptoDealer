@@ -33,6 +33,14 @@
             },
             {
               "classname": "java.lang.int"
+            },
+            {
+              "classname": "List|java.lang.String|",
+              "constructor": {
+                "classname": "|List|java.lang.String|",
+                "parameters": [
+                ]
+              }
             }
           ]
         }
