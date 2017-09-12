@@ -218,6 +218,14 @@
               {
                 "classname": "java.lang.String",
                 "value": "upgrade_2_buy_button"
+              },
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_2_decade_display"
+              },
+              {
+                "classname": "java.lang.String",
+                "value": "upgrade_2_currency_entity"
               }
             ]
           }
@@ -227,6 +235,32 @@
     {
       "entityId": "upgrade_decade_display",
       "instanceId": "upgrade_1_decade_display",
+      "constructorArgs": [
+        {
+          "classname": "com.badlogic.gdx.math.Vector2",
+          "constructor": {
+            "classname": "com.badlogic.gdx.math.Vector2",
+            "parameters": [
+              {
+                "classname": "java.lang.float",
+                "value": "300"
+              },
+              {
+                "classname": "java.lang.float",
+                "value": "60"
+              }
+            ]
+          }
+        },
+        {
+          "classname": "java.lang.String",
+          "value": "TEMEMEME"
+        }
+      ]
+    },
+    {
+      "entityId": "upgrade_decade_display",
+      "instanceId": "upgrade_2_decade_display",
       "constructorArgs": [
         {
           "classname": "com.badlogic.gdx.math.Vector2",
@@ -426,6 +460,17 @@
     {
       "entityId": "upgrade_currency_entity",
       "instanceId": "upgrade_1_currency_entity",
+      "addChildOnComplete": {
+        "constructor": {
+          "classname": "com.ldz.config.impl.UpgradeCurrencyDisplayerAddingChild",
+          "parameters": []
+        }
+      },
+      "constructorArgs": []
+    },
+    {
+      "entityId": "upgrade_currency_entity",
+      "instanceId": "upgrade_2_currency_entity",
       "addChildOnComplete": {
         "constructor": {
           "classname": "com.ldz.config.impl.UpgradeCurrencyDisplayerAddingChild",

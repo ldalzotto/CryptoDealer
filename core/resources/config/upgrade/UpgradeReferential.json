@@ -17,6 +17,32 @@
           ]
         },
         {
+          "levelNumber": 2,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 40.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 80.0
+            }
+          ]
+        },
+        {
+          "levelNumber": 3,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 80.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 160.0
+            }
+          ]
+        },
+        {
           "levelNumber": 0,
           "currencies": [
             {
@@ -54,6 +80,32 @@
             {
               "currency": "ZIT_COIN",
               "value": 4.0
+            }
+          ]
+        },
+        {
+          "levelNumber": 2,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 40.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 80.0
+            }
+          ]
+        },
+        {
+          "levelNumber": 3,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 80.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 160.0
             }
           ]
         }
