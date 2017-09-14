@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.ldz.component.CurrencyComponent;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
+import com.ldz.util.LoggingUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
  * Created by Loic on 19/08/2017.
  */
 public class CurrencySystem extends EntitySystem implements IRetrieveAllEntitiesFromSystem {
+
+    private static final String TAG = CurrencySystem.class.getSimpleName();
 
     private static CurrencySystem instance = null;
     private ImmutableArray<Entity> currencyEntities;
@@ -46,7 +49,10 @@ public class CurrencySystem extends EntitySystem implements IRetrieveAllEntities
 
             if (currencyComponent != null) {
                 if (currencyComponent.scoreToAdd != 0.0f) {
-                    currencyComponent.currentValue += (currencyComponent.scoreToAdd * currencyComponent.currentTradeRate);
+                    LoggingUtil.DEBUG(TAG, "Raw value to add " + currencyComponent.scoreToAdd + " to currency type " + currencyComponent.currencyType.name());
+                    float realScoreToAdd = (currencyComponent.scoreToAdd * currencyComponent.currentTradeRate);
+                    LoggingUtil.DEBUG(TAG, "Adding " + realScoreToAdd + " to currency type " + currencyComponent.currencyType.name());
+                    currencyComponent.currentValue += realScoreToAdd;
                     currencyComponent.scoreToAdd = 0.0f;
                 }
                 if (currencyComponent.scoreToRemove != 0.0f) {

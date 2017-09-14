@@ -3,6 +3,7 @@ package com.ldz.component.domain;
 import com.ldz.component.CurrencyComponent;
 import com.ldz.config.upgrade.referential.domain.Currency;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
 /**
  * Created by Loic on 22/08/2017.
  */
-public class CurrencyInstance {
+public class CurrencyInstance implements Serializable {
 
     Map<CurrencyComponent.CURRENCY_TYPE, Float> currencies = new HashMap<>();
 

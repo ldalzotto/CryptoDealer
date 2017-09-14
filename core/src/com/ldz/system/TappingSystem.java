@@ -8,7 +8,9 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.ldz.component.CurrencyComponent;
 import com.ldz.component.PersistantUpgradeComponent;
+import com.ldz.component.domain.CurrencyInstance;
 import com.ldz.system.inter.IRetrieveAllEntitiesFromSystem;
+import org.apache.commons.lang3.SerializationUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.Map;
  * Created by Loic on 28/08/2017.
  */
 public class TappingSystem extends EntitySystem implements IRetrieveAllEntitiesFromSystem {
+
+    private static final String TAG = TappingSystem.class.getSimpleName();
 
     private static TappingSystem instance;
     private ImmutableArray<Entity> currencyEntities;
@@ -56,9 +60,10 @@ public class TappingSystem extends EntitySystem implements IRetrieveAllEntitiesF
                 PersistantUpgradeComponent persistantUpgradeComponent = persistantUpgradeNeitty.getComponent(PersistantUpgradeComponent.class);
                 if (persistantUpgradeComponent != null) {
                     //apply decay
-                    persistantUpgradeComponent.objectBonus.multiplyAllBy(persistantUpgradeComponent.itemPerformances);
+                    CurrencyInstance objectBonusCopy = SerializationUtils.clone(persistantUpgradeComponent.objectBonus);
+                    objectBonusCopy.multiplyAllBy(persistantUpgradeComponent.itemPerformances);
                     for (Map.Entry<CurrencyComponent.CURRENCY_TYPE, Float> entry :
-                            persistantUpgradeComponent.objectBonus.getCurrencies().entrySet()) {
+                            objectBonusCopy.getCurrencies().entrySet()) {
 
                         for (Entity currencyEntity :
                                 currencyEntities) {
