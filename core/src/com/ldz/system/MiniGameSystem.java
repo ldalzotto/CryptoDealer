@@ -7,6 +7,8 @@ import com.ldz.component.BuyableUpgradeComponent;
 import com.ldz.component.MiniGameComponent;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.component.PersistantUpgradeComponent;
+import com.ldz.engine.MyEngine;
+import com.ldz.util.ParentAndChildUtil;
 
 /**
  * Created by Loic on 17/09/2017.
@@ -53,6 +55,7 @@ public class MiniGameSystem extends IteratingSystem {
 
             switch (miniGameComponent.state) {
                 case PENDING:
+                    miniGameComponent.state = MiniGameComponent.STATE.RUNNING;
                     break;
                 case RUNNING:
                     miniGameComponent.executionTimeAccumulator += deltaTime;
@@ -69,6 +72,10 @@ public class MiniGameSystem extends IteratingSystem {
                 case COMPLETED:
                     //TODO calculate bonus time to add
                     miniGameComponent.currencScore = 0;
+                    miniGameComponent.state = MiniGameComponent.STATE.DESTROY;
+                    break;
+                case DESTROY:
+                    ParentAndChildUtil.destroyFromParent(entity, entity.getComponent(ParentAndChildComponent.class), MyEngine.getInstance());
                     break;
             }
 

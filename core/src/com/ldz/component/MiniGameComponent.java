@@ -8,7 +8,7 @@ import com.ldz.component.action.IMiniGameUpdate;
  */
 public class MiniGameComponent implements Component {
 
-    public final static float EXECUTION_TIME = 30;
+    public final static float EXECUTION_TIME = 5;
     public int goalScore = 0;
     public int currencScore = 0;
     public STATE state = STATE.PENDING;
@@ -21,7 +21,7 @@ public class MiniGameComponent implements Component {
     public enum STATE {
         PENDING,
         RUNNING,
-        COMPLETED;
+        COMPLETED, DESTROY;
     }
 
 }

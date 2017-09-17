@@ -1,6 +1,5 @@
 package com.ldz.util;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.ldz.component.BagOfEntitiesComponent;
@@ -59,23 +58,21 @@ public class ParentAndChildUtil {
         engine.removeEntity(entity1);
     }
 
-    public static void removeEntityComponentRecursively(Entity entity1, ParentAndChildComponent parentAndChildComponent, Class<? extends Component> componentClass) {
+    public static void destroyFromParent(Entity entity1, ParentAndChildComponent parentAndChildComponent, Engine engine) {
+
         if (parentAndChildComponent == null) {
             parentAndChildComponent = entity1.getComponent(ParentAndChildComponent.class);
         }
 
-        for (Entity entity :
-                parentAndChildComponent.childs) {
-            entity1.remove(componentClass);
-            if (entity.getComponent(DisplayStateComponent.class) != null) {
-                entity.getComponent(DisplayStateComponent.class).isDisplayed = false;
-            }
-            if (entity.getComponent(ParentAndChildComponent.class) != null) {
-                removeEntityComponentRecursively(entity, entity.getComponent(ParentAndChildComponent.class), componentClass);
+        if (parentAndChildComponent != null) {
+            Entity parentEntity = parentAndChildComponent.parent;
+            BagOfEntitiesComponent bagOfEntitiesComponent = parentEntity.getComponent(BagOfEntitiesComponent.class);
+            if (bagOfEntitiesComponent != null) {
+                bagOfEntitiesComponent.entities.remove(entity1);
             }
         }
 
-        entity1.remove(componentClass);
+        engine.removeEntity(entity1);
     }
 
 
