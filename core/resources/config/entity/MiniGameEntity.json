@@ -1,0 +1,42 @@
+{
+  "entities": [
+    {
+      "id": "mini_game_entity",
+      "instance": {
+        "constructor": {
+          "classname": "com.ldz.entity.MiniGameEntity",
+          "parameters": [
+            {
+              "classname": "com.badlogic.gdx.math.Vector2",
+              "constructor": {
+                "classname": "com.badlogic.gdx.math.Vector2",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float"
+                  },
+                  {
+                    "classname": "java.lang.float"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "com.badlogic.gdx.graphics.Texture",
+              "constructor": {
+                "classname": "com.badlogic.gdx.graphics.Texture",
+                "parameters": [
+                  {
+                    "classname": "java.lang.String"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "java.lang.int"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

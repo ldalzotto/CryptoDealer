@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.*;
+import com.ldz.component.action.impl.SimpleMiniGameUpdate;
 import com.ldz.config.game.entities.InstanceEntityId;
 import com.ldz.entity.EntityFactory;
 import com.ldz.entity.EntityWithId;
@@ -36,11 +37,7 @@ public class EntityUtil {
     public static EntityWithId addDisplayerEntityComponents(ArrayList<Entity> entityInBag, EntityWithId entityWithId) {
 
         addDisplayerCoreComponents(entityWithId);
-
-        BagOfEntitiesComponent bagOfEntitiesComponent = new BagOfEntitiesComponent();
-        bagOfEntitiesComponent.entities.addAll(entityInBag);
-
-        entityWithId.add(bagOfEntitiesComponent);
+        addBagOfEntitiesComponent(entityInBag, entityWithId);
 
         return entityWithId;
     }
@@ -51,6 +48,14 @@ public class EntityUtil {
 
         addBagOfEntitiesComponent(entityInBagIds, entityWithId);
 
+        return entityWithId;
+    }
+
+    public static EntityWithId addBagOfEntitiesComponent(ArrayList<Entity> entityInBag, EntityWithId entityWithId) {
+        BagOfEntitiesComponent bagOfEntitiesComponent = new BagOfEntitiesComponent();
+        bagOfEntitiesComponent.entities.addAll(entityInBag);
+
+        entityWithId.add(bagOfEntitiesComponent);
         return entityWithId;
     }
 
@@ -65,6 +70,13 @@ public class EntityUtil {
         entityWithId.add(bagOfEntitiesComponent);
     }
 
+    public static EntityWithId addParentAndChildEntity(EntityWithId entityWithId) {
+        ParentAndChildComponent parentAndChildComponent = new ParentAndChildComponent();
+        entityWithId.add(parentAndChildComponent);
+
+        return entityWithId;
+    }
+
     public static EntityWithId addFontDisplayComponentsFromEntityId(Vector2 position, String stringToDisplay, EntityWithId entityWithId) {
         TranformComponent tranformComponent = new TranformComponent();
         tranformComponent.position = position;
@@ -74,11 +86,11 @@ public class EntityUtil {
         bitmapFontComponent.stringToDisplay = stringToDisplay;
         entityWithId.add(bitmapFontComponent);
 
-        ParentAndChildComponent parentAndChildComponent = new ParentAndChildComponent();
-        entityWithId.add(parentAndChildComponent);
+        addParentAndChildEntity(entityWithId);
 
         return entityWithId;
     }
+
 
     public static EntityWithId addUpgradeCurrencyDisplayerCompoent(CurrencyComponent.CURRENCY_TYPE currency_type, EntityWithId entityWithId) {
         UpgradeCurrencyDisplayerComponent upgradeCurrencyDisplayerComponent = new UpgradeCurrencyDisplayerComponent();
@@ -104,6 +116,14 @@ public class EntityUtil {
         tranformComponent.z = z;
 
         entityWithId.add(tranformComponent);
+    }
+
+    public static EntityWithId addMiniGameComponent(EntityWithId entityWithId) {
+        MiniGameComponent miniGameComponent = new MiniGameComponent();
+        miniGameComponent.iMiniGameUpdate = new SimpleMiniGameUpdate();
+        miniGameComponent.state = MiniGameComponent.STATE.RUNNING;
+        entityWithId.add(miniGameComponent);
+        return entityWithId;
     }
 
 

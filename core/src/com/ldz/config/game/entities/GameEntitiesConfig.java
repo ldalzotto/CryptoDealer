@@ -41,6 +41,8 @@ public class GameEntitiesConfig {
         gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/UpgradeObjectsEntity.json")));
         gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/PersistantUpgrade.json")));
         gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/CriticalStateDisplayEntity.json")));
+        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/MiniGameEntity.json")));
+
 
         for (GameEntities gameEntities1 :
                 gameEntities) {
@@ -57,6 +59,7 @@ public class GameEntitiesConfig {
         gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/PopupEntityInstance.json")));
         gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/PersistantUpgradeInstance.json")));
         gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/CriticalStateDisplayEntityInstance.json")));
+        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/MiniGameEntityInstance.json")));
 
 
         for (GameEntitiesInstance gameEntitiesInstance :

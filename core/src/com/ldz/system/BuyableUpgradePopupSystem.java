@@ -4,10 +4,10 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.ldz.component.BuyableUpgradeComponent;
-import com.ldz.component.CurrencyComponent;
-import com.ldz.component.ParentAndChildComponent;
-import com.ldz.component.PersistantUpgradeComponent;
+import com.ldz.component.*;
+import com.ldz.config.game.entities.InstanceEntityId;
+import com.ldz.entity.EntityFactory;
+import com.ldz.entity.EntityWithId;
 import com.ldz.system.custom.MyIteratingSystem;
 import com.ldz.util.LoggingUtil;
 import com.ldz.util.UpgradeUtil;
@@ -57,6 +57,7 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
             if (parentAndChildComponent != null && persistantUpgradeComponent != null) {
                 parentAndChildComponent.dataToTransit.put(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.UPGRADE_ID_KEY, persistantUpgradeComponent.upgradeId);
                 parentAndChildComponent.dataToTransit.put(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.UPGRADE_PERFORMANCE, persistantUpgradeComponent.itemPerformances);
+                parentAndChildComponent.dataToTransit.put(ParentAndChildComponent.DATA_TO_TRANSIT_KEY.BUYABLE_UPGRADE_COMPONENT_STATE, buyableUpgradeComponent.state);
             }
 
             switch (buyableUpgradeComponent.state) {
@@ -77,7 +78,19 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
                     buyableUpgradeComponent.state = BuyableUpgradeComponent.STATE.PENDING;
                     break;
                 case ASKING_FOR_RESPLENDISH:
-                    persistantUpgradeComponent.itemPerformances = 1f;
+                    //persistantUpgradeComponent.itemPerformances = 1f;
+
+                    //add associated mini-game
+                    BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
+                    if (bagOfEntitiesComponent != null) {
+                        EntityWithId miniGameEntity = EntityFactory.getEntityFromInstanceId(InstanceEntityId.simple_mini_game_entity);
+                        if (miniGameEntity != null) {
+                            bagOfEntitiesComponent.entities.add(miniGameEntity);
+                            bagOfEntitiesComponent.addEntityToEngine = true;
+                            ParentAndChildSystem.getInstance().setProcessing(true);
+                        }
+                    }
+
                     buyableUpgradeComponent.state = BuyableUpgradeComponent.STATE.PENDING;
                     break;
             }

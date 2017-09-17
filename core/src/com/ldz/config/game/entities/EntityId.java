@@ -17,7 +17,8 @@ public enum EntityId {
     upgrade_resp_button("The button to resplendish the upgrade performances."),
     upgrade_exit_button("The exit button to exit buy popup."),
     upgrade_currency_entity("Container displaying upgrade price."),
-    upgrade_currency_displayer("Display one currency of the upgrade.");
+    upgrade_currency_displayer("Display one currency of the upgrade."),
+    mini_game_entity("Entity managing mini-games.");
 
     private String description;
 

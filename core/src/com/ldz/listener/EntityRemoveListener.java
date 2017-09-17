@@ -3,6 +3,7 @@ package com.ldz.listener;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
+import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.component.ParentAndChildComponent;
 import com.ldz.engine.MyEngine;
 import com.ldz.util.ParentAndChildUtil;
@@ -23,9 +24,8 @@ public class EntityRemoveListener implements EntityListener {
 
         //get parend and child component
         ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
-        if(parentAndChildComponent != null){
-            ParentAndChildUtil.removeChildsRecurcsively(entity, parentAndChildComponent, engine);
-        }
+        BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
+        ParentAndChildUtil.removeChildsRecurcsively(entity, parentAndChildComponent, bagOfEntitiesComponent, engine);
 
     }
 }

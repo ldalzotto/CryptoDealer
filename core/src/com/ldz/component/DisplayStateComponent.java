@@ -11,7 +11,7 @@ public class DisplayStateComponent implements Component {
     public boolean isDisplayed = false;
 
     public enum STATE {
-        INSTANT, DELAYED;
+        INSTANT, DELAYED, EPHEMER;
     }
 
 }

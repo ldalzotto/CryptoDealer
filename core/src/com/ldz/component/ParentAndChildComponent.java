@@ -27,7 +27,8 @@ public class ParentAndChildComponent implements Component {
 
     public enum DATA_TO_TRANSIT_KEY {
         UPGRADE_ID_KEY,
-        UPGRADE_PERFORMANCE;
+        UPGRADE_PERFORMANCE,
+        BUYABLE_UPGRADE_COMPONENT_STATE;
     }
 
 }
