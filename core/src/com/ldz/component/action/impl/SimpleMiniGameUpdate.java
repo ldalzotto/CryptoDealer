@@ -12,4 +12,5 @@ public class SimpleMiniGameUpdate implements IMiniGameUpdate {
     public int update(MiniGameComponent miniGameComponent, float delta) {
         return 0;
     }
+
 }

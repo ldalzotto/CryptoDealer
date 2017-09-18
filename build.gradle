@@ -100,12 +100,21 @@ project(":core") {
 
     dependencies {
         compile project(":neo4jdebug")
+        compile project(":core-gine")
+    }
+}
+
+project(":core-gine") {
+    apply plugin: "java"
+
+    dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "org.apache.commons:commons-lang3:$apacheCommonVersion"
 
     }
 }
+
 
 project(":neo4jdebug") {
     apply plugin: "java"
