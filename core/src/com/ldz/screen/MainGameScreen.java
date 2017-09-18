@@ -1,7 +1,6 @@
 package com.ldz.screen;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -9,12 +8,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.ldz.component.ParentAndChildComponent;
 import com.ldz.config.game.entities.EntityId;
 import com.ldz.config.game.entities.InstanceEntityId;
 import com.ldz.engine.MyEngine;
 import com.ldz.entity.EntityFactory;
-import com.ldz.listener.EntityRemoveListener;
 import com.ldz.screen.viewport.GlobalViewport;
 import com.ldz.system.*;
 
@@ -56,7 +53,7 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         camera.update();
 
         //ashley initialisation
-        engine = MyEngine.getInstance();
+        engine = MyEngine.getInstance(camera, batch);
 
         //set all entity
         engine.addEntity(EntityFactory.getEntityFromInstanceId(InstanceEntityId.zit_coin_entity));
@@ -69,24 +66,13 @@ public class MainGameScreen extends GlobalViewport implements Screen {
         engine.addEntity(EntityFactory.getEntityFromInstanceId(InstanceEntityId.persistant_upgrade_2));
 
         //set all systems
-        engine.addSystem(new RenderingSystem(camera, batch));
         engine.addSystem(new RenderingBitmapSystem(camera, batch));
         engine.addSystem(CurrencySystem.getInstance());
-        engine.addSystem(DelayedDisplayerSystem.getInstance(camera));
-        engine.addSystem(PopupSystem.getInstance(camera));
-        engine.addSystem(ExitBoxSystem.getInstance(camera));
-        engine.addSystem(ParentAndChildSystem.getInstance());
-        engine.addSystem(BagOfEntitiesToEngineSystem.getInstance());
-        engine.addSystem(InstantDisplayerSystem.getInstance(camera));
         engine.addSystem(BuyableUpgradePopupSystem.getInstance());
-        engine.addSystem(OnActionSystem.getInstance(camera));
         engine.addSystem(PersistantUpgradeSystem.getInstance());
         engine.addSystem(TappingSystem.getInstance());
         engine.addSystem(UpgradeCurrencyDisplayerSystem.getInstance());
-        engine.addSystem(DataTransitToChildSystem.getInstance());
         engine.addSystem(MiniGameSystem.getInstance());
-
-        engine.addEntityListener(Family.all(ParentAndChildComponent.class).get(), 2, new EntityRemoveListener());
     }
 
     @Override

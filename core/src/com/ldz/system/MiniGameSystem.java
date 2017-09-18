@@ -75,7 +75,7 @@ public class MiniGameSystem extends IteratingSystem {
                     miniGameComponent.state = MiniGameComponent.STATE.DESTROY;
                     break;
                 case DESTROY:
-                    ParentAndChildUtil.destroyFromParent(entity, entity.getComponent(ParentAndChildComponent.class), MyEngine.getInstance());
+                    ParentAndChildUtil.destroyFromParent(entity, entity.getComponent(ParentAndChildComponent.class), MyEngine.getInstance(null, null));
                     break;
             }
 
