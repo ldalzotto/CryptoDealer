@@ -1,4 +1,4 @@
-package com.ldz.config.game.entities.instance.domain;
+package com.ldz.config.game.entities.domain;
 
 import java.util.List;
 

@@ -5,14 +5,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.component.CurrencyComponent;
 import com.ldz.config.game.entities.EntityId;
-import com.ldz.config.itf.IAddingInstanceChildOnComplete;
+import com.ldz.config.game.entities.itf.IAddingInstanceChildOnComplete;
 import com.ldz.entity.EntityWithId;
 import com.ldz.entity.util.EntityUtil;
 
 /**
  * Created by Loic on 09/09/2017.
  */
-public class UpgradeCurrencyDisplayerAddingChild implements IAddingInstanceChildOnComplete {
+public class UpgradeCurrencyDisplayerAddingChild implements IAddingInstanceChildOnComplete<Entity> {
 
     private static final String TAG = UpgradeCurrencyDisplayerAddingChild.class.getSimpleName();
 

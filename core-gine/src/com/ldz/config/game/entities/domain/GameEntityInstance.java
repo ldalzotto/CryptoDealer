@@ -1,9 +1,4 @@
-package com.ldz.config.game.entities.instance.domain;
-
-import com.ldz.config.game.entities.EntityId;
-import com.ldz.config.game.entities.InstanceEntityId;
-import com.ldz.config.game.entities.domain.Instance;
-import com.ldz.config.game.entities.domain.Parameter;
+package com.ldz.config.game.entities.domain;
 
 import java.util.List;
 
@@ -12,26 +7,26 @@ import java.util.List;
  */
 public class GameEntityInstance {
 
-    private EntityId entityId;
-    private InstanceEntityId instanceId;
+    private String entityId;
+    private String instanceId;
     private Instance addChildOnComplete;
 
 
     private List<Parameter> constructorArgs;
 
-    public EntityId getEntityId() {
+    public String getEntityId() {
         return entityId;
     }
 
-    public void setEntityId(EntityId entityId) {
+    public void setEntityId(String entityId) {
         this.entityId = entityId;
     }
 
-    public InstanceEntityId getInstanceId() {
+    public String getInstanceId() {
         return instanceId;
     }
 
-    public void setInstanceId(InstanceEntityId instanceId) {
+    public void setInstanceId(String instanceId) {
         this.instanceId = instanceId;
     }
 

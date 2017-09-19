@@ -1,21 +1,19 @@
 package com.ldz.config.game.entities.domain;
 
-import com.ldz.config.game.entities.EntityId;
-
 /**
  * Created by Loic on 20/08/2017.
  */
 public class GameEntity {
 
-    private EntityId id;
+    private String id;
     private Instance instance;
     private Instance addChildOnComplete;
 
-    public EntityId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(EntityId id) {
+    public void setId(String id) {
         this.id = id;
     }
 

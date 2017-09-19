@@ -1,7 +1,7 @@
 package com.ldz.entity;
 
+import com.ldz.config.game.entities.CoreGameEntitiesConfig;
 import com.ldz.config.game.entities.EntityId;
-import com.ldz.config.game.entities.GameEntitiesConfig;
 import com.ldz.config.game.entities.InstanceEntityId;
 
 /**
@@ -11,15 +11,15 @@ public class EntityFactory {
 
     @Deprecated
     public static EntityWithId getEntityFromId(EntityId entityId) {
-        return GameEntitiesConfig.getInstance().buildEntityById(entityId);
+        return CoreGameEntitiesConfig.getInstance().buildEntityById(entityId.name());
     }
 
     public static EntityWithId getEntityFromInstanceId(InstanceEntityId instanceEntityId) {
-        return GameEntitiesConfig.getInstance().buildEntityByInstanceEntityid(instanceEntityId);
+        return CoreGameEntitiesConfig.getInstance().buildEntityByInstanceEntityid(instanceEntityId.name());
     }
 
     public static EntityWithId createInstanceFromEntityId(EntityId entityId, Object... arguments) {
-        return GameEntitiesConfig.getInstance().buildEntityFromEntityIdAndArguments(entityId, arguments);
+        return CoreGameEntitiesConfig.getInstance().buildEntityFromEntityIdAndArguments(entityId.name(), arguments);
     }
 
 }

@@ -2,14 +2,8 @@ package com.ldz.config.game.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
-import com.ldz.config.game.entities.domain.Constructor;
-import com.ldz.config.game.entities.domain.GameEntities;
-import com.ldz.config.game.entities.domain.GameEntity;
-import com.ldz.config.game.entities.domain.Parameter;
-import com.ldz.config.game.entities.instance.domain.GameEntitiesInstance;
-import com.ldz.config.game.entities.instance.domain.GameEntityInstance;
-import com.ldz.config.itf.IAddingInstanceChildOnComplete;
-import com.ldz.entity.EntityWithId;
+import com.ldz.config.game.entities.domain.*;
+import com.ldz.config.game.entities.itf.IAddingInstanceChildOnComplete;
 import com.ldz.util.LoggingUtil;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,17 +19,16 @@ import java.util.stream.Collectors;
 /**
  * Created by Loic on 20/08/2017.
  */
-public class GameEntitiesConfig {
+public abstract class GameEntitiesConfig {
 
     private static final String TAG = GameEntitiesConfig.class.getSimpleName();
     private static final String ENTITY_PATH = ".\\core\\resources\\config\\entity";
     private static final String ENTITY_INSTANCE_PATH = ".\\core\\resources\\config\\entityinstance";
-    private static GameEntitiesConfig instance = null;
     private Json json = new Json();
     private GameEntities gameEntities = new GameEntities();
     private GameEntitiesInstance gameEntitiesInstance = new GameEntitiesInstance();
 
-    private GameEntitiesConfig() {
+    public GameEntitiesConfig() {
         try {
             this.gameEntities.setEntities(new ArrayList<>());
             List<GameEntities> gameEntities = new ArrayList<>();
@@ -69,14 +62,7 @@ public class GameEntitiesConfig {
 
     }
 
-    public static GameEntitiesConfig getInstance() {
-        if (instance == null) {
-            instance = new GameEntitiesConfig();
-        }
-        return instance;
-    }
-
-    public EntityWithId buildEntityFromEntityIdAndArguments(EntityId entityId, Object... args) {
+    public <T> T buildEntityFromEntityIdAndArguments(String entityId, Object... args) {
 
         String classNameToinstantiate = StringUtils.EMPTY;
         for (GameEntity gameEntity :
@@ -86,7 +72,7 @@ public class GameEntitiesConfig {
             }
         }
 
-        EntityWithId entityToReturn = null;
+        T entityToReturn = null;
 
         try {
             if (!classNameToinstantiate.equals(StringUtils.EMPTY)) {
@@ -99,8 +85,7 @@ public class GameEntitiesConfig {
 
                 java.lang.reflect.Constructor constructor = this.getJavaConstructorFromClass(Class.forName(classNameToinstantiate),
                         constructorClassParam.toArray(new Class[]{}), new ArrayList<>(constructorClassParam));
-                entityToReturn = (EntityWithId) constructor.newInstance(args);
-                entityToReturn.setId(entityId);
+                entityToReturn = (T) constructor.newInstance(args);
             } else {
                 throw new RuntimeException("Cannot instante the entity with id " + ReflectionToStringBuilder.toString(entityId) + " with arguments : + "
                         + ReflectionToStringBuilder.toString(args));
@@ -116,7 +101,20 @@ public class GameEntitiesConfig {
         return gameEntities;
     }
 
-    public EntityWithId buildEntityByInstanceEntityid(InstanceEntityId instanceEntityId) {
+    public String getEntityIdFromInstanceId(String instanceId) {
+
+        for (GameEntityInstance gameEntityInstance :
+                this.gameEntitiesInstance.getEntities()) {
+            if (gameEntityInstance.getInstanceId().equals(instanceId)) {
+                return gameEntityInstance.getEntityId();
+            }
+        }
+
+        return null;
+
+    }
+
+    public <T> T buildEntityByInstanceEntityid(String instanceEntityId) {
 
         try {
             //get entity
@@ -134,13 +132,11 @@ public class GameEntitiesConfig {
                     }
 
                     //call constructor of entityId
-                    EntityId entityId = gameEntityInstance.getEntityId();
+                    String entityId = gameEntityInstance.getEntityId();
                     GameEntity gameEntityToInstantiate = this.findGameEntityFromEntityId(entityId);
                     Constructor constructor = gameEntityToInstantiate.getInstance().getConstructor();
 
-                    EntityWithId entityWithId = (EntityWithId) this.buildInstance(constructor, constructedConstructorArgs.toArray());
-                    entityWithId.setId(entityId);
-                    entityWithId.setIstanceId(instanceEntityId);
+                    T entityWithId = (T) this.buildInstance(constructor, constructedConstructorArgs.toArray());
 
 
                     if (gameEntityInstance.getAddChildOnComplete() != null) {
@@ -160,7 +156,7 @@ public class GameEntitiesConfig {
     }
 
     @Deprecated
-    public EntityWithId buildEntityById(EntityId id) {
+    public <T> T buildEntityById(String id) {
 
         //get entity
         try {
@@ -170,8 +166,7 @@ public class GameEntitiesConfig {
                     //get constructor
                     Constructor jsonConstructor = gameEntity.getInstance().getConstructor();
 
-                    EntityWithId entityWithId = (EntityWithId) buildInstance(jsonConstructor);
-                    entityWithId.setId(id);
+                    T entityWithId = (T) buildInstance(jsonConstructor);
 
                     if (gameEntity.getAddChildOnComplete() != null) {
                         Constructor addingChildConstructor = gameEntity.getAddChildOnComplete().getConstructor();
@@ -330,7 +325,7 @@ public class GameEntitiesConfig {
         return constructorReturn;
     }
 
-    private GameEntity findGameEntityFromEntityId(EntityId entityId) {
+    private GameEntity findGameEntityFromEntityId(String entityId) {
         for (GameEntity gameEntity :
                 this.gameEntities.getEntities()) {
             if (gameEntity.getId().equals(entityId)) {
