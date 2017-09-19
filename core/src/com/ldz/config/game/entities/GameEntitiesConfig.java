@@ -15,8 +15,12 @@ import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Loic on 20/08/2017.
@@ -24,47 +28,43 @@ import java.util.List;
 public class GameEntitiesConfig {
 
     private static final String TAG = GameEntitiesConfig.class.getSimpleName();
-
+    private static final String ENTITY_PATH = ".\\core\\resources\\config\\entity";
+    private static final String ENTITY_INSTANCE_PATH = ".\\core\\resources\\config\\entityinstance";
     private static GameEntitiesConfig instance = null;
     private Json json = new Json();
     private GameEntities gameEntities = new GameEntities();
     private GameEntitiesInstance gameEntitiesInstance = new GameEntitiesInstance();
 
     private GameEntitiesConfig() {
-        this.gameEntities.setEntities(new ArrayList<>());
-        List<GameEntities> gameEntities = new ArrayList<>();
+        try {
+            this.gameEntities.setEntities(new ArrayList<>());
+            List<GameEntities> gameEntities = new ArrayList<>();
 
-        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/GameEntities.json")));
-        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/DelayedDisplayerEntity.json")));
-        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/ExitBoxEntity.json")));
-        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/PopUpEntity.json")));
-        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/UpgradeObjectsEntity.json")));
-        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/PersistantUpgrade.json")));
-        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/CriticalStateDisplayEntity.json")));
-        gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal("config/entity/MiniGameEntity.json")));
+            Files.list(Paths.get(ENTITY_PATH)).collect(Collectors.toList()).forEach(path -> {
+                gameEntities.add(json.fromJson(GameEntities.class, Gdx.files.internal(path.toString())));
+            });
 
-
-        for (GameEntities gameEntities1 :
-                gameEntities) {
-            this.gameEntities.getEntities().addAll(gameEntities1.getEntities());
-        }
+            for (GameEntities gameEntities1 :
+                    gameEntities) {
+                this.gameEntities.getEntities().addAll(gameEntities1.getEntities());
+            }
 
 
-        this.gameEntitiesInstance.setEntities(new ArrayList<>());
-        List<GameEntitiesInstance> gameEntitiesInstances = new ArrayList<>();
+            this.gameEntitiesInstance.setEntities(new ArrayList<>());
+            List<GameEntitiesInstance> gameEntitiesInstances = new ArrayList<>();
 
-        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/GameEntityInstance.json")));
-        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/ExitBoxEntityInstace.json")));
-        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/UpgradeObjectEntityInstance.json")));
-        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/PopupEntityInstance.json")));
-        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/PersistantUpgradeInstance.json")));
-        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/CriticalStateDisplayEntityInstance.json")));
-        gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal("config/entityinstance/MiniGameEntityInstance.json")));
+            Files.list(Paths.get(ENTITY_INSTANCE_PATH)).collect(Collectors.toList()).forEach(path -> {
+                gameEntitiesInstances.add(json.fromJson(GameEntitiesInstance.class, Gdx.files.internal(path.toString())));
+            });
 
 
-        for (GameEntitiesInstance gameEntitiesInstance :
-                gameEntitiesInstances) {
-            this.gameEntitiesInstance.getEntities().addAll(gameEntitiesInstance.getEntities());
+            for (GameEntitiesInstance gameEntitiesInstance :
+                    gameEntitiesInstances) {
+                this.gameEntitiesInstance.getEntities().addAll(gameEntitiesInstance.getEntities());
+            }
+        } catch (IOException e) {
+            LoggingUtil.DEBUG(TAG, "An error occured while reading configuration files ! ", e);
+            throw new RuntimeException(e);
         }
 
     }
