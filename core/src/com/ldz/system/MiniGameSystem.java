@@ -64,6 +64,7 @@ public class MiniGameSystem extends IteratingSystem {
                         bagOfEntitiesComponent.entities.addAll(
                                 miniGameComponent.iMiniGameUpdate.addNewEntityToEngine(MyEngine.getInstance(null, null)));
                         scoreToAdd = miniGameComponent.iMiniGameUpdate.update(deltaTime);
+                        miniGameComponent.iMiniGameUpdate.removeEntityToRemoveToEngine(MyEngine.getInstance(null, null));
                     }
 
                     if (miniGameComponent.executionTimeAccumulator > MiniGameComponent.EXECUTION_TIME) {

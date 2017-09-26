@@ -19,7 +19,8 @@ public enum EntityId {
     upgrade_currency_entity("Container displaying upgrade price."),
     upgrade_currency_displayer("Display one currency of the upgrade."),
     mini_game_entity("Entity managing mini-games."),
-    simple_mini_game_target("simple mini games target");
+    simple_mini_game_target("simple mini games target"),
+    simple_mini_game_player("");
 
     private String description;
 

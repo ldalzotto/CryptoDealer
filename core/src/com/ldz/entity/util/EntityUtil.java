@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.*;
-import com.ldz.component.action.impl.SimpleMiniGameUpdate;
+import com.ldz.system.mini.game.SimpleMiniGameUpdate;
 import com.ldz.config.game.entities.InstanceEntityId;
 import com.ldz.entity.EntityFactory;
 import com.ldz.entity.EntityWithId;
@@ -133,5 +133,10 @@ public class EntityUtil {
         return entityWithId;
     }
 
+    public static EntityWithId addCollisionCalculationComponent(EntityWithId entityWithId) {
+        CollisionCalculationComponent collisionCalculationComponent = new CollisionCalculationComponent();
+        entityWithId.add(collisionCalculationComponent);
+        return entityWithId;
+    }
 
 }

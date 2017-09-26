@@ -8,11 +8,12 @@ import com.ldz.entity.util.EntityUtil;
 /**
  * Created by Loic on 26/09/2017.
  */
-public class TargetEntity extends EntityWithId {
+public class PlayerEntity extends EntityWithId {
 
-    public TargetEntity(Vector2 vector2, Texture texture, int z, Vector2 speed) {
+    public PlayerEntity(Vector2 vector2, Texture texture, int z, Vector2 speed) {
         EntityUtil.addtextureEntityComponents(vector2, texture, z, this);
         EntityUtil.addPhysicsMovementCompoentn(speed, this);
         EntityUtil.addCollisionCalculationComponent(this);
     }
+
 }

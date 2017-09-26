@@ -13,6 +13,8 @@ public interface IMiniGameUpdate {
 
     public List<Entity> addNewEntityToEngine(Engine engine);
 
+    public void removeEntityToRemoveToEngine(Engine engine);
+
     public void init(Rectangle gameArea);
 
     public int update(float delta);
