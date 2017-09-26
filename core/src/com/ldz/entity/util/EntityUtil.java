@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.*;
 import com.ldz.engine.MyEngine;
-import com.ldz.system.mini.game.SimpleMiniGameUpdate;
+import com.ldz.system.mini.game.SimpleFunctionalEngineUpdate;
 import com.ldz.config.game.entities.InstanceEntityId;
 import com.ldz.entity.EntityFactory;
 import com.ldz.entity.EntityWithId;
@@ -121,7 +121,7 @@ public class EntityUtil {
 
     public static EntityWithId addMiniGameComponent(EntityWithId entityWithId) {
         MiniGameComponent miniGameComponent = new MiniGameComponent();
-        miniGameComponent.iMiniGameUpdate = new SimpleMiniGameUpdate(MyEngine.getInstance(null, null));
+        miniGameComponent.iFunctionalEngineUpdate = new SimpleFunctionalEngineUpdate(MyEngine.getInstance(null, null));
         miniGameComponent.state = MiniGameComponent.STATE.PENDING;
         entityWithId.add(miniGameComponent);
         return entityWithId;

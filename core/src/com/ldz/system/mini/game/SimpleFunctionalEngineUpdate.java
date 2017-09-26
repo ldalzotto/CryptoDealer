@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.BagOfEntitiesComponent;
 import com.ldz.component.CollisionCalculationComponent;
-import com.ldz.component.action.AbstractMiniGameUpdate;
+import com.ldz.engine.functional.AbstractFunctionalEngineUpdate;
 import com.ldz.config.game.entities.EntityId;
 import com.ldz.entity.EntityFactory;
 import com.ldz.entity.EntityWithId;
@@ -21,15 +21,15 @@ import java.util.List;
 /**
  * Created by Loic on 17/09/2017.
  */
-public class SimpleMiniGameUpdate extends AbstractMiniGameUpdate {
+public class SimpleFunctionalEngineUpdate extends AbstractFunctionalEngineUpdate {
 
-    private static final String TAG = SimpleMiniGameUpdate.class.getSimpleName();
+    private static final String TAG = SimpleFunctionalEngineUpdate.class.getSimpleName();
     private Rectangle gameArea;
 
     private EntityWithId player;
     private List<EntityWithId> targets = new ArrayList<>();
 
-    public SimpleMiniGameUpdate(Engine associatedEngine) {
+    public SimpleFunctionalEngineUpdate(Engine associatedEngine) {
         super(associatedEngine);
     }
 

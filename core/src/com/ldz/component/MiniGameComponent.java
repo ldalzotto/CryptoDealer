@@ -1,7 +1,7 @@
 package com.ldz.component;
 
 import com.badlogic.ashley.core.Component;
-import com.ldz.component.action.IMiniGameUpdate;
+import com.ldz.engine.functional.IFunctionalEngineUpdate;
 
 /**
  * Created by Loic on 17/09/2017.
@@ -12,7 +12,7 @@ public class MiniGameComponent implements Component {
     public int goalScore = 0;
     public int currencScore = 0;
     public STATE state = STATE.PENDING;
-    public IMiniGameUpdate iMiniGameUpdate;
+    public IFunctionalEngineUpdate iFunctionalEngineUpdate;
     public float executionTimeAccumulator = 0;
     //transited from childs
     public BuyableUpgradeComponent.STATE buyableUpgradeCompState;

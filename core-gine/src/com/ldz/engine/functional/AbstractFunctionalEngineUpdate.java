@@ -1,4 +1,4 @@
-package com.ldz.component.action;
+package com.ldz.engine.functional;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -10,14 +10,14 @@ import java.util.List;
 /**
  * Created by Loic on 26/09/2017.
  */
-public abstract class AbstractMiniGameUpdate implements IMiniGameUpdate {
+public abstract class AbstractFunctionalEngineUpdate implements IFunctionalEngineUpdate {
 
     protected List<Entity> entityToAddToEngine = new ArrayList<>();
     protected List<Entity> entityToRemoveToEngine = new ArrayList<>();
     protected BagOfEntitiesComponent parentBagOfEntitiesContainer;
     private Engine associatedEngine;
 
-    public AbstractMiniGameUpdate(Engine associatedEngine) {
+    public AbstractFunctionalEngineUpdate(Engine associatedEngine) {
         this.associatedEngine = associatedEngine;
     }
 

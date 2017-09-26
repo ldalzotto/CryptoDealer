@@ -1,4 +1,4 @@
-package com.ldz.component.action;
+package com.ldz.engine.functional;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Rectangle;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Loic on 17/09/2017.
  */
-public interface IMiniGameUpdate {
+public interface IFunctionalEngineUpdate {
 
     public List<Entity> addNewEntityToEngine();
 
