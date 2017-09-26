@@ -54,17 +54,14 @@ public class MiniGameSystem extends IteratingSystem {
 
             switch (miniGameComponent.state) {
                 case PENDING:
-                    miniGameComponent.iMiniGameUpdate.init(boudingRectangleComponent.rectangle);
+                    miniGameComponent.iMiniGameUpdate.init(boudingRectangleComponent.rectangle, bagOfEntitiesComponent);
                     miniGameComponent.state = MiniGameComponent.STATE.RUNNING;
                     break;
                 case RUNNING:
                     miniGameComponent.executionTimeAccumulator += deltaTime;
 
                     if (miniGameComponent.iMiniGameUpdate != null) {
-                        bagOfEntitiesComponent.entities.addAll(
-                                miniGameComponent.iMiniGameUpdate.addNewEntityToEngine(MyEngine.getInstance(null, null)));
                         scoreToAdd = miniGameComponent.iMiniGameUpdate.update(deltaTime);
-                        miniGameComponent.iMiniGameUpdate.removeEntityToRemoveToEngine(MyEngine.getInstance(null, null));
                     }
 
                     if (miniGameComponent.executionTimeAccumulator > MiniGameComponent.EXECUTION_TIME) {
