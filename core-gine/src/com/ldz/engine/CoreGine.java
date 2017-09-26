@@ -25,6 +25,7 @@ public abstract class CoreGine extends Engine {
         this.addSystem(InstantDisplayerSystem.getInstance(orthographicCamera));
         this.addSystem(OnActionSystem.getInstance(orthographicCamera));
         this.addSystem(DataTransitToChildSystem.getInstance());
+        this.addSystem(PhysicsMovementSystem.getInstance());
 
         this.addEntityListener(Family.all(ParentAndChildComponent.class).get(), 2, new EntityRemoveListener(this));
     }

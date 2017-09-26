@@ -121,8 +121,15 @@ public class EntityUtil {
     public static EntityWithId addMiniGameComponent(EntityWithId entityWithId) {
         MiniGameComponent miniGameComponent = new MiniGameComponent();
         miniGameComponent.iMiniGameUpdate = new SimpleMiniGameUpdate();
-        miniGameComponent.state = MiniGameComponent.STATE.RUNNING;
+        miniGameComponent.state = MiniGameComponent.STATE.PENDING;
         entityWithId.add(miniGameComponent);
+        return entityWithId;
+    }
+
+    public static EntityWithId addPhysicsMovementCompoentn(Vector2 speed, EntityWithId entityWithId) {
+        PhysicsMovementComponent physicsMovementComponent = new PhysicsMovementComponent();
+        physicsMovementComponent.constantSpeed = speed;
+        entityWithId.add(physicsMovementComponent);
         return entityWithId;
     }
 

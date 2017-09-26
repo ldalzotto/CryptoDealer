@@ -1,0 +1,64 @@
+{
+  "entities": [
+    {
+      "id": "simple_mini_game_target",
+      "instance": {
+        "constructor": {
+          "classname": "com.ldz.entity.simple.mini.game.TargetEntity",
+          "parameters": [
+            {
+              "classname": "com.badlogic.gdx.math.Vector2",
+              "constructor": {
+                "classname": "com.badlogic.gdx.math.Vector2",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float"
+                  },
+                  {
+                    "classname": "java.lang.float"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "com.badlogic.gdx.graphics.Texture",
+              "constructor": {
+                "classname": "com.badlogic.gdx.graphics.Texture",
+                "parameters": [
+                  {
+                    "classname": "java.lang.String"
+                  }
+                ]
+              }
+            },
+            {
+              "classname": "java.lang.int"
+            },
+            {
+              "classname": "List|java.lang.String|",
+              "constructor": {
+                "classname": "|List|java.lang.String|",
+                "parameters": [
+                ]
+              }
+            },
+            {
+              "classname": "com.badlogic.gdx.math.Vector2",
+              "constructor": {
+                "classname": "com.badlogic.gdx.math.Vector2",
+                "parameters": [
+                  {
+                    "classname": "java.lang.float"
+                  },
+                  {
+                    "classname": "java.lang.float"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

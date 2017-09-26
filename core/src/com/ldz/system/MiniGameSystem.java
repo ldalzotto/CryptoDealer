@@ -3,10 +3,7 @@ package com.ldz.system;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.ldz.component.BuyableUpgradeComponent;
-import com.ldz.component.MiniGameComponent;
-import com.ldz.component.ParentAndChildComponent;
-import com.ldz.component.PersistantUpgradeComponent;
+import com.ldz.component.*;
 import com.ldz.engine.MyEngine;
 import com.ldz.util.ParentAndChildUtil;
 
@@ -33,6 +30,8 @@ public class MiniGameSystem extends IteratingSystem {
 
         ParentAndChildComponent parentAndChildComponent = entity.getComponent(ParentAndChildComponent.class);
         MiniGameComponent miniGameComponent = entity.getComponent(MiniGameComponent.class);
+        BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
+        BoudingRectangleComponent boudingRectangleComponent = entity.getComponent(BoudingRectangleComponent.class);
 
         //catch data from parents
         //retrieve state
@@ -51,17 +50,20 @@ public class MiniGameSystem extends IteratingSystem {
 
         int scoreToAdd = 0;
 
-        if (miniGameComponent != null) {
+        if (miniGameComponent != null && bagOfEntitiesComponent != null) {
 
             switch (miniGameComponent.state) {
                 case PENDING:
+                    miniGameComponent.iMiniGameUpdate.init(boudingRectangleComponent.rectangle);
                     miniGameComponent.state = MiniGameComponent.STATE.RUNNING;
                     break;
                 case RUNNING:
                     miniGameComponent.executionTimeAccumulator += deltaTime;
 
                     if (miniGameComponent.iMiniGameUpdate != null) {
-                        scoreToAdd = miniGameComponent.iMiniGameUpdate.update(miniGameComponent, deltaTime);
+                        bagOfEntitiesComponent.entities.addAll(
+                                miniGameComponent.iMiniGameUpdate.addNewEntityToEngine(MyEngine.getInstance(null, null)));
+                        scoreToAdd = miniGameComponent.iMiniGameUpdate.update(deltaTime);
                     }
 
                     if (miniGameComponent.executionTimeAccumulator > MiniGameComponent.EXECUTION_TIME) {
