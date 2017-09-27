@@ -2,12 +2,13 @@ package com.ldz.config.upgrade.referential.domain;
 
 import com.ldz.component.PersistantUpgradeComponent;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by ldalzotto on 05/09/2017.
  */
-public class Upgrade {
+public class Upgrade implements Serializable {
 
     private PersistantUpgradeComponent.UpgradeId upgradeId;
     private List<PriceCurrencies> upgradesCosts;

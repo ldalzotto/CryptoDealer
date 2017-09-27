@@ -1,11 +1,12 @@
 package com.ldz.config.upgrade.referential.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by ldalzotto on 05/09/2017.
  */
-public class PriceCurrencies {
+public class PriceCurrencies implements Serializable {
 
     private int levelNumber;
     private List<Currency> currencies;

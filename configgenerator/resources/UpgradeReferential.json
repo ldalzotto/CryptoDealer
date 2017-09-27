@@ -1,0 +1,37 @@
+{
+  "upgrades": [
+    {
+      "upgradeId": "UPGRADE_1",
+      "upgradesCosts": [
+        {
+          "levelNumber": 0,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 2.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 4.0
+            }
+          ]
+        }
+      ],
+      "upgradeBonuses": [
+        {
+          "levelNumber": 0,
+          "currencies": [
+            {
+              "currency": "ITHEREUM_COIN",
+              "value": 2.0
+            },
+            {
+              "currency": "ZIT_COIN",
+              "value": 4.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

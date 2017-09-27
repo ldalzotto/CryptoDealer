@@ -1,11 +1,12 @@
 package com.ldz.config.upgrade.referential.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by ldalzotto on 05/09/2017.
  */
-public class Upgrades {
+public class Upgrades implements Serializable {
     private List<Upgrade> upgrades;
 
     public List<Upgrade> getUpgrades() {

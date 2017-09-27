@@ -1,0 +1,5 @@
+{
+  "nbLevel": 100,
+  "upgradeCostFomula": "((oldValue)*1.5)",
+  "upgradeBonusFormula": "((oldValue)*1.5)"
+}

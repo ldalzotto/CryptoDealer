@@ -25,7 +25,7 @@ public class ArgsVerificatorUtil {
                 exceptions.add(new ArgValidationException("Args input : " + arg + " doesn't respect the following format : " + ARG_TEMPLATE));
             } else {
                 Map.Entry<String, String> entry = extractArg(arg);
-                argsMap.put(entry.getKey(), entry.getValue());
+                argsMap.put(entry.getKey().replace(ARG_TEMPLATE_MINUS, ""), entry.getValue());
             }
         }
 

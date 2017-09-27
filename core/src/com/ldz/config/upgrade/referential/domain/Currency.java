@@ -2,10 +2,12 @@ package com.ldz.config.upgrade.referential.domain;
 
 import com.ldz.component.CurrencyComponent;
 
+import java.io.Serializable;
+
 /**
  * Created by ldalzotto on 05/09/2017.
  */
-public class Currency {
+public class Currency implements Serializable {
     private CurrencyComponent.CURRENCY_TYPE currency;
     private float value;
 
