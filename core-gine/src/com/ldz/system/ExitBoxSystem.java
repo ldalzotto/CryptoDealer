@@ -32,6 +32,7 @@ public class ExitBoxSystem extends MyIteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+
         if (Gdx.input.isTouched()) {
             if (CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
 

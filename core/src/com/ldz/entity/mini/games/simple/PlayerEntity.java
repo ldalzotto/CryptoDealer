@@ -1,4 +1,4 @@
-package com.ldz.entity.simple.mini.game;
+package com.ldz.entity.mini.games.simple;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -14,6 +14,7 @@ public class PlayerEntity extends EntityWithId {
         EntityUtil.addtextureEntityComponents(vector2, texture, z, this);
         EntityUtil.addPhysicsMovementCompoentn(speed, this);
         EntityUtil.addCollisionCalculationComponent(this);
+        EntityUtil.addDragAndDropComponent(this);
     }
 
 }

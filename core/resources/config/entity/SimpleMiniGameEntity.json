@@ -4,7 +4,7 @@
       "id": "simple_mini_game_target",
       "instance": {
         "constructor": {
-          "classname": "com.ldz.entity.simple.mini.game.TargetEntity",
+          "classname": "com.ldz.entity.mini.games.simple.TargetEntity",
           "parameters": [
             {
               "classname": "com.badlogic.gdx.math.Vector2",
@@ -64,7 +64,7 @@
       "id": "simple_mini_game_player",
       "instance": {
         "constructor": {
-          "classname": "com.ldz.entity.simple.mini.game.PlayerEntity",
+          "classname": "com.ldz.entity.mini.games.simple.PlayerEntity",
           "parameters": [
             {
               "classname": "com.badlogic.gdx.math.Vector2",

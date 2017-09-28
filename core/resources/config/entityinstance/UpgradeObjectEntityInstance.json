@@ -151,10 +151,6 @@
               },
               {
                 "classname": "java.lang.String",
-                "value": "upgrade_1_exit_button"
-              },
-              {
-                "classname": "java.lang.String",
                 "value": "upgrade_1_decade_display"
               },
               {
@@ -411,44 +407,6 @@
           "constructor": {
             "classname": "com.ldz.component.action.impl.ResplendishButtonAction",
             "parameters": []
-          }
-        },
-        {
-          "classname": "java.lang.int",
-          "value": 4
-        }
-      ]
-    },
-    {
-      "entityId": "upgrade_exit_button",
-      "instanceId": "upgrade_1_exit_button",
-      "constructorArgs": [
-        {
-          "classname": "com.badlogic.gdx.math.Vector2",
-          "constructor": {
-            "classname": "com.badlogic.gdx.math.Vector2",
-            "parameters": [
-              {
-                "classname": "java.lang.float",
-                "value": "300"
-              },
-              {
-                "classname": "java.lang.float",
-                "value": "300"
-              }
-            ]
-          }
-        },
-        {
-          "classname": "com.badlogic.gdx.graphics.Texture",
-          "constructor": {
-            "classname": "com.badlogic.gdx.graphics.Texture",
-            "parameters": [
-              {
-                "classname": "java.lang.String",
-                "value": "assets/exit_cross.jpg"
-              }
-            ]
           }
         },
         {

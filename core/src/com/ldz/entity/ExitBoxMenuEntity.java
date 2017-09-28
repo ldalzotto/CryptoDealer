@@ -21,5 +21,6 @@ public class ExitBoxMenuEntity extends TextureDisplayEntity {
         ExitBoxComponent exitBoxComponent = new ExitBoxComponent();
         exitBoxComponent.boundingBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
         this.add(exitBoxComponent);
+
     }
 }

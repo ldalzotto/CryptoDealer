@@ -33,6 +33,9 @@
             },
             {
               "classname": "java.lang.int"
+            },
+            {
+              "classname": "java.lang.String"
             }
           ]
         }

@@ -27,6 +27,7 @@ public abstract class CoreGine extends Engine {
         this.addSystem(DataTransitToChildSystem.getInstance());
         this.addSystem(PhysicsMovementSystem.getInstance());
         this.addSystem(CollisionSystem.getInstance());
+        this.addSystem(DragAndDropSystem.getInstance());
 
         this.addEntityListener(Family.all(ParentAndChildComponent.class).get(), 2, new EntityRemoveListener(this));
     }

@@ -64,6 +64,8 @@ public class PopupSystem extends MyIteratingSystem {
         if (Gdx.input.isTouched()) {
             if (!popUpComponent.screenBeingTouched) {
                 popUpComponent.screenBeingTouched = true;
+
+
                 if (!CollisionChecker.tapPressedInside(Gdx.input.getX(), Gdx.input.getY(), entity, orthographicCamera)) {
 
                     LoggingUtil.DEBUG(TAG, "Tap pressed outside of this entity ", ReflectionToStringBuilder.toString(entity));
@@ -83,6 +85,8 @@ public class PopupSystem extends MyIteratingSystem {
                     }
 
                 }
+
+
             }
         } else {
             popUpComponent.screenBeingTouched = false;

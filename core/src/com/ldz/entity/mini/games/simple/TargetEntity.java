@@ -1,4 +1,4 @@
-package com.ldz.entity.simple.mini.game;
+package com.ldz.entity.mini.games.simple;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;

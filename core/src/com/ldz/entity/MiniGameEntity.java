@@ -12,11 +12,11 @@ import java.util.ArrayList;
  */
 public class MiniGameEntity extends EntityWithId {
 
-    public MiniGameEntity(Vector2 position, Texture texture, int z) {
+    public MiniGameEntity(Vector2 position, Texture texture, int z, String miniGameEngineUpdateClassName) {
         EntityUtil.addParentAndChildEntity(this);
         EntityUtil.addBagOfEntitiesComponent(new ArrayList<String>(), this);
         EntityUtil.addtextureEntityComponents(position, texture, z, this);
-        EntityUtil.addMiniGameComponent(this);
+        EntityUtil.addMiniGameComponent(miniGameEngineUpdateClassName, this);
 
         DisplayStateComponent displayStateComponent = new DisplayStateComponent();
         displayStateComponent.state = DisplayStateComponent.STATE.EPHEMER;

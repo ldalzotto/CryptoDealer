@@ -1,6 +1,7 @@
 package com.ldz;
 
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter;
 import com.ldz.common.ArgsVerificatorUtil;
 import com.ldz.config.upgrade.referential.domain.Currency;
 import com.ldz.config.upgrade.referential.domain.PriceCurrencies;
@@ -62,7 +63,8 @@ public class ConfigGeneratorApplication {
 
 
                 //write conf
-                String jsonString = json.toJson(finalUpgrades);
+                json.setOutputType(JsonWriter.OutputType.json);
+                String jsonString = json.prettyPrint(finalUpgrades);
                 Files.write(Paths.get(outputJsonFilePath), jsonString.getBytes());
 
             } catch (Exception e) {

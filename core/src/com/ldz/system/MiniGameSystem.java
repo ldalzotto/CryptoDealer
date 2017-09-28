@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.ldz.component.*;
 import com.ldz.engine.MyEngine;
+import com.ldz.util.InputProcessUtil;
 import com.ldz.util.ParentAndChildUtil;
 
 /**
@@ -54,6 +55,7 @@ public class MiniGameSystem extends IteratingSystem {
 
             switch (miniGameComponent.state) {
                 case PENDING:
+                    InputProcessUtil.disableInputSystems();
                     miniGameComponent.iFunctionalEngineUpdate.init(boudingRectangleComponent.rectangle, bagOfEntitiesComponent);
                     miniGameComponent.state = MiniGameComponent.STATE.RUNNING;
                     break;
@@ -75,6 +77,7 @@ public class MiniGameSystem extends IteratingSystem {
                     miniGameComponent.state = MiniGameComponent.STATE.DESTROY;
                     break;
                 case DESTROY:
+                    InputProcessUtil.enableInputSystems();
                     ParentAndChildUtil.destroyFromParent(entity, entity.getComponent(ParentAndChildComponent.class), MyEngine.getInstance(null, null));
                     break;
             }

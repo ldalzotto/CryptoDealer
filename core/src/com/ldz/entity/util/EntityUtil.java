@@ -1,15 +1,17 @@
 package com.ldz.entity.util;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.ldz.component.*;
-import com.ldz.engine.MyEngine;
-import com.ldz.system.mini.game.SimpleFunctionalEngineUpdate;
 import com.ldz.config.game.entities.InstanceEntityId;
+import com.ldz.engine.MyEngine;
+import com.ldz.engine.functional.IFunctionalEngineUpdate;
 import com.ldz.entity.EntityFactory;
 import com.ldz.entity.EntityWithId;
+import com.ldz.util.LoggingUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,8 @@ import java.util.List;
  * Created by Loic on 05/09/2017.
  */
 public class EntityUtil {
+
+    private static final String TAG = EntityUtil.class.getSimpleName();
 
     public static EntityWithId addtextureEntityComponents(Vector2 position, Texture texture, int z, EntityWithId entity) {
 
@@ -119,9 +123,19 @@ public class EntityUtil {
         entityWithId.add(tranformComponent);
     }
 
-    public static EntityWithId addMiniGameComponent(EntityWithId entityWithId) {
+    public static EntityWithId addMiniGameComponent(String miniGameEngineUpdateClassName, EntityWithId entityWithId) {
         MiniGameComponent miniGameComponent = new MiniGameComponent();
-        miniGameComponent.iFunctionalEngineUpdate = new SimpleFunctionalEngineUpdate(MyEngine.getInstance(null, null));
+
+        try {
+            //create minigame engine instnce
+            Class minigameEngineClass = Class.forName(miniGameEngineUpdateClassName);
+            java.lang.reflect.Constructor ctor = minigameEngineClass.getConstructor(Engine.class);
+            miniGameComponent.iFunctionalEngineUpdate = (IFunctionalEngineUpdate) ctor.newInstance(MyEngine.getInstance(null, null));
+        } catch (Exception e) {
+            LoggingUtil.DEBUG(TAG, e.getMessage(), e);
+            throw new RuntimeException(e);
+        }
+
         miniGameComponent.state = MiniGameComponent.STATE.PENDING;
         entityWithId.add(miniGameComponent);
         return entityWithId;
@@ -137,6 +151,12 @@ public class EntityUtil {
     public static EntityWithId addCollisionCalculationComponent(EntityWithId entityWithId) {
         CollisionCalculationComponent collisionCalculationComponent = new CollisionCalculationComponent();
         entityWithId.add(collisionCalculationComponent);
+        return entityWithId;
+    }
+
+    public static EntityWithId addDragAndDropComponent(EntityWithId entityWithId) {
+        DragAndDropComponent dragAndDropComponent = new DragAndDropComponent();
+        entityWithId.add(dragAndDropComponent);
         return entityWithId;
     }
 

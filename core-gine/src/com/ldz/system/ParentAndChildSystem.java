@@ -113,7 +113,9 @@ public class ParentAndChildSystem extends EntitySystem implements IRetrieveAllEn
         for (Entity entityChild :
                 childEntities) {
             ParentAndChildComponent parentAndChildComponentChild = entityChild.getComponent(ParentAndChildComponent.class);
-            parentAndChildComponentChild.parent = parentEntity;
+            if (parentAndChildComponentChild != null) {
+                parentAndChildComponentChild.parent = parentEntity;
+            }
         }
 
     }
