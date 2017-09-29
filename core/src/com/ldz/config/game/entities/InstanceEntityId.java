@@ -21,6 +21,6 @@ public enum InstanceEntityId {
     upgrade_1_currency_entity,
     upgrade_2_currency_entity,
     persistant_upgrade_1,
-    persistant_upgrade_2,
-    upgrade_1_critical_state_display, simple_mini_game_entity
+    persistant_upgrade_2, upgrade_2_resp_button,
+    upgrade_1_critical_state_display, simple_mini_game_entity, refresh_cooler_mini_game_entity
 }

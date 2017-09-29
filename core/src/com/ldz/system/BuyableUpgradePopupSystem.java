@@ -83,7 +83,7 @@ public class BuyableUpgradePopupSystem extends MyIteratingSystem {
                     //add associated mini-game
                     BagOfEntitiesComponent bagOfEntitiesComponent = entity.getComponent(BagOfEntitiesComponent.class);
                     if (bagOfEntitiesComponent != null) {
-                        EntityWithId miniGameEntity = EntityFactory.getEntityFromInstanceId(InstanceEntityId.simple_mini_game_entity);
+                        EntityWithId miniGameEntity = EntityFactory.getEntityFromInstanceId(buyableUpgradeComponent.miniGameInstanceEntityId);
                         if (miniGameEntity != null) {
                             bagOfEntitiesComponent.entities.add(miniGameEntity);
                             bagOfEntitiesComponent.addEntityToEngine = true;

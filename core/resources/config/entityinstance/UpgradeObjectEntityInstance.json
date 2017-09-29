@@ -163,6 +163,10 @@
               }
             ]
           }
+        },
+        {
+          "classname": "java.lang.String",
+          "value": "simple_mini_game_entity"
         }
       ]
     },
@@ -221,10 +225,18 @@
               },
               {
                 "classname": "java.lang.String",
+                "value": "upgrade_2_resp_button"
+              },
+              {
+                "classname": "java.lang.String",
                 "value": "upgrade_2_currency_entity"
               }
             ]
           }
+        },
+        {
+          "classname": "java.lang.String",
+          "value": "refresh_cooler_mini_game_entity"
         }
       ]
     },
@@ -386,6 +398,51 @@
               {
                 "classname": "java.lang.float",
                 "value": "500"
+              }
+            ]
+          }
+        },
+        {
+          "classname": "com.badlogic.gdx.graphics.Texture",
+          "constructor": {
+            "classname": "com.badlogic.gdx.graphics.Texture",
+            "parameters": [
+              {
+                "classname": "java.lang.String",
+                "value": "assets/resplendish_upgrade_button.bmp"
+              }
+            ]
+          }
+        },
+        {
+          "classname": "com.ldz.component.action.impl.ResplendishButtonAction",
+          "constructor": {
+            "classname": "com.ldz.component.action.impl.ResplendishButtonAction",
+            "parameters": []
+          }
+        },
+        {
+          "classname": "java.lang.int",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "entityId": "upgrade_resp_button",
+      "instanceId": "upgrade_2_resp_button",
+      "constructorArgs": [
+        {
+          "classname": "com.badlogic.gdx.math.Vector2",
+          "constructor": {
+            "classname": "com.badlogic.gdx.math.Vector2",
+            "parameters": [
+              {
+                "classname": "java.lang.float",
+                "value": "250"
+              },
+              {
+                "classname": "java.lang.float",
+                "value": "350"
               }
             ]
           }

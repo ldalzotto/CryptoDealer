@@ -88,6 +88,9 @@
                 "classname": "|List|java.lang.String|",
                 "parameters": []
               }
+            },
+            {
+              "classname": "java.lang.String"
             }
           ]
         }
